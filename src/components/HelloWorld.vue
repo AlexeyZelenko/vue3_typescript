@@ -1,58 +1,352 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div>
+    <header>
+      <div class="container">
+        <div class="brand">Блага вість</div>
+        <nav>
+          <ul class="menu">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>
+          Так бо Бог полюбив світ, що дав Сина Свого Одноро́дженого, щоб кожен, хто вірує в Нього, не згинув, але мав життя вічне.
+        </h1>
+        <a class="button"
+           href="https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSb71yKJmS0eHyhRRl00ioQ&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY&part=snippet&&maxResults=1"
+        >
+          Дивитися останє служіння
+        </a>
+      </div>
+    </div>
+
+    <div class="services">
+      <div class="container">
+        <h2>Сервіси</h2>
+        <div class="service">
+          <i aria-hidden="true"
+             class="fa fa-tachometer fa-3x"
+          ></i>
+          <p>Молитва</p>
+        </div>
+        <div class="service">
+          <i aria-hidden="true"
+             class="fa fa-calendar fa-3x"
+          ></i>
+          <p>Навчання практичному Слову Божому</p>
+        </div>
+        <div class="service">
+          <i aria-hidden="true" class="fa fa-bar-chart fa-3x"></i>
+          <p>Підтримка</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="blog">
+      <div class="container">
+        <h2>Служіння</h2>
+        <div class="post">
+          <img :src="require(`@/assets/img/2.jpg`)">
+          <h3>Загальноцерковне служіння</h3>
+          <p class="date">Неділя 10:00 та Четвер 18:00</p>
+          <p>Богослужіння поділяються на два основних види: загальні і приватні. Загальні богослужіння відбуваються регулярно, відповідно до вимог церковного уставу,
+            тоді як приватні призначені для задоволення поточних потреб віруючих і відбуваються будь-коли.</p>
+        </div>
+        <div class="post">
+          <img :src="require(`@/assets/img/3.jpg`)">
+          <h3>Нічна молитва</h3>
+          <p class="date">П'ятниця</p>
+          <p>{{`Молитва - джерело сили та двигун Церкви! Молитва - головний інструмент та стратегічне знаряддя церкви для впливу на своє місто, країну, континент і весь світ. Все починається з молитви. Молитва - це головне покликання Церкви!\n'
+            «Отже, перш над усе я благаю чинити молитви, благання, прохання, подяки за всіх людей» (1 Тимофія 2:1)
+            На служіннях загальноцерковних вечірньої та нічної молитв в атмосфері Божої слави та поклоніння ви переживете особливі зустрічі з Богом і приймете свіжий вогонь Святого Духа! Ви зможете бути істинними заступниками за церкву, країну, за своїх рідних та близьких, своє призначення та молитися за інші питання.`}}</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div>
+        <iframe
+          allowfullscreen=""
+          aria-hidden="false"
+          frameborder="0"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2595.4405292888096!2d32.10316!3d49.419485!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9101cca08af2968c!2z0KbQtdGA0LrQvtCy0Ywg0JHQu9Cw0LPQsNGPINCS0LXRgdGC0Ywg0KfQtdGA0LrQsNGB0YHRiw!5e0!3m2!1suk!2sus!4v1603789520347!5m2!1suk!2sus"
+          style="border:0;"
+          tabindex="0"
+        >
+
+        </iframe>
+      </div>
+      <div class="container">
+        <div class="brand">Блага вість</div>
+        <nav>
+          <ul class="menu">
+            <li
+              :key="icon.icon"
+              v-for="icon in icons"
+            >
+              <a :href="icon.src">
+                {{ icon.name }}
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <p class="copyright">
+          {{ new Date().getFullYear() }} — <strong>Блага вість</strong>
+        </p>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
+  data: () => ({
+    icons: [
+      {
+        icon: 'mdi-facebook',
+        name: 'facebook',
+        src: 'https://www.facebook.com/%D0%A6%D0%B5%D1%80%D0%BA%D0%BE%D0%B2%D1%8C-%D0%91%D0%BB%D0%B0%D0%B3%D0%B0%D1%8F-%D0%92%D0%B5%D1%81%D1%82%D1%8C-%D0%A7%D0%B5%D1%80%D0%BA%D0%B0%D1%81%D1%81%D1%8B-746415165547326/'
+      },
+      {
+        icon: 'mdi-youtube-tv',
+        name: 'youtube',
+        src: 'https://www.youtube.com/channel/UCSb71yKJmS0eHyhRRl00ioQ'
+      }, {
+        icon: 'mdi-email',
+        name: 'email',
+        src: 'mailto:info@bv.ck.ua'
+      },
+      {
+        icon: 'mdi-instagram',
+        name: 'instagram',
+        src: 'https://www.instagram.com/bv.ck.ua/'
+      }
+    ]
+  })
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+  iframe {
+    width: 100%;
+    height: 500px;
+  }
+
+  /* General */
+  body {
+    font-family: Raleway, Arial, Helvetica, sans-serif;
+  }
+
+  p {
+    font-size: 14px;
+    color: #999;
+    line-height: 1.6;
+  }
+
+  h1 {
+    font-size: 40px;
+    color: #fff;
+    text-shadow: 0 0 5px black;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  h3 {
+    font-size: 26px;
+  }
+
+  h2, h3 {
+    color: #282828;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .brand {
+    font-size: 30px;
+  }
+
+  .menu {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .menu li {
+    float: left;
+    font-size: 16px;
+    list-style: none;
+  }
+
+  .menu li a {
+    text-decoration: none;
+  }
+
+  img {
+    display: block;
+    max-width: 300px;
+    height: auto;
+  }
+
+  /* Header */
+  header {
+    background-color: #fff;
+    padding-top: 30px;
+  }
+
+  header .brand {
+    float: left;
+    color: #59abe3;
+    margin-bottom: 30px;
+  }
+
+  header .menu {
+    float: right;
+    margin-bottom: 30px;
+  }
+
+  header .menu li {
+    padding-left: 20px;
+  }
+
+  header .menu li a {
+    color: #aaa;
+  }
+
+  /* Jumbotron */
+  .jumbotron {
+    background-image: url(../assets/img/jumbotron.jpg);
+    background-size: cover;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    min-height: 250px;
+    text-align: center;
+    clear: both;
+  }
+
+  .jumbotron .button {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 40px;
+    background-color: #fa5ba5;
+    padding: 20px 30px;
+    border-radius: 30px;
+  }
+
+  /* Services */
+  .services .service {
+    width: 33.333333%;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    box-sizing: border-box;
+  }
+
+  .services {
+    padding-top: 50px;
+    text-align: center;
+  }
+
+  .services .fa {
+    color: #979797;
+    margin-bottom: 15px;
+  }
+
+  /* Blog */
+  .blog {
+    clear: both;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #fcfcfc;
+  }
+
+  .blog h2 {
+    text-align: center;
+  }
+
+  .blog .post {
+    padding-top: 30px;
+    display: inline-block;
+    clear: both;
+  }
+
+  .blog .post img {
+    float: left;
+    margin-right: 30px;
+  }
+
+  /* Footer */
+  footer {
+    clear: both;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    background-color: #38404b;
+  }
+
+  footer .brand {
+    color: #bcc9dd;
+  }
+
+  footer .menu li {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  footer .menu li a {
+    color: #bcc9dd;
+  }
+
+  footer .menu {
+    display: inline-block;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  footer .copyright {
+    font-size: 12px;
+    color: #eee;
+  }
+
+  /* Media Queries */
+  @media (max-width: 575px) {
+    .services .service {
+      width: 100%;
+      float: none;
+    }
+
+    .blog .post img {
+      float: none;
+      display: block;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .blog .post {
+      max-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+  }
+
 </style>
