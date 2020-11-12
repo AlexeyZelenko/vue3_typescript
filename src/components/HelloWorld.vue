@@ -5,10 +5,8 @@
         <div class="brand">Блага вість</div>
         <nav>
           <ul class="menu">
-            <li><a href="#">About</a></li>
-            <li><a href="#">Team</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><router-link to="/">Головна</router-link></li>
+            <li><router-link to="/about">Про церкву</router-link></li>
           </ul>
         </nav>
       </div>
@@ -19,10 +17,34 @@
           Так бо Бог полюбив світ, що дав Сина Свого Одноро́дженого, щоб кожен, хто вірує в Нього, не згинув, але мав життя вічне.
         </h1>
         <a class="button"
+           @click="$refs.modalName.openModal()"
            href="https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSb71yKJmS0eHyhRRl00ioQ&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY&part=snippet&&maxResults=1"
         >
           Дивитися останє служіння
         </a>
+<!--        Модальное окно-->
+        <modal ref="modalName">
+          <template v-slot:header>
+            <h3>321</h3>
+          </template>
+
+          <template v-slot:body>
+            <div>
+              123
+            </div>
+          </template>
+
+          <template v-slot:footer>
+            <div>
+              <button
+                @click="$refs.modalName.closeModal()"
+                style="margin: 5px"
+              >
+                Закрити
+              </button>
+            </div>
+          </template>
+        </modal>
       </div>
     </div>
 
@@ -79,7 +101,6 @@
           style="border:0;"
           tabindex="0"
         >
-
         </iframe>
       </div>
       <div class="container">
@@ -106,13 +127,14 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-// import Note from '@/models/NoteModel'
-// import Icon from '@/models/IconModel'
 import store from '@/store'
-// import router from '@/router'
+const Modal = () => import('@/components/Modal.vue')
 
 export default defineComponent({
   name: 'HelloWorld',
+  components: {
+    Modal
+  },
   setup () {
     const icons = computed(() => store.state.icons)
     return {
