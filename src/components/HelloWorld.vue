@@ -105,33 +105,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
+// import Note from '@/models/NoteModel'
+// import Icon from '@/models/IconModel'
+import store from '@/store'
+// import router from '@/router'
 
 export default defineComponent({
   name: 'HelloWorld',
-  data: () => ({
-    icons: [
-      {
-        icon: 'mdi-facebook',
-        name: 'facebook',
-        src: 'https://www.facebook.com/%D0%A6%D0%B5%D1%80%D0%BA%D0%BE%D0%B2%D1%8C-%D0%91%D0%BB%D0%B0%D0%B3%D0%B0%D1%8F-%D0%92%D0%B5%D1%81%D1%82%D1%8C-%D0%A7%D0%B5%D1%80%D0%BA%D0%B0%D1%81%D1%81%D1%8B-746415165547326/'
-      },
-      {
-        icon: 'mdi-youtube-tv',
-        name: 'youtube',
-        src: 'https://www.youtube.com/channel/UCSb71yKJmS0eHyhRRl00ioQ'
-      }, {
-        icon: 'mdi-email',
-        name: 'email',
-        src: 'mailto:info@bv.ck.ua'
-      },
-      {
-        icon: 'mdi-instagram',
-        name: 'instagram',
-        src: 'https://www.instagram.com/bv.ck.ua/'
-      }
-    ]
-  })
+  setup () {
+    const icons = computed(() => store.state.icons)
+    return {
+      icons
+    }
+  }
 })
 </script>
 
