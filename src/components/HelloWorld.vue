@@ -7,15 +7,13 @@
       <template v-slot:header>
         <h1>custom header</h1>
       </template>
-      <template v-slot:footer>
-      default footer
-      <button
-        class="modal-default-button"
-        @click="$emit('close')"
-      >
-        Закрыть
-      </button>
+
+      <template v-slot:body>
       </template>
+
+      <template v-slot:footer>
+      </template>
+
     </Modal>
     <header>
       <div class="container">
@@ -35,7 +33,6 @@
         </h1>
         <a class="button"
            @click="showModal = true"
-           href="https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSb71yKJmS0eHyhRRl00ioQ&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY&part=snippet&&maxResults=1"
         >
           Дивитися останє служіння
         </a>

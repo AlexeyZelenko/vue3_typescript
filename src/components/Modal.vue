@@ -5,28 +5,51 @@
         <div class="modal-container">
 
           <div class="modal-header">
-            <slot name="header">
-              default header
-            </slot>
+            <slot name="header"></slot>
           </div>
 
-          <div class="modal-body">
+          <div
+            v-for="(video, i) in lastVideoData.items"
+            :key="i"
+            class="modal-body"
+          >
             <slot name="body">
-              default body
+              <youtube
+                style="padding: 5px"
+                @ready="ready"
+                :player-vars="{ autoplay: 0, controls: 1, modestbranding: 1, showinfo: 0, rel: 0 }"
+                player-width="100%"
+                :video-id="ijUrKZEPimo"
+              />
             </slot>
           </div>
 
           <div class="modal-footer">
-            <slot
-              name="footer"
-            >
-            </slot>
+            <slot name="footer"></slot>
           </div>
+
         </div>
       </div>
     </div>
   </transition>
 </template>
+
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
+import store from '@/store'
+
+export default defineComponent({
+  name: 'Modal',
+  data: () => ({
+  }),
+  setup () {
+    const lastVideoData = computed(() => store.state.LastVideoData)
+    return {
+      lastVideoData
+    }
+  }
+})
+</script>
 
 <style>
   .modal-mask {
