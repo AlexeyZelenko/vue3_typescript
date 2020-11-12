@@ -1,5 +1,22 @@
 <template>
   <div>
+    <Modal
+      v-if="showModal"
+      @click="showModal = false"
+    >
+      <template v-slot:header>
+        <h1>custom header</h1>
+      </template>
+      <template v-slot:footer>
+      default footer
+      <button
+        class="modal-default-button"
+        @click="$emit('close')"
+      >
+        Закрыть
+      </button>
+      </template>
+    </Modal>
     <header>
       <div class="container">
         <div class="brand">Блага вість</div>
@@ -17,6 +34,7 @@
           Так бо Бог полюбив світ, що дав Сина Свого Одноро́дженого, щоб кожен, хто вірує в Нього, не згинув, але мав життя вічне.
         </h1>
         <a class="button"
+           @click="showModal = true"
            href="https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSb71yKJmS0eHyhRRl00ioQ&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY&part=snippet&&maxResults=1"
         >
           Дивитися останє служіння
@@ -104,9 +122,16 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import store from '@/store'
+import Modal from '@/components/Modal.vue' // @ is an alias to /src
 
 export default defineComponent({
   name: 'HelloWorld',
+  components: {
+    Modal
+  },
+  data: () => ({
+    showModal: false
+  }),
   setup () {
     const icons = computed(() => store.state.icons)
     return {
@@ -330,6 +355,70 @@ export default defineComponent({
       margin-left: auto;
       margin-right: auto;
       display: block;
+    }
+
+    .modal-mask {
+      position: fixed;
+      z-index: 9998;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: table;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-wrapper {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .modal-container {
+      width: 300px;
+      margin: 0px auto;
+      padding: 20px 30px;
+      background-color: #fff;
+      border-radius: 2px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+      transition: all 0.3s ease;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    .modal-header h3 {
+      margin-top: 0;
+      color: #42b983;
+    }
+
+    .modal-body {
+      margin: 20px 0;
+    }
+
+    .modal-default-button {
+      float: right;
+    }
+
+    /*
+     * The following styles are auto-applied to elements with
+     * transition="modal" when their visibility is toggled
+     * by Vue.js.
+     *
+     * You can easily play with the modal transition by editing
+     * these styles.
+     */
+
+    .modal-enter {
+      opacity: 0;
+    }
+
+    .modal-leave-active {
+      opacity: 0;
+    }
+
+    .modal-enter .modal-container,
+    .modal-leave-active .modal-container {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
     }
   }
 
