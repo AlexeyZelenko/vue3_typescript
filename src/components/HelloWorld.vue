@@ -29,10 +29,39 @@
           <ul class="menu">
             <li><router-link to="/">Головна</router-link></li>
             <li><router-link to="/about">Про церкву</router-link></li>
+            <li><router-link to="/video">Відео</router-link></li>
           </ul>
         </nav>
       </div>
     </header>
+    <div class="fullscreen-bg">
+      <div class="overlay">
+        <h1>
+          Так бо Бог полюбив світ, що дав Сина Свого Одноро́дженого, щоб кожен, хто вірує в Нього, не згинув, але мав життя вічне.
+        </h1>
+        <button
+          class="button"
+          @click="showModal = true"
+        >
+          Дивитися останє служіння
+        </button>
+      </div>
+      <video
+        loop=""
+        muted=""
+        autoplay=""
+        poster="../assets/video/plane.jpg"
+        class="fullscreen-bg__video"
+      >
+        <source
+          :src="require(`../assets/video/plane.mp4`)"
+        >
+        <source
+          :src="require(`../assets/video/plane.webm`)"
+          type="video/webm"
+        >
+      </video>
+    </div>
     <div class="jumbotron">
       <div class="container">
         <h1>
@@ -160,7 +189,58 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style >
+  .fullscreen-bg {
+    overflow: hidden;
+    z-index: -100;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding-top:45%;
+  }
+
+  .fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .overlay {
+    background: rgba(0,0,0,0.6);
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+  }
+  .overlay h1 {
+    text-align:center;
+    color:#fff;
+    font-size: 50px;
+    margin:10% 10%;
+    text-shadow: 0 0 10px black;
+  }
+  @media (max-width: 767px) {
+    .fullscreen-bg {
+      background: url('../assets/images/plane.jpg') center center / cover no-repeat;
+    }
+    .fullscreen-bg__video {
+      display: none;
+    }
+  }
+  .overlay button {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 40px;
+    margin-left: 40%;
+    background-color: #fa5ba5;
+    padding: 20px 30px;
+    border-radius: 30px;
+  }
   iframe {
     width: 100%;
     height: 500px;
