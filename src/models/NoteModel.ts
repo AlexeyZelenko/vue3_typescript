@@ -5,5 +5,5 @@ export default interface Note {
   fontawesome: string,
   icon: string,
   name: string,
-  src: string
+  src: string,
 }

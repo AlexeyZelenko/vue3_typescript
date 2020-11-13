@@ -5,24 +5,19 @@
         <div class="modal-container">
 
           <div class="modal-header">
-            <slot name="header"></slot>
+            <slot name="header" ></slot>
           </div>
 
-          <div
-            v-for="(video, i) in lastVideoData.items"
-            :key="i"
-            class="modal-body"
-          >
-            <slot name="body">
-              <youtube
-                style="padding: 5px"
-                @ready="ready"
-                :player-vars="{ autoplay: 0, controls: 1, modestbranding: 1, showinfo: 0, rel: 0 }"
-                player-width="100%"
-                :video-id="ijUrKZEPimo"
-              />
-            </slot>
-          </div>
+<!--          <div-->
+<!--            v-for="(video, i) in lastVideoData.items"-->
+<!--            :key="i"-->
+<!--            class="modal-body"-->
+<!--          >-->
+<!--            <slot name="body">-->
+<!--            </slot>-->
+<!--          </div>-->
+          <slot name="body">
+          </slot>
 
           <div class="modal-footer">
             <slot name="footer"></slot>
@@ -70,9 +65,9 @@ export default defineComponent({
   }
 
   .modal-container {
-    width: 300px;
+    width: 80%;
     margin: 0px auto;
-    padding: 20px 30px;
+    padding: 10px 20px;
     background-color: #fff;
     border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -80,7 +75,7 @@ export default defineComponent({
     font-family: Helvetica, Arial, sans-serif;
   }
 
-  .modal-header h3 {
+  .modal-header h4 {
     margin-top: 0;
     color: #42b983;
   }
