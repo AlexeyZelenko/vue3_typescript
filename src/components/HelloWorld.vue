@@ -5,14 +5,14 @@
       @click="showModal = false"
     >
       <template v-slot:header>
-        <h1>Тітл</h1>
+        <h4>{{titleVideo}}</h4>
       </template>
 
       <template v-slot:body>
         <iframe
           width="560"
           height="315"
-          :src="`https://www.youtube.com/embed/${codvideo}`"
+          :src="`https://www.youtube.com/embed/${codVideo}`"
           frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
@@ -38,11 +38,11 @@
         <h1>
           Так бо Бог полюбив світ, що дав Сина Свого Одноро́дженого, щоб кожен, хто вірує в Нього, не згинув, але мав життя вічне.
         </h1>
-        <a class="button"
+        <button class="button"
            @click="showModal = true"
         >
           Дивитися останє служіння
-        </a>
+        </button>
       </div>
     </div>
 
@@ -120,14 +120,11 @@
         </p>
       </div>
     </footer>
-    <button @click="getcodvideo">
-      Save
-    </button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, onMounted } from 'vue'
 import store from '@/store'
 import Modal from '@/components/Modal.vue' // @ is an alias to /src
 
@@ -138,23 +135,26 @@ export default defineComponent({
   },
   data: () => ({
     showModal: false
-    // codvideo: 'qBXXSlcO5IQ'
   }),
   computed: {
-    codvideo (): string {
-      return this.LastVideoData
+    codVideo (): string {
+      return this.LastVideoData.resourceId.videoId
+    },
+    titleVideo (): string {
+      return this.LastVideoData.title
     }
   },
   setup () {
     const icons = computed(() => store.state.icons)
     const LastVideoData = computed(() => store.state.LastVideoData)
-    const getcodvideo = () => {
+
+    const getCodeVideo = () => {
       store.dispatch('getLastVideoData')
     }
+    onMounted(getCodeVideo)
     return {
       icons,
-      LastVideoData,
-      getcodvideo
+      LastVideoData
     }
   }
 })

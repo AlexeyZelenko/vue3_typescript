@@ -7,15 +7,6 @@
           <div class="modal-header">
             <slot name="header" ></slot>
           </div>
-
-<!--          <div-->
-<!--            v-for="(video, i) in lastVideoData.items"-->
-<!--            :key="i"-->
-<!--            class="modal-body"-->
-<!--          >-->
-<!--            <slot name="body">-->
-<!--            </slot>-->
-<!--          </div>-->
           <slot name="body">
           </slot>
 
@@ -29,21 +20,11 @@
   </transition>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
-import store from '@/store'
+<script>
 
-export default defineComponent({
-  name: 'Modal',
-  data: () => ({
-  }),
-  setup () {
-    const lastVideoData = computed(() => store.state.LastVideoData)
-    return {
-      lastVideoData
-    }
-  }
-})
+export default {
+  name: 'Modal'
+}
 </script>
 
 <style>
@@ -78,6 +59,7 @@ export default defineComponent({
   .modal-header h4 {
     margin-top: 0;
     color: #42b983;
+    text-shadow: 0 0 1px black;
   }
 
   .modal-body {
