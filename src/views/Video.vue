@@ -21,23 +21,22 @@
   <div class="youtube-container">
     <div >
       <template
-        v-for="item in video"
-        :key="item.datayoutube"
+        v-for="item in ListVideoData"
+        :key="item.id"
+        class="youtube-list"
       >
 
         <div
-          class="youtube-list"
+          class="change-youtube"
           :class="item.class"
-          :data-youtube="item.datayoutube"
-          @click="changeVideo(item.datayoutube)"
+          :data-youtube="item.snippet.resourceId.videoId"
+          @click="changeVideo(item.snippet.resourceId.videoId)"
         >
           <img
             style="width: 100%"
-            :src="item.img"
+            :src="item.snippet.thumbnails.medium.url"
           />
-          <span>
-          {{item.title}}
-        </span>
+          <p>{{item.snippet.title}}</p>
         </div>
 
       </template>
@@ -45,42 +44,65 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, computed, onMounted } from 'vue'
+import store from '@/store'
+
+export default defineComponent({
   name: 'Video',
   data: () => ({
-    mainVideo: '30BQjlXXamY',
-    video: [
-      {
-        class: 'change-youtube active',
-        datayoutube: '30BQjlXXamY',
-        img: 'https://img.youtube.com/vi/30BQjlXXamY/mqdefault.jpg',
-        title: 'RE1 - Classic Costumes'
-      },
-      {
-        class: 'change-youtube',
-        datayoutube: 'CWl0hOeJvzA',
-        img: 'https://img.youtube.com/vi/CWl0hOeJvzA/mqdefault.jpg',
-        title: 'RE2 - Classic Costumes'
-      },
-      {
-        class: 'change-youtube',
-        datayoutube: 'bjO6JFagZhc',
-        img: 'https://img.youtube.com/vi/bjO6JFagZhc/mqdefault.jpg',
-        title: 'RE3 - Classic Costumes'
-      }
-    ]
+    mainVideo: 'kmHZ0lI-hHs'
   }),
+  // computed: {
+  //   mainVideo (): string {
+  //     return this.LastVideoData.resourceId.videoId
+  //   }
+  // },
   methods: {
     changeVideo (item) {
       this.mainVideo = item
-      const a = this.video
-        .findIndex(i => i.datayoutube === item)
-      // this.video.forEach(i => i.class = '')
-      this.video[a].class = 'change-youtube active'
+      const a = this.ListVideoData.findIndex(i => i.snippet.resourceId.videoId === item)
+      for (let i = 0; this.ListVideoData.length > i; i++) {
+        this.ListVideoData[i].class = 'change-youtube'
+      }
+      this.ListVideoData[a].class = 'change-youtube active'
+    },
+    PlaylistIdSermons () {
+      this.resultPlaylistId = 'PLlURDWJlf7fS8-Z9hz4ShqtXdjg2tIGil'
+      this.refresh()
+    },
+    PlaylistIdAll () {
+      this.resultPlaylistId = 'UUSb71yKJmS0eHyhRRl00ioQ'
+      this.refresh()
+    },
+    PlaylistIdSong () {
+      this.resultPlaylistId = 'PLlURDWJlf7fQyA3kIfQ9Pa3Dtd_tM97-z'
+      this.refresh()
+    },
+    PlaylistIdLife () {
+      this.resultPlaylistId = 'PLlURDWJlf7fTuF3VfkKrsesTtfQtuNwo9'
+      this.refresh()
+    },
+    PlaylistIdChildren () {
+      this.resultPlaylistId = 'PLlURDWJlf7fS9RdrfemM6deAzy1zLyhug'
+      this.refresh()
+    }
+  },
+  setup () {
+    const ListVideoData = computed(() => store.state.ListVideoData)
+    // const LastVideoData = computed(() => store.state.LastVideoData)
+
+    const listVideo = () => {
+      store.dispatch('getListVideoData')
+    }
+    onMounted(listVideo)
+    return {
+      ListVideoData,
+      listVideo
+      // LastVideoData
     }
   }
-}
+})
 </script>
 
 <style>
