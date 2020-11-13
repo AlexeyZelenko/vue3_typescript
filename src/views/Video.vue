@@ -8,12 +8,14 @@
       </div>
     </div>
   </div>
-  <div id="player" class="youtube-container-main">
+  <div
+    id="player"
+    class="youtube-container-main"
+  >
     <iframe
-      src="https://www.youtube.com/embed/6wJAdfTJZUQ"
+      :src="`https://www.youtube.com/embed/${mainVideo}`"
       allowfullscreen
       allowtransparency
-      allow="autoplay"
     ></iframe>
   </div>
   <div class="youtube-container">
@@ -27,6 +29,7 @@
           class="youtube-list"
           :class="item.class"
           :data-youtube="item.datayoutube"
+          @click="changeVideo(item.datayoutube)"
         >
           <img
             style="width: 100%"
@@ -46,6 +49,7 @@
 export default {
   name: 'Video',
   data: () => ({
+    mainVideo: '30BQjlXXamY',
     video: [
       {
         class: 'change-youtube active',
@@ -66,7 +70,16 @@ export default {
         title: 'RE3 - Classic Costumes'
       }
     ]
-  })
+  }),
+  methods: {
+    changeVideo (item) {
+      this.mainVideo = item
+      const a = this.video
+        .findIndex(i => i.datayoutube === item)
+      // this.video.forEach(i => i.class = '')
+      this.video[a].class = 'change-youtube active'
+    }
+  }
 }
 </script>
 
