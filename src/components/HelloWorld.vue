@@ -155,7 +155,7 @@
 <script lang="ts">
 import { defineComponent, computed, onMounted } from 'vue'
 import store from '@/store'
-import Modal from '@/components/Modal.vue' // @ is an alias to /src
+import Modal from '@/components/Modal.vue'
 
 export default defineComponent({
   name: 'HelloWorld',

@@ -19,39 +19,65 @@
     ></iframe>
   </div>
   <div class="youtube-container">
-    <div >
-      <template
-        v-for="item in ListVideoData"
-        :key="item.id"
-        class="youtube-list"
+    <template
+      v-for="item in ListVideoData"
+      :key="item.id"
+      class="youtube-list"
+    >
+      <Modal
+        v-if="showModal"
+        @click="showModal = false"
       >
+        <template #header>
+          <h4>{{videoModalTitle}}</h4>
+        </template>
 
-        <div
-          class="change-youtube"
-          :class="item.class"
-          :data-youtube="item.snippet.resourceId.videoId"
-          @click="changeVideo(item.snippet.resourceId.videoId)"
-        >
-          <img
-            style="width: 100%"
-            :src="item.snippet.thumbnails.medium.url"
-          />
-          <p>{{item.snippet.title}}</p>
-        </div>
+        <template v-slot:body>
+          <iframe
+            width="560"
+            height="315"
+            :src="`https://www.youtube.com/embed/${videoModal}`"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </template>
 
-      </template>
-    </div>
+      </Modal>
+
+      <div
+        class="change-youtube"
+        :class="item.class"
+        :data-youtube="item.snippet.resourceId.videoId"
+        @click="changeVideo(item.snippet.resourceId.videoId), openModal(item)"
+      >
+        <img
+          style="width: 100%"
+          :src="item.snippet.thumbnails.medium.url"
+        />
+        <p
+          style="max-width: 200px"
+        >{{item.snippet.title}}</p>
+      </div>
+
+    </template>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed, onMounted } from 'vue'
 import store from '@/store'
+import Modal from '@/components/Modal.vue'
 
 export default defineComponent({
   name: 'Video',
+  components: {
+    Modal
+  },
   data: () => ({
-    mainVideo: 'kmHZ0lI-hHs'
+    showModal: false,
+    mainVideo: 'kmHZ0lI-hHs',
+    videoModal: '',
+    videoModalTitle: ''
   }),
   // computed: {
   //   mainVideo (): string {
@@ -59,6 +85,11 @@ export default defineComponent({
   //   }
   // },
   methods: {
+    openModal (item) {
+      this.showModal = true
+      this.videoModal = item.snippet.resourceId.videoId
+      this.videoModalTitle = item.snippet.title
+    },
     changeVideo (item) {
       this.mainVideo = item
       const a = this.ListVideoData.findIndex(i => i.snippet.resourceId.videoId === item)
@@ -110,20 +141,18 @@ export default defineComponent({
     margin-top: 20px;
   }
   .youtube-container {
-    padding-top: 30px;
-    text-align: center;
-    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
   }
   .youtube-list {
-    width: 90%;
-    max-width: 960px;
-    margin-left: 10px;
-    margin-right: 10px;
-    padding-right: 20px;
+    flex-basis: 25%;
+    box-shadow: 0 0 8px 0 #e0e0e0;
+    padding: 16px;
+    margin-bottom: 16px;
+    margin-left: 1px;
   }
   .change-youtube {
-    width: 30.333%;
-    float: left;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.2);
     margin-top: 30px;
     margin-bottom: 50px;
@@ -157,7 +186,7 @@ export default defineComponent({
   }
 
   @media (max-width: 570px) {
-    .youtube-container .youtube-list {
+    .youtube-list .change-youtube {
       width: 100%;
       float: none;
     }
