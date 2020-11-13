@@ -41,7 +41,7 @@
         </h1>
         <button
           class="button"
-          @click="showModal = true"
+          @click="this.showModal = true"
         >
           Дивитися останє служіння
         </button>
@@ -240,6 +240,7 @@ export default defineComponent({
     background-color: #fa5ba5;
     padding: 20px 30px;
     border-radius: 30px;
+    z-index: 99999;
   }
   iframe {
     width: 100%;
