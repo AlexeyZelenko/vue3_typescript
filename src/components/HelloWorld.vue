@@ -220,6 +220,7 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     z-index: 4;
+    text-align:center;
   }
   .overlay h1 {
     text-align:center;
@@ -245,12 +246,13 @@ export default defineComponent({
     }
   }
   .overlay button {
-    justify-content: center;
     color: #fff;
     text-decoration: none;
     font-weight: bold;
     font-size: 18px;
-    margin: 40px auto ;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #fa5ba5;
     padding: 20px 30px;
     border-radius: 30px;

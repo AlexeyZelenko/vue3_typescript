@@ -8,15 +8,14 @@
       </div>
     </div>
   </div>
-  <div
-    id="player"
-    class="youtube-container-main"
-  >
-    <iframe
-      :src="`https://www.youtube.com/embed/${mainVideo}`"
-      allowfullscreen
-      allowtransparency
-    ></iframe>
+  <div class="div1">
+    <nav>
+      <a href="#" class="hvr-grow">HOME</a>
+      <a href="#" >ABOUT</a>
+      <a href="#" >CONTACT US</a>
+      <a href="#" >FOLLOW US</a>
+      <div class="div2"></div>
+    </nav>
   </div>
   <div class="youtube-container">
     <template
@@ -48,7 +47,7 @@
         class="change-youtube"
         :class="item.class"
         :data-youtube="item.snippet.resourceId.videoId"
-        @click="changeVideo(item.snippet.resourceId.videoId), openModal(item)"
+        @click="openModal(item)"
       >
         <img
           style="width: 100%"
@@ -75,7 +74,6 @@ export default defineComponent({
   },
   data: () => ({
     showModal: false,
-    mainVideo: 'kmHZ0lI-hHs',
     videoModal: '',
     videoModalTitle: ''
   }),
@@ -89,14 +87,6 @@ export default defineComponent({
       this.showModal = true
       this.videoModal = item.snippet.resourceId.videoId
       this.videoModalTitle = item.snippet.title
-    },
-    changeVideo (item) {
-      this.mainVideo = item
-      const a = this.ListVideoData.findIndex(i => i.snippet.resourceId.videoId === item)
-      for (let i = 0; this.ListVideoData.length > i; i++) {
-        this.ListVideoData[i].class = 'change-youtube'
-      }
-      this.ListVideoData[a].class = 'change-youtube active'
     },
     PlaylistIdSermons () {
       this.resultPlaylistId = 'PLlURDWJlf7fS8-Z9hz4ShqtXdjg2tIGil'
@@ -121,7 +111,6 @@ export default defineComponent({
   },
   setup () {
     const ListVideoData = computed(() => store.state.ListVideoData)
-    // const LastVideoData = computed(() => store.state.LastVideoData)
 
     const listVideo = () => {
       store.dispatch('getListVideoData')
@@ -130,13 +119,84 @@ export default defineComponent({
     return {
       ListVideoData,
       listVideo
-      // LastVideoData
     }
   }
 })
 </script>
 
 <style>
+  .div1{
+    width: 100%;
+    height: 100px;
+    font-family: 'Oswald', sans-serif;
+    background-color:#212;
+    position: relative
+  }
+
+  nav{
+    padding: 10px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+  }
+  a{
+    text-decoration:none;
+    color:#fff;
+    width:120px;
+    display:inline-block;
+    text-align:center;
+    transition:all .33s linear;
+    -webkit-transition:all .33s linear;
+  }
+
+  .div2 {
+    width:120px;
+    height:2px;
+    background:#fff;
+  }
+  a:nth-child(1) ~ div{
+    transition:all .33s linear;
+    -webkit-transition:all .33s linear;
+
+  }
+  a:nth-child(2):hover ~ div {
+    transform:translate(120px);
+    -webkit-transform:translate(120px);
+    background-color:#e74c3c;
+    transition:all .33s linear;
+    -webkit-transition:all .33s linear;
+  }
+  a:nth-child(3):hover ~ div {
+    transform:translate(120px);
+    -webkit-transform:translate(240px);
+    background-color:#BF55EC;
+    transition:all .33s linear;
+    -webkit-transition:all .33s linear;
+  }
+  a:nth-child(4):hover ~ div {
+    transform:translate(120px);
+    -webkit-transform:translate(360px);
+    background-color:#f39c12;
+    color:#03C9A9;
+    transition:all .33s linear;
+    -webkit-transition:all .33s linear;
+  }
+  a:nth-child(2):hover {
+    color:#e74c3c;
+  }
+
+  a:nth-child(3):hover {
+    color:#BF55EC;
+  }
+
+  a:nth-child(4):hover {
+    color:#f39c12;
+  }
+
+  ---------
   .youtube-container-main {
     margin-top: 20px;
   }
