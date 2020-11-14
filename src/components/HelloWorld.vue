@@ -1,5 +1,7 @@
 <template>
   <div>
+
+<!--    Модальное окно-->
     <Modal
       v-if="showModal"
       @click="showModal = false"
@@ -22,9 +24,12 @@
       </template>
 
     </Modal>
+
     <header>
       <div class="container">
         <div class="brand">Блага вість</div>
+
+<!--        Меню-->
         <nav>
           <ul class="menu">
             <li><router-link to="/">Головна</router-link></li>
@@ -34,6 +39,8 @@
         </nav>
       </div>
     </header>
+
+<!--    ВидеоОбложка-->
     <div class="fullscreen-bg">
       <div class="overlay">
         <h1>
@@ -62,18 +69,6 @@
         >
       </video>
     </div>
-    <div class="jumbotron">
-      <div class="container">
-        <h1>
-          Так бо Бог полюбив світ, що дав Сина Свого Одноро́дженого, щоб кожен, хто вірує в Нього, не згинув, але мав життя вічне.
-        </h1>
-        <button class="button"
-           @click="showModal = true"
-        >
-          Дивитися останє служіння
-        </button>
-      </div>
-    </div>
 
     <div class="services">
       <div class="container">
@@ -94,6 +89,19 @@
           <i aria-hidden="true" class="fa fa-bar-chart fa-3x"></i>
           <p>Підтримка</p>
         </div>
+      </div>
+    </div>
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1>
+          Так бо Бог полюбив світ, що дав Сина Свого Одноро́дженого, щоб кожен, хто вірує в Нього, не згинув, але мав життя вічне.
+        </h1>
+        <button class="button"
+                @click="showModal = true"
+        >
+          Дивитися останє служіння
+        </button>
       </div>
     </div>
 
@@ -192,7 +200,6 @@ export default defineComponent({
 <style >
   .fullscreen-bg {
     overflow: hidden;
-    z-index: -100;
     position: relative;
     height: 100%;
     width: 100%;
@@ -217,26 +224,33 @@ export default defineComponent({
   .overlay h1 {
     text-align:center;
     color:#fff;
-    font-size: 50px;
+    font-size: 45px;
     margin:10% 10%;
     text-shadow: 0 0 10px black;
   }
   @media (max-width: 767px) {
     .fullscreen-bg {
       background: url('../assets/images/plane.jpg') center center / cover no-repeat;
+      padding-top: 100%;
     }
     .fullscreen-bg__video {
       display: none;
     }
+    .overlay h1 {
+      text-align:center;
+      color:#fff;
+      font-size: 25px;
+      margin:5% 5%;
+      text-shadow: 0 0 10px black;
+    }
   }
   .overlay button {
-    display: inline-block;
+    justify-content: center;
     color: #fff;
     text-decoration: none;
     font-weight: bold;
     font-size: 18px;
-    margin-top: 40px;
-    margin-left: 40%;
+    margin: 40px auto ;
     background-color: #fa5ba5;
     padding: 20px 30px;
     border-radius: 30px;
