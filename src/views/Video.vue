@@ -10,10 +10,27 @@
   </div>
   <div class="div1">
     <nav>
-      <a href="#" class="hvr-grow">HOME</a>
-      <a href="#" >ABOUT</a>
-      <a href="#" >CONTACT US</a>
-      <a href="#" >FOLLOW US</a>
+      <button_tab
+        @click="listVideo('PLlURDWJlf7fS8-Z9hz4ShqtXdjg2tIGil')"
+        class="hvr-grow"
+      >
+        ПРОПОВІДІ
+      </button_tab>
+      <button_tab
+        @click="listVideo('PLlURDWJlf7fQyA3kIfQ9Pa3Dtd_tM97-z')"
+      >
+        ПІСНІ
+      </button_tab>
+      <button_tab
+        @click="listVideo('PLlURDWJlf7fTuF3VfkKrsesTtfQtuNwo9')"
+      >
+        ЖИТТЯ
+      </button_tab>
+      <button_tab
+        @click="listVideo('PLlURDWJlf7fS9RdrfemM6deAzy1zLyhug')"
+      >
+        ДІТИ
+      </button_tab>
       <div class="div2"></div>
     </nav>
   </div>
@@ -60,6 +77,11 @@
 
     </template>
   </div>
+<!--  <button-->
+<!--    @click="videoOnPage( 5)"-->
+<!--  >-->
+<!--    додати 5 відео-->
+<!--  </button>-->
 </template>
 
 <script lang="ts">
@@ -87,38 +109,25 @@ export default defineComponent({
       this.showModal = true
       this.videoModal = item.snippet.resourceId.videoId
       this.videoModalTitle = item.snippet.title
-    },
-    PlaylistIdSermons () {
-      this.resultPlaylistId = 'PLlURDWJlf7fS8-Z9hz4ShqtXdjg2tIGil'
-      this.refresh()
-    },
-    PlaylistIdAll () {
-      this.resultPlaylistId = 'UUSb71yKJmS0eHyhRRl00ioQ'
-      this.refresh()
-    },
-    PlaylistIdSong () {
-      this.resultPlaylistId = 'PLlURDWJlf7fQyA3kIfQ9Pa3Dtd_tM97-z'
-      this.refresh()
-    },
-    PlaylistIdLife () {
-      this.resultPlaylistId = 'PLlURDWJlf7fTuF3VfkKrsesTtfQtuNwo9'
-      this.refresh()
-    },
-    PlaylistIdChildren () {
-      this.resultPlaylistId = 'PLlURDWJlf7fS9RdrfemM6deAzy1zLyhug'
-      this.refresh()
     }
   },
   setup () {
     const ListVideoData = computed(() => store.state.ListVideoData)
 
-    const listVideo = () => {
-      store.dispatch('getListVideoData')
+    const videoOnPage = (value2) => {
+      const payload = { value2 }
+      store.dispatch('getListVideoData', payload)
+    }
+
+    const listVideo = (value) => {
+      const payload = { value }
+      store.dispatch('getListVideoData', payload)
     }
     onMounted(listVideo)
     return {
       ListVideoData,
-      listVideo
+      listVideo,
+      videoOnPage
     }
   }
 })
@@ -142,7 +151,8 @@ export default defineComponent({
     margin-right: -50%;
     transform: translate(-50%, -50%)
   }
-  a{
+  button_tab{
+    cursor: pointer;
     text-decoration:none;
     color:#fff;
     width:120px;
@@ -157,26 +167,26 @@ export default defineComponent({
     height:2px;
     background:#fff;
   }
-  a:nth-child(1) ~ div{
+  button_tab:nth-child(1) ~ div{
     transition:all .33s linear;
     -webkit-transition:all .33s linear;
 
   }
-  a:nth-child(2):hover ~ div {
+  button_tab:nth-child(2):hover ~ div {
     transform:translate(120px);
     -webkit-transform:translate(120px);
     background-color:#e74c3c;
     transition:all .33s linear;
     -webkit-transition:all .33s linear;
   }
-  a:nth-child(3):hover ~ div {
+  button_tab:nth-child(3):hover ~ div {
     transform:translate(120px);
     -webkit-transform:translate(240px);
     background-color:#BF55EC;
     transition:all .33s linear;
     -webkit-transition:all .33s linear;
   }
-  a:nth-child(4):hover ~ div {
+  button_tab:nth-child(4):hover ~ div {
     transform:translate(120px);
     -webkit-transform:translate(360px);
     background-color:#f39c12;
@@ -184,15 +194,15 @@ export default defineComponent({
     transition:all .33s linear;
     -webkit-transition:all .33s linear;
   }
-  a:nth-child(2):hover {
+  button_tab:nth-child(2):hover {
     color:#e74c3c;
   }
 
-  a:nth-child(3):hover {
+  button_tab:nth-child(3):hover {
     color:#BF55EC;
   }
 
-  a:nth-child(4):hover {
+  button_tab:nth-child(4):hover {
     color:#f39c12;
   }
 
