@@ -137,24 +137,25 @@
           tabindex="0"
         >
         </iframe>
-      </div>
-      <div class="container">
-        <div class="brand">Блага вість</div>
-        <nav>
-          <ul class="menu">
-            <li
-              :key="icon.icon"
-              v-for="icon in icons"
-            >
-              <a :href="icon.src">
-                {{ icon.name }}
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <p class="copyright">
-          {{ new Date().getFullYear() }} — <strong>Блага вість</strong>
-        </p>
+        <div>
+          <div class="brand">{{ new Date().getFullYear() }} — Блага вість</div>
+              <nav>
+                <ul class="menu">
+                  <template
+                    :key="icon.icon"
+                    v-for="icon in icons"
+                  >
+                    <li>
+                      <a :href="icon.src">
+                        <i
+                          :class="icon.fontawesome"
+                          aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  </template>
+                </ul>
+              </nav>
+        </div>
       </div>
     </footer>
   </div>
@@ -423,7 +424,7 @@ export default defineComponent({
   footer {
     clear: both;
     padding-top: 50px;
-    padding-bottom: 50px;
+    padding-bottom: 40px;
     text-align: center;
     background-color: #38404b;
   }
