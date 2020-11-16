@@ -313,7 +313,6 @@ export default defineComponent({
   }
 
   .brand {
-    text-align: center;
     font-size: 30px;
   }
     img {
