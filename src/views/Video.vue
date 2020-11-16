@@ -48,13 +48,17 @@
           <h4>{{videoModalTitle}}</h4>
         </template>
 
-        <template v-slot:body>
+        <template #body>
           <iframe
-            width="560"
-            height="315"
             :src="`https://www.youtube.com/embed/${videoModal}`"
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            frameborder="0"
+            allow="accelerometer;
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            gyroscope;
+            picture-in-picture"
+            allowfyullscreen
           ></iframe>
         </template>
 
@@ -99,11 +103,6 @@ export default defineComponent({
     videoModal: '',
     videoModalTitle: ''
   }),
-  // computed: {
-  //   mainVideo (): string {
-  //     return this.LastVideoData.resourceId.videoId
-  //   }
-  // },
   methods: {
     openModal (item) {
       this.showModal = true
@@ -143,7 +142,7 @@ export default defineComponent({
   }
 
   nav{
-    padding: 10px;
+    padding: 5px;
     margin: 0;
     position: absolute;
     top: 50%;
@@ -155,7 +154,7 @@ export default defineComponent({
     cursor: pointer;
     text-decoration:none;
     color:#fff;
-    width:120px;
+    width:100px;
     display:inline-block;
     text-align:center;
     transition:all .33s linear;
@@ -163,7 +162,7 @@ export default defineComponent({
   }
 
   .div2 {
-    width:120px;
+    width:100px;
     height:2px;
     background:#fff;
   }
@@ -173,21 +172,21 @@ export default defineComponent({
 
   }
   button_tab:nth-child(2):hover ~ div {
-    transform:translate(120px);
-    -webkit-transform:translate(120px);
+    transform:translate(100px);
+    -webkit-transform:translate(100px);
     background-color:#e74c3c;
     transition:all .33s linear;
     -webkit-transition:all .33s linear;
   }
   button_tab:nth-child(3):hover ~ div {
-    transform:translate(120px);
-    -webkit-transform:translate(240px);
+    transform:translate(100px);
+    -webkit-transform:translate(200px);
     background-color:#BF55EC;
     transition:all .33s linear;
     -webkit-transition:all .33s linear;
   }
   button_tab:nth-child(4):hover ~ div {
-    transform:translate(120px);
+    transform:translate(100px);
     -webkit-transform:translate(360px);
     background-color:#f39c12;
     color:#03C9A9;
