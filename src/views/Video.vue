@@ -11,6 +11,11 @@
   <div class="div1">
     <nav>
       <button_tab
+        @click="listVideo('UUSb71yKJmS0eHyhRRl00ioQ')"
+      >
+        ВСІ
+      </button_tab>
+      <button_tab
         @click="listVideo('PLlURDWJlf7fS8-Z9hz4ShqtXdjg2tIGil')"
         class="hvr-grow"
       >
@@ -21,16 +26,11 @@
       >
         ПІСНІ
       </button_tab>
-      <button_tab
-        @click="listVideo('PLlURDWJlf7fTuF3VfkKrsesTtfQtuNwo9')"
-      >
-        ЖИТТЯ
-      </button_tab>
-      <button_tab
-        @click="listVideo('PLlURDWJlf7fS9RdrfemM6deAzy1zLyhug')"
-      >
-        ДІТИ
-      </button_tab>
+<!--      <button_tab-->
+<!--        @click="listVideo('PLlURDWJlf7fS9RdrfemM6deAzy1zLyhug')"-->
+<!--      >-->
+<!--        ДІТИ-->
+<!--      </button_tab>-->
       <div class="div2"></div>
     </nav>
   </div>
@@ -85,7 +85,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onMounted } from 'vue'
+import { defineComponent, computed } from 'vue'
 import store from '@/store'
 import Modal from '@/components/Modal.vue'
 
@@ -123,7 +123,7 @@ export default defineComponent({
       const payload = { value }
       store.dispatch('getListVideoData', payload)
     }
-    onMounted(listVideo)
+    // onMounted(listVideo)
     return {
       ListVideoData,
       listVideo,

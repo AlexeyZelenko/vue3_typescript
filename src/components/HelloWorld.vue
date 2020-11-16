@@ -1,6 +1,5 @@
 <template>
   <div>
-
 <!--    Модальное окно-->
     <Modal
       v-if="showModal"
@@ -101,8 +100,8 @@
     <div class="jumbotron">
       <div class="container">
         <h1>
-          Так бо Бог полюбив світ, що дав Сина Свого Одноро́дженого, щоб кожен, хто вірує в Нього, не згинув, але мав життя вічне.
-        </h1>
+          Ісус відповів: „Поправді, поправді кажуу Я тобі: Коли хто не роодиться з води й Духа, той не може ввійти в Царство Боже.
+          /Івана 3 : 5/</h1>
         <button class="button"
                 @click="showModal = true"
         >
@@ -313,6 +312,7 @@ export default defineComponent({
   }
 
   .brand {
+    width: 100%;
     font-size: 30px;
   }
     img {
@@ -344,13 +344,13 @@ export default defineComponent({
   /* Header */
   header {
     background-color: #fff;
-    padding-top: 30px;
+    padding-top: 5px;
   }
 
   header .brand {
     float: left;
     color: #59abe3;
-    margin-bottom: 30px;
+    padding-top: 5px;
   }
 
   header .menu {
