@@ -27,16 +27,22 @@
 
     <header>
       <div class="container">
-        <div class="brand">Блага вість</div>
+        <div class="brand">
+          <img :src="require(`@/assets/img/logo.png`)" />
+          <h1>Блага вість</h1>
+<!--          <h6 style="margin-top: 0">Україна Черкаси</h6>-->
+          <h3>Церква християн віри евангельскої</h3>
+          <div class="clear"></div>
+        </div>
 
 <!--        Меню-->
-        <nav>
-          <ul class="menu">
-            <li><router-link to="/">Головна</router-link></li>
-            <li><router-link to="/about">Про церкву</router-link></li>
-            <li><router-link to="/video">Відео</router-link></li>
-          </ul>
-        </nav>
+<!--        <nav>-->
+<!--          <ul class="menu">-->
+<!--            <li><router-link to="/">Головна</router-link></li>-->
+<!--            <li><router-link to="/about">Про церкву</router-link></li>-->
+<!--            <li><router-link to="/video">Відео</router-link></li>-->
+<!--          </ul>-->
+<!--        </nav>-->
       </div>
     </header>
 
@@ -199,6 +205,9 @@ export default defineComponent({
 </script>
 
 <style >
+  .clear {
+    clear: both;
+  }
   .fullscreen-bg {
     overflow: hidden;
     position: relative;
@@ -231,6 +240,9 @@ export default defineComponent({
     text-shadow: 0 0 10px black;
   }
   @media (max-width: 767px) {
+    .brand img {
+      display: none;
+    }
     .fullscreen-bg {
       background: url('../assets/images/plane.jpg') center center / cover no-repeat;
       padding-top: 100%;
@@ -301,8 +313,12 @@ export default defineComponent({
   }
 
   .brand {
+    text-align: center;
     font-size: 30px;
   }
+    img {
+      float: left;
+    }
 
   .menu {
     padding-left: 0;
