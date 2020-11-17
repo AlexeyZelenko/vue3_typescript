@@ -13,8 +13,6 @@
 
       <template v-slot:body>
         <iframe
-          width="560"
-          height="315"
           :src="`https://www.youtube.com/embed/${codVideo}`"
           frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
@@ -31,7 +29,6 @@
         <div class="brand">
           <img :src="require(`@/assets/img/logo.png`)" />
           <h1>Блага вість</h1>
-<!--          <h6 style="margin-top: 0">Україна Черкаси</h6>-->
           <h3>Церква християн віри евангельскої</h3>
           <div class="clear"></div>
         </div>
@@ -167,7 +164,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onMounted } from 'vue'
+import { defineComponent, computed, onMounted, ref } from 'vue'
 import store from '@/store'
 import Modal from '@/components/Modal.vue'
 
@@ -176,9 +173,6 @@ export default defineComponent({
   components: {
     Modal
   },
-  data: () => ({
-    showModal: false
-  }),
   computed: {
     codVideo (): string {
       return this.LastVideoData.resourceId.videoId
@@ -188,6 +182,7 @@ export default defineComponent({
     }
   },
   setup () {
+    const showModal = ref(false)
     const icons = computed(() => store.state.icons)
     const LastVideoData = computed(() => store.state.LastVideoData)
 
@@ -197,7 +192,8 @@ export default defineComponent({
     onMounted(getCodeVideo)
     return {
       icons,
-      LastVideoData
+      LastVideoData,
+      showModal
     }
   }
 })
@@ -239,8 +235,12 @@ export default defineComponent({
     text-shadow: 0 0 10px black;
   }
   @media (max-width: 767px) {
+    iframe {
+      width: 100%;
+      height: 240px;
+    }
     .brand img {
-      display: none;
+      width: 96px;
     }
     .fullscreen-bg {
       background: url('../assets/images/jumbotron.png') center center / cover no-repeat;
@@ -272,7 +272,7 @@ export default defineComponent({
   }
   iframe {
     width: 100%;
-    height: 500px;
+    height: 460px;
   }
 
   /* General */
@@ -316,6 +316,7 @@ export default defineComponent({
     font-size: 30px;
   }
     img {
+      width: 128px;
       float: left;
     }
 

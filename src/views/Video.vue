@@ -3,7 +3,7 @@
     <div class="jumbotron">
       <div class="container">
         <h1>
-          Так бо Бог полюбив світ, що дав Сина Свого Одноро́дженого, щоб кожен, хто вірує в Нього, не згинув, але мав життя вічне.
+          Хто вірує в Нього, не буде засуджений; хто ж не вірує, – той вже засуджений, що не повірив в Ім'я Однородженого Сина Божого.
         </h1>
       </div>
     </div>
@@ -58,7 +58,7 @@
             encrypted-media;
             gyroscope;
             picture-in-picture"
-            allowfyullscreen
+            allowfullscreen
           ></iframe>
         </template>
 
@@ -81,15 +81,14 @@
 
     </template>
   </div>
-<!--  <button-->
-<!--    @click="videoOnPage( 5)"-->
-<!--  >-->
-<!--    додати 5 відео-->
-<!--  </button>-->
+<!--  <img-->
+<!--    class="topbutton"-->
+<!--    @click="goUp"-->
+<!--    :src="require(`@/assets/img/19.png`)">-->
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref, onMounted } from 'vue'
 import store from '@/store'
 import Modal from '@/components/Modal.vue'
 
@@ -99,11 +98,16 @@ export default defineComponent({
     Modal
   },
   data: () => ({
-    showModal: false,
-    videoModal: '',
-    videoModalTitle: ''
+    // videoModal: '',
+    // videoModalTitle: ''
   }),
   methods: {
+    // goUp () {
+    //   const top = Math.max(document.body.scrollTop, document.documentElement.scrollTop)
+    //   if (top > 0) {
+    //     window.scrollBy(0, -5000)
+    //   } else { window.scrollBy(0, 0) }
+    // },
     openModal (item) {
       this.showModal = true
       this.videoModal = item.snippet.resourceId.videoId
@@ -111,28 +115,57 @@ export default defineComponent({
     }
   },
   setup () {
+    const showModal = ref(false)
+    const videoModal = ref('')
+    const videoModalTitle = ref('')
     const ListVideoData = computed(() => store.state.ListVideoData)
 
-    const videoOnPage = (value2) => {
-      const payload = { value2 }
-      store.dispatch('getListVideoData', payload)
-    }
+    // const videoOnPage = (value2) => {
+    //   const payload = { value2 }
+    //   store.dispatch('getListVideoData', payload)
+    // }
 
     const listVideo = (value) => {
       const payload = { value }
       store.dispatch('getListVideoData', payload)
     }
-    // onMounted(listVideo)
+
+    const startListVideo = () => {
+      store.dispatch('getListVideoData')
+    }
+    onMounted(startListVideo)
+
     return {
       ListVideoData,
       listVideo,
-      videoOnPage
+      // videoOnPage,
+      showModal,
+      videoModal,
+      videoModalTitle
     }
   }
 })
 </script>
 
 <style scoped>
+  .topbutton {
+    width:50px;
+    border:2px solid #ccc;
+    background:#f7f7f7;
+    text-align:center;
+    padding:10px;
+    position:fixed;
+    bottom:50px;
+    right:50px;
+    cursor:pointer;
+    color:#333;
+    font-family:verdana;
+    font-size:12px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+  }
   .div1{
     width: 100%;
     height: 100px;
@@ -223,8 +256,8 @@ export default defineComponent({
   }
   .change-youtube {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.2);
-    margin-top: 30px;
-    margin-bottom: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border: 6px solid #BFE2FF;
     transition: box-shadow 0.3s linear;
     cursor: pointer;

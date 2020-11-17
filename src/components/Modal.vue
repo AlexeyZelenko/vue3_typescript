@@ -2,21 +2,31 @@
   <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
+        <div class="modal-header">
+          <slot name="header" ></slot>
+          <div
+            type="button"
+            class="modal-close"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 352 512"
+            >
+              <path
+                fill="currentColor"
+                d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+              ></path>
+            </svg>
+          </div>
+        </div>
         <div class="modal-container">
 
-          <div class="modal-header">
-            <slot name="header" ></slot>
-            <button type="button" class="modal-close">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
-                <path
-                  fill="currentColor"
-                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
-                ></path>
-              </svg>
-            </button>
+          <div class="modal-body">
+            <slot
+              name="body"
+            >
+            </slot>
           </div>
-          <slot name="body">
-          </slot>
 
           <div class="modal-footer">
             <slot name="footer"></slot>
@@ -49,40 +59,43 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(45, 39, 39, 0.4);
+    background-color: rgba(8, 8, 8, 0.8);
     display: table;
     transition: opacity 0.3s ease;
   }
 
   .modal-wrapper {
-    display: table-cell;
+    height: 100%;
     vertical-align: middle;
   }
 
   .modal-container {
+    height: 70%;
     width: 80%;
     margin: 0px auto;
-    background-color: #fff;
+    background-color: #e1d6d6;
     border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
   }
 
   .modal-header h4 {
+    margin-left: 20px;
+    height: 100%;
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 20px;
+    font-size: 30px;
     margin-top: 0;
-    color: #42b983;
-    text-shadow: 0 1px 1px black;
+    color: #eff4f1;
   }
 
   .modal-body {
-    margin: 20px 0;
+    padding: 5px;
   }
 
   .modal-close {
-    width: 30px;
-    height: 30px;
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
   }
 
   .modal-default-button {
@@ -90,7 +103,7 @@ export default {
   }
 
   .modal-enter {
-    opacity: 0;
+    opacity: 0.5;
   }
 
   .modal-leave-active {
@@ -102,5 +115,10 @@ export default {
   .modal-leave-active .modal-container {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
+  }
+  @media (max-width: 767px) {
+    .modal-header h4 {
+      font-size: 16px;
+    }
   }
 </style>
