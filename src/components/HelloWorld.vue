@@ -164,9 +164,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onMounted, ref } from 'vue'
+import { defineAsyncComponent, defineComponent, computed, onMounted, ref } from 'vue'
 import store from '@/store'
-import Modal from '@/components/Modal.vue'
+const Modal = defineAsyncComponent(() => import('@/components/Modal.vue')
+)
+// import Modal from '@/components/Modal.vue'
 
 export default defineComponent({
   name: 'HelloWorld',
