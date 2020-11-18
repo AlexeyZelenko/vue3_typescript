@@ -41,7 +41,7 @@
 <script>
 
 export default {
-  name: 'Modal'
+  name: 'ModalVideo'
 }
 </script>
 
@@ -74,6 +74,9 @@ export default {
     width: 80%;
     margin: 0px auto;
     background-color: #d4d4d4;
+    background-image: url('../assets/img/loading.svg');
+    background-repeat: no-repeat, repeat;
+    background-position: center center;
     border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.5s ease;

@@ -34,13 +34,15 @@
       <div class="div2"></div>
     </nav>
   </div>
+
+<!--  Лист видео-->
   <div class="youtube-container">
     <template
       v-for="item in ListVideoData"
       :key="item.id"
       class="youtube-list"
     >
-      <Modal
+      <ModalVideo
         v-if="showModal"
         @click="showModal = false"
       >
@@ -62,7 +64,7 @@
           ></iframe>
         </template>
 
-      </Modal>
+      </ModalVideo>
 
       <div
         class="change-youtube"
@@ -88,19 +90,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, onMounted } from 'vue'
+import { defineComponent, computed, ref, onMounted, defineAsyncComponent } from 'vue'
 import store from '@/store'
-import Modal from '@/components/Modal.vue'
+const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vue'))
 
 export default defineComponent({
   name: 'Video',
   components: {
-    Modal
+    ModalVideo
   },
-  data: () => ({
-    // videoModal: '',
-    // videoModalTitle: ''
-  }),
   methods: {
     // goUp () {
     //   const top = Math.max(document.body.scrollTop, document.documentElement.scrollTop)
