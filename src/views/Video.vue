@@ -83,10 +83,11 @@
 
     </template>
   </div>
-<!--  <img-->
-<!--    class="topbutton"-->
-<!--    @click="goUp"-->
-<!--    :src="require(`@/assets/img/19.png`)">-->
+  <img
+    v-if="topUp"
+    class="topbutton"
+    @click="goUp"
+    :src="require(`@/assets/img/19.png`)">
 </template>
 
 <script lang="ts">
@@ -99,29 +100,27 @@ export default defineComponent({
   components: {
     ModalVideo
   },
+  data: () => ({
+    topUp: true
+  }),
   methods: {
-    // goUp () {
-    //   const top = Math.max(document.body.scrollTop, document.documentElement.scrollTop)
-    //   if (top > 0) {
-    //     window.scrollBy(0, -5000)
-    //   } else { window.scrollBy(0, 0) }
-    // },
+    goUp () {
+      const top = Math.max(document.body.scrollTop, document.documentElement.scrollTop)
+      if (top > 0) {
+        window.scrollBy(0, -5000)
+      } else { window.scrollBy(0, 0) }
+    },
     openModal (item) {
       this.showModal = true
       this.videoModal = item.snippet.resourceId.videoId
       this.videoModalTitle = item.snippet.title
     }
   },
-  setup () {
+  setup (playlistId) {
     const showModal = ref(false)
     const videoModal = ref('')
     const videoModalTitle = ref('')
     const ListVideoData = computed(() => store.state.ListVideoData)
-
-    // const videoOnPage = (value2) => {
-    //   const payload = { value2 }
-    //   store.dispatch('getListVideoData', payload)
-    // }
 
     const listVideo = (value) => {
       const payload = { value }
@@ -133,13 +132,22 @@ export default defineComponent({
     }
     onMounted(startListVideo)
 
+    // const cats = ref([])
+    // const fetchCats = async () => {
+    //   cats.value = await fetch(
+    //     'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSb71yKJmS0eHyhRRl00ioQ&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY&part=snippet&maxResults=10'
+    //   ).then((response) => response.json())
+    //   console.log(cats.value)
+    // }
+    // onMounted(fetchCats)
+
     return {
       ListVideoData,
       listVideo,
-      // videoOnPage,
       showModal,
       videoModal,
       videoModalTitle
+      // cats
     }
   }
 })
@@ -265,24 +273,8 @@ export default defineComponent({
     padding-left: 15px;
     padding-right: 15px;
   }
-  .change-youtube:nth-child(2) {
-    margin-left: 16px;
-    margin-right: 16px;
-  }
-  .change-youtube span {
-    display: block;
-    padding: 6px 12px 0 12px;
-    font-size: 18px;
-    font-family: 'Roboto Condensed', sans-serif;
-  }
   .change-youtube:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 16px 20px rgba(0,0,0,0.2);
-  }
-  .change-youtube.active {
-    border: 6px solid #00b3ff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 16px 20px rgba(0,0,0,0.2);
-    color: #FFF;
-    background: #00b3ff;
   }
 
   @media (max-width: 570px) {

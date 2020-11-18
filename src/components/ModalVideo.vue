@@ -22,10 +22,7 @@
         <div class="modal-container">
 
           <div class="modal-body">
-            <slot
-              name="body"
-            >
-            </slot>
+            <slot name="body"></slot>
           </div>
 
           <div class="modal-footer">
@@ -61,7 +58,6 @@ export default {
     height: 100%;
     background-color: rgba(8, 8, 8, 0.8);
     display: table;
-    transition: opacity 0.3s ease;
   }
 
   .modal-wrapper {
@@ -70,16 +66,13 @@ export default {
   }
 
   .modal-container {
-    height: 70%;
     width: 80%;
     margin: 0px auto;
-    background-color: #d4d4d4;
     background-image: url('../assets/img/loading.svg');
     background-repeat: no-repeat, repeat;
     background-position: center center;
     border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-    transition: all 0.5s ease;
   }
 
   .modal-header h4 {
@@ -105,20 +98,6 @@ export default {
     float: right;
   }
 
-  .modal-enter {
-    opacity: 0.5;
-  }
-
-  .modal-leave-active {
-    transition: opacity 0.2s;
-    opacity: 0;
-  }
-
-  .modal-enter .modal-container,
-  .modal-leave-active .modal-container {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-  }
   @media (max-width: 767px) {
     .modal-header h4 {
       font-size: 16px;

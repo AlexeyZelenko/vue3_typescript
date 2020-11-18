@@ -3,8 +3,8 @@
     <div
       class="sec-text"
     >
-      <h3 class="sec-text__title">{{product_data.title}}</h3>
-      <p class="sec-text__dsc">{{product_data.text}}</p>
+      <h3 class="sec-text__title">{{title}}</h3>
+      <p class="sec-text__dsc">{{text}}</p>
     </div>
     <section
       :class=product_data.sectionClass
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { computed } from 'vue'
 
 export default {
   name: 'v-catalog-item',
@@ -22,6 +23,18 @@ export default {
       default () {
         return {}
       }
+    }
+  },
+  setup (props) {
+    const title = computed(
+      () => props.product_data.title
+    )
+    const text = computed(
+      () => props.product_data.text
+    )
+    return {
+      title,
+      text
     }
   }
 }

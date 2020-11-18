@@ -65,14 +65,14 @@ export default {
   }
 
   .modal-wrapper {
-    height: 100%;
+    height: 80%;
     vertical-align: middle;
   }
 
   .modal-container {
-    height: 70%;
+    max-width: 400px;
     width: 80%;
-    margin: 0px auto;
+    margin: 10px auto;
     background-color: #d4d4d4;
     border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -89,7 +89,10 @@ export default {
   }
 
   .modal-body {
-    padding: 5px;
+    justify-content: center;
+    vertical-align: top;
+    display: inline-block;
+    padding: 10px;
   }
 
   .modal-close {

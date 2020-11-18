@@ -1,7 +1,7 @@
 <template>
   <div>
 <!--    Модальное окно-->
-    <Modal
+    <ModalVideo
       v-if="showModal"
       @click="showModal = false"
     >
@@ -22,7 +22,7 @@
       <template v-slot:footer>
       </template>
 
-    </Modal>
+    </ModalVideo>
 
     <header>
       <div class="container">
@@ -166,12 +166,12 @@
 <script lang="ts">
 import { defineAsyncComponent, defineComponent, computed, onMounted, ref } from 'vue'
 import store from '@/store'
-const Modal = defineAsyncComponent(() => import('@/components/Modal.vue'))
+const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vue'))
 
 export default defineComponent({
   name: 'HelloWorld',
   components: {
-    Modal
+    ModalVideo
   },
   computed: {
     codVideo (): string {
@@ -190,6 +190,16 @@ export default defineComponent({
       store.dispatch('getLastVideoData')
     }
     onMounted(getCodeVideo)
+
+    // const cats = ref([])
+    // const fetchCats = async () => {
+    //   cats.value = await fetch(
+    //     'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSb71yKJmS0eHyhRRl00ioQ&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY&part=snippet&maxResults=10'
+    //   ).then((response) => response.json())
+    //   console.log(cats.value)
+    // }
+    // onMounted(fetchCats)
+
     return {
       icons,
       LastVideoData,
@@ -316,7 +326,6 @@ export default defineComponent({
     font-size: 30px;
   }
     img {
-      width: 128px;
       float: left;
     }
 
