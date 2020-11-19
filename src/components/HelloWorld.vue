@@ -174,6 +174,9 @@ export default defineComponent({
     ModalVideo
   },
   computed: {
+    style () {
+      return this.styleBtnUp
+    },
     codVideo (): string {
       return this.LastVideoData.resourceId.videoId
     },

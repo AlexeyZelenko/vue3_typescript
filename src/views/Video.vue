@@ -83,11 +83,6 @@
 
     </template>
   </div>
-  <img
-    v-if="topUp"
-    class="topbutton"
-    @click="goUp"
-    :src="require(`@/assets/img/19.png`)">
 </template>
 
 <script lang="ts">
@@ -104,12 +99,6 @@ export default defineComponent({
     topUp: true
   }),
   methods: {
-    goUp () {
-      const top = Math.max(document.body.scrollTop, document.documentElement.scrollTop)
-      if (top > 0) {
-        window.scrollBy(0, -5000)
-      } else { window.scrollBy(0, 0) }
-    },
     openModal (item) {
       this.showModal = true
       this.videoModal = item.snippet.resourceId.videoId
@@ -154,24 +143,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-  .topbutton {
-    width:50px;
-    border:2px solid #ccc;
-    background:#f7f7f7;
-    text-align:center;
-    padding:10px;
-    position:fixed;
-    bottom:50px;
-    right:50px;
-    cursor:pointer;
-    color:#333;
-    font-family:verdana;
-    font-size:12px;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
-  }
   .div1{
     width: 100%;
     height: 100px;
