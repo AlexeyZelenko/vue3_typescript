@@ -1,8 +1,8 @@
 <template>
   <div id="nav">
-    <router-link to="/">Головна</router-link> |
-    <router-link to="/about">Про церкву</router-link> |
-    <router-link to="/video">Відео</router-link>
+    <router-link  to="/">Головна</router-link> |
+    <router-link  to="/about">Про церкву</router-link> |
+    <router-link  to="/video">Відео</router-link>
   </div>
   <router-view/>
 </template>
@@ -24,6 +24,7 @@
 #nav a {
   font-weight: bold;
   color: #dee3e9;
+  text-decoration: none;
 }
 
 #nav a.router-link-exact-active {

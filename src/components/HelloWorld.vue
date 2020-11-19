@@ -268,6 +268,7 @@ export default defineComponent({
     }
   }
   .overlay button {
+    cursor: pointer;
     color: #fff;
     text-decoration: none;
     font-weight: bold;
