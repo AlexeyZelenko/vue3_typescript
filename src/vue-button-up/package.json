@@ -1,6 +1,6 @@
 {
   "name": "vue-button-up",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Move up button for VUE2-3",
   "main": "src/main.js",
   "scripts": {
@@ -10,7 +10,8 @@
   "author": "zelenkooleksii75@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "vue": "^2.6.12"
+    "vue": "^2.6.12",
+    "vuejs-hello-app": "^0.1.5"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
