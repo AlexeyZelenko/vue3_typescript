@@ -15,9 +15,12 @@
     "eslint-config-vuetify": "^0.6.1",
     "vue": "^3.0.0",
     "vue-aos": "^1.1.0",
+    "vue-button-up": "^1.0.7",
+    "vue-material-design-icons": "^4.11.0",
     "vue-plyr": "^7.0.0",
     "vue-router": "^4.0.0-0",
     "vue-youtube-embed": "^2.2.2",
+    "vuejs-hello-app": "^0.1.5",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {

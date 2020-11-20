@@ -1,8 +1,7 @@
 <snippet>
-  <content><![CDATA[
+  <content>
   
-# [vue-button-up](https://github.com/AlexeyZelenko/vue3_typescript/tree/master/src/vue-button-up) with Vue3 and Vue2.
-
+## [vue-button-up](https://github.com/AlexeyZelenko/vue3_typescript/tree/master/src/vue-button-up) with Vue3 and Vue2.
 
 <p align="center">
     <a href="https://www.npmjs.com/package/vue-button-up">
@@ -22,13 +21,12 @@
   Button with the functionality of scrolling the page up for Vue.
   [DEMO on codesanbox](https://codesandbox.io/s/vue-button-up-dcvnc)
   
-  ## Navigation
-  
+  ## Navigation  
   <!-- TOC -->
   
   - [Features](#features)
   - [Installation](#installation)
-  - [Get started](#get-started)
+  - [Usage](#Usage)
   <!-- /TOC -->
   
   ## Features
@@ -36,18 +34,26 @@
   - used vue2, vue3
   - easy to install
   - Easy application
+  - Using slot
+  - Use with icons, images, by default
+  - Possibility to work on the button design
+  - Slow down at the end
 
   
   ## Installation
+  
     ```
      npm install --save vue-button-up
     ```
 
 ## Usage
+ #default
 ```
-<template>
-    <VuejsHelloApp/>
-</template>
+<VuejsHelloApp>
+    <template #default>
+      <p>↑</p>
+    </template>
+  </VuejsHelloApp>
 
 <script>
     import VuejsHelloApp from 'vue-button-up'
@@ -59,8 +65,26 @@ export default {
 }
 </script>
 ``` 
+ #images
+```
+<VuejsHelloApp>
+    <template #default>
+        <img
+         :src="require(`@/assets/img/buttonTop.png`)"
+        >
+    </template>
+</VuejsHelloApp>
 
-
+<script>
+    import VuejsHelloApp from 'vue-button-up'
+    
+export default {
+  components: {
+    VuejsHelloApp
+  }
+}
+</script>
+```
 
 ></content>
 ><tabTrigger>readme</tabTrigger>

@@ -174,9 +174,6 @@ export default defineComponent({
     ModalVideo
   },
   computed: {
-    style () {
-      return this.styleBtnUp
-    },
     codVideo (): string {
       return this.LastVideoData.resourceId.videoId
     },
@@ -212,7 +209,7 @@ export default defineComponent({
 })
 </script>
 
-<style >
+<style>
   .clear {
     clear: both;
   }
@@ -286,7 +283,7 @@ export default defineComponent({
   }
   iframe {
     width: 100%;
-    height: 460px;
+    height: 640px;
   }
 
   /* General */
@@ -484,6 +481,11 @@ export default defineComponent({
 
   /* Media Queries */
   @media (max-width: 575px) {
+    iframe {
+      margin-top: 20%;
+      width: 100%;
+      height: 240px;
+    }
     .services .service {
       width: 100%;
       float: none;

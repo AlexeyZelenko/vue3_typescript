@@ -73,7 +73,6 @@ export default {
     background-repeat: no-repeat, repeat;
     background-position: center center;
     border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   }
 
   .modal-header h4 {
@@ -83,10 +82,6 @@ export default {
     font-size: 30px;
     margin-top: 0;
     color: #eff4f1;
-  }
-
-  .modal-body {
-    padding: 5px;
   }
 
   .modal-close {
@@ -100,8 +95,11 @@ export default {
   }
 
   @media (max-width: 767px) {
+    .modal-container {
+      height: 50%
+    }
     .modal-header h4 {
-      font-size: 16px;
+      font-size: 18px;
     }
   }
 </style>

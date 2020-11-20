@@ -3,7 +3,11 @@
     :style='{ display: activeBlock }'
     class="back_to_top"
     title="Наверх"
-  >↑</a>
+  >
+    <main>
+      <slot></slot>
+    </main>
+  </a>
 </template>
 
 <script>
@@ -26,8 +30,9 @@ export default {
     },
 
     backToTop () {
+      const scrollStep = window.pageYOffset / 40
       if (window.pageYOffset > 0) {
-        window.scrollBy(0, -80)
+        window.scrollBy(0, -(scrollStep))
         setTimeout(this.backToTop, 0)
       }
     }
