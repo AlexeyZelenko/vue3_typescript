@@ -10,22 +10,22 @@
   </div>
   <div class="div1">
     <nav>
-      <button_tab
+      <section class="button_tab"
         @click="listVideo('UUSb71yKJmS0eHyhRRl00ioQ')"
       >
         ВСІ
-      </button_tab>
-      <button_tab
+      </section>
+      <section
+        class="button_tab"
         @click="listVideo('PLlURDWJlf7fS8-Z9hz4ShqtXdjg2tIGil')"
-        class="hvr-grow"
       >
         ПРОПОВІДІ
-      </button_tab>
-      <button_tab
+      </section>
+      <section class="button_tab"
         @click="listVideo('PLlURDWJlf7fQyA3kIfQ9Pa3Dtd_tM97-z')"
       >
         ПІСНІ
-      </button_tab>
+      </section>
 <!--      <button_tab-->
 <!--        @click="listVideo('PLlURDWJlf7fS9RdrfemM6deAzy1zLyhug')"-->
 <!--      >-->
@@ -95,21 +95,17 @@ export default defineComponent({
   components: {
     ModalVideo
   },
-  data: () => ({
-    topUp: true
-  }),
-  methods: {
-    openModal (item) {
-      this.showModal = true
-      this.videoModal = item.snippet.resourceId.videoId
-      this.videoModalTitle = item.snippet.title
-    }
-  },
-  setup (playlistId) {
+  setup () {
     const showModal = ref(false)
     const videoModal = ref('')
     const videoModalTitle = ref('')
     const ListVideoData = computed(() => store.state.ListVideoData)
+
+    const openModal = (item) => {
+      showModal.value = true
+      videoModal.value = item.snippet.resourceId.videoId
+      videoModalTitle.value = item.snippet.title
+    }
 
     const listVideo = (value) => {
       const payload = { value }
@@ -134,8 +130,9 @@ export default defineComponent({
       ListVideoData,
       listVideo,
       showModal,
-      videoModal,
-      videoModalTitle
+      videoModalTitle,
+      openModal,
+      videoModal
       // cats
     }
   }
@@ -160,7 +157,7 @@ export default defineComponent({
     margin-right: -50%;
     transform: translate(-50%, -50%)
   }
-  button_tab{
+  .button_tab{
     cursor: pointer;
     text-decoration:none;
     color:#fff;
@@ -176,26 +173,26 @@ export default defineComponent({
     height:2px;
     background:#fff;
   }
-  button_tab:nth-child(1) ~ div{
+  .button_tab:nth-child(1) ~ div{
     transition:all .33s linear;
     -webkit-transition:all .33s linear;
 
   }
-  button_tab:nth-child(2):hover ~ div {
+  .button_tab:nth-child(2):hover ~ div {
     transform:translate(100px);
     -webkit-transform:translate(100px);
     background-color:#e74c3c;
     transition:all .33s linear;
     -webkit-transition:all .33s linear;
   }
-  button_tab:nth-child(3):hover ~ div {
+  .button_tab:nth-child(3):hover ~ div {
     transform:translate(100px);
     -webkit-transform:translate(200px);
     background-color:#BF55EC;
     transition:all .33s linear;
     -webkit-transition:all .33s linear;
   }
-  button_tab:nth-child(4):hover ~ div {
+  .button_tab:nth-child(4):hover ~ div {
     transform:translate(100px);
     -webkit-transform:translate(360px);
     background-color:#f39c12;
@@ -203,15 +200,15 @@ export default defineComponent({
     transition:all .33s linear;
     -webkit-transition:all .33s linear;
   }
-  button_tab:nth-child(2):hover {
+  .button_tab:nth-child(2):hover {
     color:#e74c3c;
   }
 
-  button_tab:nth-child(3):hover {
+  .button_tab:nth-child(3):hover {
     color:#BF55EC;
   }
 
-  button_tab:nth-child(4):hover {
+  .button_tab:nth-child(4):hover {
     color:#f39c12;
   }
 

@@ -13,6 +13,7 @@
 
       <template v-slot:body>
         <iframe
+          v-if="codVideo"
           :src="`https://www.youtube.com/embed/${codVideo}`"
           frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
@@ -93,9 +94,9 @@
           Ісус відповів: „Поправді, поправді кажу Я тобі: Коли хто не родиться з води й Духа, той не може ввійти в Царство Боже.
           /Івана 3 : 5/</h1>
         <button class="button"
-                @click="showModal = true"
+                @click="ClickLiveVideo"
         >
-          Дивитися останє служіння
+          Дивитися онлайн служіння
         </button>
       </div>
     </div>
@@ -173,15 +174,17 @@ export default defineComponent({
   components: {
     ModalVideo
   },
-  computed: {
-    codVideo (): string {
-      return this.LastVideoData.resourceId.videoId
-    },
-    titleVideo (): string {
-      return this.LastVideoData.title
-    }
-  },
+  // computed: {
+  //   codVideo (): string {
+  //     return this.LastVideoData.resourceId.videoId
+  //   },
+  //   titleVideo (): string {
+  //     return this.LastVideoData.title
+  //   }
+  // },
   setup () {
+    const titleVideo = computed(() => LastVideoData.value.title)
+    const codVideo = computed(() => LastVideoData.value.resourceId.videoId)
     const showModal = ref(false)
     const icons = computed(() => store.state.icons)
     const LastVideoData = computed(() => store.state.LastVideoData)
@@ -191,19 +194,39 @@ export default defineComponent({
     }
     onMounted(getCodeVideo)
 
-    // const cats = ref([])
-    // const fetchCats = async () => {
-    //   cats.value = await fetch(
-    //     'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSb71yKJmS0eHyhRRl00ioQ&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY&part=snippet&maxResults=10'
-    //   ).then((response) => response.json())
-    //   console.log(cats.value)
-    // }
-    // onMounted(fetchCats)
+    const liveVideoData = ref([])
+    const liveVideoDataOnline = computed(() => {
+      if (liveVideoData.value) {
+        return true
+      } else {
+        return false
+      }
+    })
+    const fetchliveVideo = async () => {
+      liveVideoData.value = await fetch(
+        'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCSb71yKJmS0eHyhRRl00ioQ&eventType=live&type=video&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY'
+      ).then((response) => response.json())
+      console.log('1', liveVideoData.value)
+    }
+    onMounted(fetchliveVideo)
+
+    const ClickLiveVideo = () => {
+      if (liveVideoData.value) {
+        showModal.value = true
+      } else {
+        return false
+      }
+    }
 
     return {
       icons,
       LastVideoData,
-      showModal
+      showModal,
+      liveVideoDataOnline,
+      liveVideoData,
+      ClickLiveVideo,
+      titleVideo,
+      codVideo
     }
   }
 })

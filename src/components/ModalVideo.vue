@@ -62,11 +62,12 @@ export default {
   }
 
   .modal-wrapper {
-    height: 100%;
+    height: 80%;
     vertical-align: middle;
   }
 
   .modal-container {
+    height: 640px;
     width: 80%;
     margin: 0px auto;
     background-image: url('../assets/img/loading.svg');
