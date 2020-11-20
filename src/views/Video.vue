@@ -101,13 +101,13 @@ export default defineComponent({
     const videoModalTitle = ref('')
     const ListVideoData = computed(() => store.state.ListVideoData)
 
-    const openModal = (item) => {
+    const openModal = (item: any) => {
       showModal.value = true
       videoModal.value = item.snippet.resourceId.videoId
       videoModalTitle.value = item.snippet.title
     }
 
-    const listVideo = (value) => {
+    const listVideo = (value: string) => {
       const payload = { value }
       store.dispatch('getListVideoData', payload)
     }

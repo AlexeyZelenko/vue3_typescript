@@ -174,14 +174,6 @@ export default defineComponent({
   components: {
     ModalVideo
   },
-  // computed: {
-  //   codVideo (): string {
-  //     return this.LastVideoData.resourceId.videoId
-  //   },
-  //   titleVideo (): string {
-  //     return this.LastVideoData.title
-  //   }
-  // },
   setup () {
     const titleVideo = computed(() => LastVideoData.value.title)
     const codVideo = computed(() => LastVideoData.value.resourceId.videoId)

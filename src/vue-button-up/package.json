@@ -1,6 +1,6 @@
 {
   "name": "vue-button-up",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Move up button for VUE2-3",
   "main": "src/main.js",
   "scripts": {

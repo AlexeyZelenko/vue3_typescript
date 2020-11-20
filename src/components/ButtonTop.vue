@@ -41,12 +41,12 @@ export default {
     const goTopBtn = document.querySelector('.back_to_top')
     window.addEventListener('scroll', this.trackScroll)
     goTopBtn.addEventListener('click', this.backToTop)
-  },
-  watch: {
-    activeBlock () {
-      console.log('Данные изменились на:', this.activeBlock)
-    }
   }
+  // watch: {
+  //   activeBlock () {
+  //     console.log('Данные изменились на:', this.activeBlock)
+  //   }
+  // }
 }
 </script>
 
