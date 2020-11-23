@@ -24,6 +24,30 @@
       </template>
 
     </ModalVideo>
+    <!--    Модальное окно -  Прямая трансляция-->
+    <ModalVideo
+      v-if="showModalOnline"
+      @click="showModalOnline = false"
+    >
+      <template v-slot:header>
+        <div>
+          <h4 style="display: inline-block;">{{liveTitleVideo}}</h4>
+        </div>
+      </template>
+
+      <template v-slot:body>
+        <iframe
+          v-if="liveCodVideo"
+          :src="`https://www.youtube.com/embed/${liveCodVideo}`"
+          frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </template>
+
+      <template v-slot:footer>
+      </template>
+
+    </ModalVideo>
 
     <header>
       <div class="container">
@@ -93,8 +117,10 @@
         <h1>
           Ісус відповів: „Поправді, поправді кажу Я тобі: Коли хто не родиться з води й Духа, той не може ввійти в Царство Боже.
           /Івана 3 : 5/</h1>
-        <button class="button"
-                @click="ClickLiveVideo"
+        <button
+          v-if="LiveVideoData"
+          class="button"
+          @click="showModalOnline = true"
         >
           Дивитися онлайн служіння
         </button>
@@ -171,54 +197,44 @@ const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vu
 
 export default defineComponent({
   name: 'HelloWorld',
+  // data: () => ({
+  //   showModalLive: false,
+  //   showModalOnline: false
+  // }),
   components: {
     ModalVideo
   },
   setup () {
     const titleVideo = computed(() => LastVideoData.value.title)
     const codVideo = computed(() => LastVideoData.value.resourceId.videoId)
+    const liveTitleVideo = computed(() => LiveVideoData.value.snippet.title)
+    const liveCodVideo = computed(() => LiveVideoData.value.id.videoId)
     const showModal = ref(false)
+    const showModalOnline = ref(false)
     const icons = computed(() => store.state.icons)
     const LastVideoData = computed(() => store.state.LastVideoData)
+    const LiveVideoData = computed(() => store.state.LiveVideoData)
 
     const getCodeVideo = () => {
       store.dispatch('getLastVideoData')
     }
     onMounted(getCodeVideo)
 
-    const liveVideoData = ref([])
-    const liveVideoDataOnline = computed(() => {
-      if (liveVideoData.value) {
-        return true
-      } else {
-        return false
-      }
-    })
-    const fetchliveVideo = async () => {
-      liveVideoData.value = await fetch(
-        'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCSb71yKJmS0eHyhRRl00ioQ&eventType=live&type=video&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY'
-      ).then((response) => response.json())
-      console.log('1', liveVideoData.value)
+    const getLiveVideoData = () => {
+      store.dispatch('getLiveVideoData')
     }
-    onMounted(fetchliveVideo)
-
-    const ClickLiveVideo = () => {
-      if (liveVideoData.value) {
-        showModal.value = true
-      } else {
-        return false
-      }
-    }
+    onMounted(getLiveVideoData)
 
     return {
       icons,
       LastVideoData,
       showModal,
-      liveVideoDataOnline,
-      liveVideoData,
-      ClickLiveVideo,
+      showModalOnline,
+      LiveVideoData,
       titleVideo,
-      codVideo
+      codVideo,
+      liveTitleVideo,
+      liveCodVideo
     }
   }
 })
