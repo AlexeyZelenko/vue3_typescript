@@ -5,7 +5,7 @@
     <router-link  to="/video">Відео</router-link> |
     <router-link  to="/about_us">Про нас</router-link> |
     <router-link  to="/add_user">Додати користувача</router-link> |
-    <router-link  to="/list_user">Список користувачив</router-link>
+    <router-link  to="/list">Список користувачив</router-link>
   </div>
   <router-view/>
 <!--  <VuejsHelloApp> </VuejsHelloApp>-->

@@ -27,8 +27,8 @@
   </div>
 </template>
 
-<script>
-import { db } from '../firebaseDb'
+<script lang="ts">
+import { db } from '@/firebaseDb'
 
 export default {
   data () {
