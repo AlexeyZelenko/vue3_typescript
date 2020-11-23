@@ -7,7 +7,7 @@
     <router-link  to="/add_user">Додати користувача</router-link> |
     <router-link  to="/list">Список користувачив</router-link>
   </div>
-  <router-view/>
+  <router-view></router-view>
 <!--  <VuejsHelloApp> </VuejsHelloApp>-->
   <ButtonTop >
     <template #default>

@@ -1,11 +1,11 @@
 <snippet>
   <content>
   
-## [vue-button-up](https://github.com/AlexeyZelenko/vue3_typescript/tree/master/src/vue-button-up) with Vue3 and Vue2.
+##  [vue-button-up](https://github.com/AlexeyZelenko/vue3_typescript/tree/master/src/vue-button-up) with Vue3 and Vue2.
 
 <p align="center">
     <a href="https://www.npmjs.com/package/vue-button-up">
-      <img alt="codebeat badge" src="https://img.shields.io/badge/version-1.0.0%20-44cc11.svg" />
+      <img alt="codebeat badge" src="https://img.shields.io/badge/version-1.0.9%20-44cc11.svg" />
     </a>
     <a href="https://www.npmjs.com/package/tiptap-vuetify">
       <img alt="codebeat badge" src="https://img.shields.io/badge/license-ISC%20-44cc11.svg" />
@@ -14,7 +14,7 @@
       <img alt="codebeat badge" src="https://badgen.net/badge/code%20style/standard/f2a" />
     </a>
     <a href="https://www.npmjs.com/package/tiptap-vuetify">
-      <img alt="codebeat badge" src="https://img.shields.io/badge/size-3.28%20kB-44cc11.svg" />
+      <img alt="codebeat badge" src="https://img.shields.io/badge/size-5%20kB-44cc11.svg" />
     </a>
   </p>
   
