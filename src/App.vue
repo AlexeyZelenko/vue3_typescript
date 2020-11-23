@@ -3,8 +3,9 @@
     <router-link  to="/">Головна</router-link> |
     <router-link  to="/about">Про церкву</router-link> |
     <router-link  to="/video">Відео</router-link> |
-    <router-link  to="/about_us">Про нас</router-link>
-    <router-link  to="/add_user">Користувачи</router-link>
+    <router-link  to="/about_us">Про нас</router-link> |
+    <router-link  to="/add_user">Додати користувача</router-link> |
+    <router-link  to="/list_user">Список користувачив</router-link>
   </div>
   <router-view/>
 <!--  <VuejsHelloApp> </VuejsHelloApp>-->
