@@ -72,6 +72,14 @@ export default {
     background: url('../assets/images/centreHelp.jpg')no-repeat center / cover;
     background-attachment: fixed;
   }
+  section.sec7 {
+    background: url('../assets/images/homegroup.jpg')no-repeat center / cover;
+    background-attachment: fixed;
+  }
+  section.sec8 {
+    background: url('../assets/images/help.jpg')no-repeat center / cover;
+    background-attachment: fixed;
+  }
   .sec-text {
     padding: 4% 8%;
     height: auto;
