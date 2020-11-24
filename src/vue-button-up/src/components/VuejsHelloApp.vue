@@ -4,9 +4,7 @@
     class="back_to_top"
     title="Наверх"
   >
-    <main>
-      <slot></slot>
-    </main>
+    <slot></slot>
   </a>
 </template>
 

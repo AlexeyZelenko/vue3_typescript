@@ -197,10 +197,6 @@ const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vu
 
 export default defineComponent({
   name: 'HelloWorld',
-  // data: () => ({
-  //   showModalLive: false,
-  //   showModalOnline: false
-  // }),
   components: {
     ModalVideo
   },
