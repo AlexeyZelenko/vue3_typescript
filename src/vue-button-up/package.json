@@ -1,12 +1,17 @@
 {
   "name": "vue-button-up",
-  "version": "1.0.9",
+  "version": "1.1.1",
   "description": "Move up button for VUE2-3",
   "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -p"
   },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/AlexeyZelenko/vue3_typescript/tree/master/src/vue-button-up"
+  },
+  "email" : "zelenkooleksii75@gmail.com",
   "author": "zelenkooleksii75@gmail.com",
   "license": "ISC",
   "dependencies": {

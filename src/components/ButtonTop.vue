@@ -4,9 +4,7 @@
     class="back_to_top"
     title="Наверх"
   >
-    <main>
-      <slot></slot>
-    </main>
+    <slot></slot>
   </a>
 </template>
 
@@ -30,10 +28,8 @@ export default {
     },
 
     backToTop () {
-      const scrollStep = window.pageYOffset / 40
       if (window.pageYOffset > 0) {
-        window.scrollBy(0, -(scrollStep))
-        setTimeout(this.backToTop, 0)
+        window.scrollTo({ top: 0, behavior: 'smooth' })
       }
     }
   },
