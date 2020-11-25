@@ -51,12 +51,17 @@
 
     <header>
       <div class="container">
-        <div class="brand">
-          <img :src="require(`@/assets/img/logo.png`)" />
-          <h1>Блага вість</h1>
-          <h3>Церква християн віри евангельскої</h3>
-          <div class="clear"></div>
-        </div>
+        <table>
+          <tr>
+            <td style="vertical-align: middle">
+              <img :src="require(`@/assets/img/logo.png`)" />
+            </td>
+            <td style="vertical-align: middle">
+              <h1>Блага вість</h1>
+              <h3>Церква християн віри евангельскої</h3>
+            </td>
+          </tr>
+        </table>
       </div>
     </header>
 
@@ -218,6 +223,11 @@ export default defineComponent({
 </script>
 
 <style>
+  table {  border-collapse: collapse; }
+  td {
+    border: 1px solid blue;
+    height: 100px;
+  }
   .clear {
     clear: both;
   }
@@ -257,8 +267,11 @@ export default defineComponent({
       width: 100%;
       height: 240px;
     }
-    .brand img {
+    td img {
       width: 96px;
+    }
+    td h3 {
+      font-size: 16px;
     }
     .fullscreen-bg {
       background: url('../assets/images/jumbotron.png') center center / cover no-repeat;
@@ -363,26 +376,11 @@ export default defineComponent({
   /* Header */
   header {
     background-color: #fff;
-    padding-top: 5px;
   }
 
   header .brand {
     float: left;
     color: #59abe3;
-    padding-top: 5px;
-  }
-
-  header .menu {
-    float: right;
-    margin-bottom: 30px;
-  }
-
-  header .menu li {
-    padding-left: 20px;
-  }
-
-  header .menu li a {
-    color: #aaa;
   }
 
   /* Jumbotron */
@@ -439,21 +437,6 @@ export default defineComponent({
     background-color: #fcfcfc;
   }
 
-  .blog h2 {
-    text-align: center;
-  }
-
-  .blog .post {
-    padding-top: 30px;
-    display: inline-block;
-    clear: both;
-  }
-
-  .blog .post img {
-    float: left;
-    margin-right: 30px;
-  }
-
   /* Footer */
   footer {
     clear: both;
@@ -497,13 +480,6 @@ export default defineComponent({
     .services .service {
       width: 100%;
       float: none;
-    }
-
-    .blog .post img {
-      float: none;
-      display: block;
-      margin-right: auto;
-      margin-left: auto;
     }
 
     .blog .post {
