@@ -112,6 +112,7 @@
       </div>
     </div>
 
+<!--    ФотоОбложка-->
     <div class="jumbotron">
       <div class="container">
         <h1>
@@ -127,31 +128,10 @@
       </div>
     </div>
 
+<!--    Блог-->
     <div class="blog">
       <div class="container">
-        <h2>Служіння</h2>
-        <div class="post">
-          <img :src="require(`@/assets/img/2.jpg`)">
-          <h3>Загальноцерковне служіння</h3>
-          <h4 class="date">Неділя 10:00 та Четвер 18:00</h4>
-          <p>Богослужіння поділяються на два основних види: загальні і приватні. Загальні богослужіння відбуваються регулярно, відповідно до вимог церковного уставу,
-            тоді як приватні призначені для задоволення поточних потреб віруючих і відбуваються будь-коли.</p>
-        </div>
-        <div class="post">
-          <img :src="require(`@/assets/img/3.jpg`)">
-          <h3>Нічна молитва</h3>
-          <h4 class="date">П'ятниця</h4>
-          <p>{{`Молитва - джерело сили та двигун Церкви! Молитва - головний інструмент та стратегічне знаряддя церкви для впливу на своє місто, країну, континент і весь світ. Все починається з молитви. Молитва - це головне покликання Церкви!\n'
-            «Отже, перш над усе я благаю чинити молитви, благання, прохання, подяки за всіх людей» (1 Тимофія 2:1)
-            На служіннях загальноцерковних вечірньої та нічної молитв в атмосфері Божої слави та поклоніння ви переживете особливі зустрічі з Богом і приймете свіжий вогонь Святого Духа! Ви зможете бути істинними заступниками за церкву, країну, за своїх рідних та близьких, своє призначення та молитися за інші питання.`}}</p>
-        </div>
-        <div class="post">
-          <img :src="require(`@/assets/img/1.jpg`)">
-          <h3>Молитва на Соборній площі</h3>
-          <h4 class="date">Неділя 16:00</h4>
-          <p>{{`Молитва - джерело сили та двигун Церкви! Молитва - головний інструмент та стратегічне знаряддя церкви для впливу на своє місто, країну, континент і весь світ. Все починається з молитви. Молитва - це головне покликання Церкви!'
-            «Отже, перш над усе я благаю чинити молитви, благання, прохання, подяки за всіх людей» (1 Тимофія 2:1)`}}</p>
-        </div>
+        <Ministries/>
       </div>
     </div>
 
@@ -194,11 +174,12 @@
 import { defineAsyncComponent, defineComponent, computed, onMounted, ref } from 'vue'
 import store from '@/store'
 const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vue'))
+const Ministries = defineAsyncComponent(() => import('@/components/Ministries.vue'))
 
 export default defineComponent({
   name: 'HelloWorld',
   components: {
-    ModalVideo
+    ModalVideo, Ministries
   },
   setup () {
     const titleVideo = computed(() => LastVideoData.value.title)
@@ -375,7 +356,7 @@ export default defineComponent({
 
   img {
     display: block;
-    max-width: 300px;
+    /*max-width: 300px;*/
     height: auto;
   }
 
