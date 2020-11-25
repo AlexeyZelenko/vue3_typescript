@@ -17,9 +17,9 @@
             <td>{{ user.email }}</td>
             <td>{{ user.phone }}</td>
             <td>
-              <router-link :to="{name: 'edit', params: { id: user.key }}" class="btn btn-primary">Edit
+              <router-link :to="{name: 'edit', params: { id: user.key }}" class="btn btn-primary">Редагувати
               </router-link>
-              <button @click.prevent="deleteUser(user.key)" class="btn btn-danger">Delete</button>
+              <button @click.prevent="deleteUser(user.key)" class="btn btn-danger">Видалити</button>
             </td>
           </tr>
           </tbody>
@@ -30,19 +30,17 @@
 </template>
 
 <script lang="ts">
+import { ref } from 'vue'
 import { db } from '@/firebaseDb'
 
 export default {
-  data () {
-    return {
-      Users: []
-    }
-  },
-  created () {
+  setup () {
+    const Users = ref([])
+
     db.collection('users').onSnapshot((snapshotChange) => {
-      this.Users = []
+      Users.value = []
       snapshotChange.forEach((doc) => {
-        this.Users.push({
+        Users.value.push({
           key: doc.id,
           name: doc.data().name,
           email: doc.data().email,
@@ -50,17 +48,20 @@ export default {
         })
       })
     })
-  },
-  methods: {
-    deleteUser (id) {
-      if (window.confirm('Do you really want to delete?')) {
+
+    const deleteUser = (id) => {
+      if (window.confirm('Ви дійсно хочете видалити?')) {
         db.collection('users').doc(id).delete().then(() => {
-          console.log('Document deleted!')
+          console.log('Документ видалено!')
         })
           .catch((error) => {
             console.error(error)
           })
       }
+    }
+    return {
+      Users,
+      deleteUser
     }
   }
 }

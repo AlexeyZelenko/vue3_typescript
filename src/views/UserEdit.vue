@@ -26,10 +26,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { db } from '@/firebaseDb'
 
-export default {
+export default defineComponent({
   data () {
     return {
       user: {
@@ -56,5 +57,5 @@ export default {
         })
     }
   }
-}
+})
 </script>

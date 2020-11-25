@@ -37,6 +37,7 @@
               <router-link
                 class="dropdown-item"
                 to="/"
+                exact
               >
                 Головна
               </router-link>
@@ -45,6 +46,7 @@
               <router-link
                 class="dropdown-item"
                 to="/add_user"
+                exact
               >Додати користувача
               </router-link>
             </li>
@@ -52,6 +54,7 @@
               <router-link
                 class="dropdown-item"
                 to="/list"
+                exact
               >
                 Список користувачив
               </router-link>
@@ -62,7 +65,7 @@
     </div>
   </div>
 
-  <component :is="layout">
+  <component :is=layout>
     <router-view/>
   </component>
 
@@ -109,7 +112,8 @@
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, defineComponent, ref } from 'vue'
+import { defineAsyncComponent, defineComponent, ref, computed } from 'vue'
+import router from '@/router'
 const Vue3DownUpButton = defineAsyncComponent(() => import('@/components/Vue3DownUpButton.vue'))
 const user = defineAsyncComponent(() => import('@/layouts/user.vue'))
 const empty = defineAsyncComponent(() => import('@/layouts/empty.vue'))
@@ -121,17 +125,22 @@ export default defineComponent({
     empty
   },
   setup () {
+    const { currentRoute } = router
     const showDropdownMenu = ref(false)
-
-    return { showDropdownMenu }
-  },
-  computed: {
-    layout () {
-      if (this.$route.meta.layout) {
-        console.log(this.$route.meta.layout)
-        return (this.$route.meta.layout) + '-layout'
+    const layout = computed(() => {
+      if (currentRoute.value.meta.layout) {
+        console.log('layout', currentRoute.value.meta.layout)
+        return (currentRoute.value.meta.layout) + '-layout'
       } else { return 'empty' + '-layout' }
+    })
+    return {
+      showDropdownMenu,
+      layout
     }
+  },
+  beforeRouteLeave (to, from, next) {
+    this.clearNote()
+    next()
   }
 })
 </script>
