@@ -3,30 +3,61 @@
     <router-link  to="/">Головна</router-link> |
     <router-link  to="/about">Про церкву</router-link> |
     <router-link  to="/video">Відео</router-link> |
-    <router-link  to="/about_us">Про нас</router-link> |
-    <router-link  to="/add_user">Додати користувача</router-link> |
-    <router-link  to="/list">Список користувачив</router-link>
+    <router-link  to="/about_us">Про нас</router-link>
 
+<!--Выпадающее меню-->
     <div class="position-relative">
       <div
         class="position-absolute bottom-50 right-0"
-        type="button"
       >
-        <svg
-          @click="showDropdownMenu = !showDropdownMenu"
-          width="2em"
-          height="2em"
-          viewBox="0 0 16 16"
-          class="bi bi-three-dots-vertical"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-          style="color: #42b983"
+        <div
+          class="dropdown"
         >
-          <path
-            fill-rule="evenodd"
-            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-          />
-        </svg>
+          <svg
+            type="button"  data-toggle="dropdown" aria-expanded="false"
+            @click="showDropdownMenu = !showDropdownMenu"
+            width="2em"
+            height="2em"
+            viewBox="0 0 16 16"
+            class="bi bi-three-dots-vertical"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            style="color: #42b983"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+            />
+          </svg>
+          <ul
+            class="dropdown-menu dropdown-menu-dark dropdown-menu-right"
+            aria-labelledby="dropdownMenuButton"
+          >
+            <li>
+              <router-link
+                class="dropdown-item"
+                to="/"
+              >
+                Головна
+              </router-link>
+            </li>
+            <li>
+              <router-link
+                class="dropdown-item"
+                to="/add_user"
+              >Додати користувача
+              </router-link>
+            </li>
+            <li>
+              <router-link
+                class="dropdown-item"
+                to="/list"
+              >
+                Список користувачив
+              </router-link>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
