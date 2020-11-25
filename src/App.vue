@@ -6,6 +6,29 @@
     <router-link  to="/about_us">Про нас</router-link> |
     <router-link  to="/add_user">Додати користувача</router-link> |
     <router-link  to="/list">Список користувачив</router-link>
+
+    <div class="position-relative">
+      <div
+        class="position-absolute bottom-50 right-0"
+        type="button"
+      >
+        <svg
+          @click="showDropdownMenu = !showDropdownMenu"
+          width="2em"
+          height="2em"
+          viewBox="0 0 16 16"
+          class="bi bi-three-dots-vertical"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          style="color: #42b983"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+          />
+        </svg>
+      </div>
+    </div>
   </div>
 
   <component :is="layout">
@@ -55,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from 'vue'
+import { defineAsyncComponent, defineComponent, ref } from 'vue'
 const Vue3DownUpButton = defineAsyncComponent(() => import('@/components/Vue3DownUpButton.vue'))
 const user = defineAsyncComponent(() => import('@/layouts/user.vue'))
 const empty = defineAsyncComponent(() => import('@/layouts/empty.vue'))
@@ -66,11 +89,11 @@ export default defineComponent({
     user,
     empty
   },
-  // setup ($route) {
-  //   const layout = computed(() => ($route.meta.layout || 'empty') + '-layout')
-  //
-  //   return { layout }
-  // }
+  setup () {
+    const showDropdownMenu = ref(false)
+
+    return { showDropdownMenu }
+  },
   computed: {
     layout () {
       if (this.$route.meta.layout) {
