@@ -225,7 +225,6 @@ export default defineComponent({
 <style>
   table {  border-collapse: collapse; }
   td {
-    border: 1px solid blue;
     height: 100px;
   }
   .clear {

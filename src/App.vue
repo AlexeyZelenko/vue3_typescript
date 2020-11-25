@@ -129,7 +129,6 @@ export default defineComponent({
     const showDropdownMenu = ref(false)
     const layout = computed(() => {
       if (currentRoute.value.meta.layout) {
-        console.log('layout', currentRoute.value.meta.layout)
         return (currentRoute.value.meta.layout) + '-layout'
       } else { return 'empty' + '-layout' }
     })
