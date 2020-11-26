@@ -1,5 +1,6 @@
 <template>
   <div ref="el" class="bg-gray-800 radius-sm shadow-md rounded-md h-full">
+<!--    Картинка-->
     <figure class="relative pb-2/3">
       <img
         :src="isShown ? gameImages : null"
@@ -7,6 +8,7 @@
       />
     </figure>
 
+<!--Карточка-->
     <div class="p-5">
       <h3 class="text-2xl font-bold">{{ gameName }}</h3>
       <div class="my-2 flex flex-wrap">
