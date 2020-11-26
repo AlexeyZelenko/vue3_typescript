@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div ref="el">
     <div
       class="sec-text"
     >
@@ -7,6 +7,7 @@
       <p class="sec-text__dsc">{{text}}</p>
     </div>
     <section
+      ref="el"
       :class="isShown ? sectionClass : null"
     ></section>
   </div>
@@ -14,30 +15,26 @@
 
 <script>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import useIntersectionObserver from '@/composables/useIntersectionObserver'
+import useIntersectionObserver from '../composables/useIntersectionObserver'
 
 export default {
-  name: 'v-catalog-item',
+  name: 'CatalogItem',
   props: {
-    product_data: {
-      type: Object,
-      default () {
-        return {}
-      }
-    }
+    data: Object
   },
   setup (props) {
     const el = ref(null)
     const { observe, unobserve, isShown } = useIntersectionObserver()
     const title = computed(
-      () => props.product_data.title
+      () => props.data.title
     )
     const text = computed(
-      () => props.product_data.text
+      () => props.data.text
     )
     const sectionClass = computed(
-      () => props.product_data.sectionClass
+      () => props.data.sectionClass
     )
+
     onMounted(() => {
       observe(el.value)
     })

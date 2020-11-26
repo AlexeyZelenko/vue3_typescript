@@ -8,7 +8,6 @@ export default function useIntersectionObserver () {
   if (!isSupported) {
     console.log('Ваш браузер не поддерживает эту функцию')
   }
-
   const observer = new IntersectionObserver((entries) => {
     const component = entries[0]
 

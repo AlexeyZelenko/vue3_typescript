@@ -38,7 +38,7 @@
 <script>
 import { defineAsyncComponent } from 'vue'
 
-const vCatalogItem = defineAsyncComponent(() => import('@/components/v-catalog-item.vue'))
+const vCatalogItem = defineAsyncComponent(() => import('@/components/CatalogItem.vue'))
 
 export default {
   name: 'AboutUs',
