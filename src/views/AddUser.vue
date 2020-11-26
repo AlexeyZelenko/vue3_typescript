@@ -26,7 +26,8 @@
   </div>
 </template>
 
-<script>import { db } from '../firebaseDb'
+<script>
+import { db } from '../firebaseDb'
 
 export default {
   data () {
@@ -38,7 +39,7 @@ export default {
     onFormSubmit (event) {
       event.preventDefault()
       db.collection('users').add(this.user).then(() => {
-        alert('User successfully created!')
+        alert('Користувача успішно створено!')
         this.user.name = ''
         this.user.email = ''
         this.user.phone = ''
