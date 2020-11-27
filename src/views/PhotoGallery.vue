@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-wrap justify-center">
+  <div class="mx-4 flex flex-wrap justify-center">
     <div class="mx-4  max-w-4xl justify-center">
       <h1 class="font-bold text-5xl flex-1 mb-4">Фотогалерея</h1>
-      <div class="flex mb-4">
+      <div class="flex">
         <input
           type="search"
           v-model="searchInput"

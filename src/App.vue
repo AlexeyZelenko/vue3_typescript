@@ -148,6 +148,7 @@ export default defineComponent({
 <style scoped>
 
 #app {
+  margin: 5px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

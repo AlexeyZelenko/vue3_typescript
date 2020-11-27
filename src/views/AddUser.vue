@@ -2,20 +2,51 @@
   <div class="row justify-content-center">
     <div class="col-md-5">
       <h3 class="text-center">Додати категорію</h3>
-      <form @submit.prevent="onFormSubmit">
-        <div class="form-group">
+      <form
+        @submit.prevent="onFormSubmit"
+      >
+        <div
+          class="form-group"
+        >
           <label>Назва</label>
-          <input type="text" class="form-control" v-model="photo.name" required>
+          <input
+            type="text"
+            class="form-control"
+            v-model="photo.name"
+            required
+          >
         </div>
 
         <div class="form-group">
           <label>Опис</label>
-          <input type="email" class="form-control" v-model="photo.description" required>
+          <input
+            type="text"
+            class="form-control"
+            v-model="photo.description"
+            required
+          >
         </div>
 
-        <div class="form-group">
-          <label>Обкладинка</label>
-          <input type="text" class="form-control" v-model="photo.picture" required>
+<!--        <div class="form-group">-->
+<!--          <label>Обкладинка</label>-->
+<!--          <input type="text" class="form-control" v-model="photo.picture" required>-->
+<!--        </div>-->
+
+        <div
+          class="mb-3"
+        >
+          <label
+            for="formFile"
+            class="form-label"
+          >
+            Фото обкладинки
+          </label>
+          <input
+            :change="photo.picture"
+            class="form-control"
+            type="file"
+            id="formFile"
+          >
         </div>
 
         <div class="form-group">
@@ -38,14 +69,16 @@ export default {
   methods: {
     onFormSubmit (event) {
       event.preventDefault()
-      db.collection('photos').add(this.photo).then(() => {
-        alert('Користувача успішно створено!')
-        this.photo.name = ''
-        this.photo.description = ''
-        this.photo.picture = ''
-      }).catch((error) => {
-        console.log(error)
-      })
+      db.collection('photos')
+        .add(this.photo)
+        .then(() => {
+          alert('Користувача успішно створено!')
+          this.photo.name = ''
+          this.photo.description = ''
+          this.photo.picture = ''
+        }).catch((error) => {
+          console.log(error)
+        })
     }
   }
 }

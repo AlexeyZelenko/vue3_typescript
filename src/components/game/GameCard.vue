@@ -8,7 +8,7 @@
       <img
         :src="isShown ? gameImages : null"
         :alt="`${gameName} обложка`"
-        class="h-full w-full object-cover rounded-t-md"
+        class=" h-full w-full object-cover rounded-t-md"
       />
     </figure>
 
