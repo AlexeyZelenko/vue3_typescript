@@ -1,25 +1,25 @@
 <template>
   <div class="row justify-content-center">
     <div class="col-md-5">
-      <h3 class="text-center">Add User</h3>
+      <h3 class="text-center">Додати категорію</h3>
       <form @submit.prevent="onFormSubmit">
         <div class="form-group">
-          <label>Name</label>
-          <input type="text" class="form-control" v-model="user.name" required>
+          <label>Назва</label>
+          <input type="text" class="form-control" v-model="photo.name" required>
         </div>
 
         <div class="form-group">
-          <label>Email</label>
-          <input type="email" class="form-control" v-model="user.email" required>
+          <label>Опис</label>
+          <input type="email" class="form-control" v-model="photo.description" required>
         </div>
 
         <div class="form-group">
-          <label>Phone</label>
-          <input type="text" class="form-control" v-model="user.phone" required>
+          <label>Обкладинка</label>
+          <input type="text" class="form-control" v-model="photo.picture" required>
         </div>
 
         <div class="form-group">
-          <button class="btn btn-primary btn-block">Add User</button>
+          <button class="btn btn-primary btn-block">Додати категорію</button>
         </div>
       </form>
     </div>
@@ -32,17 +32,17 @@ import { db } from '../firebaseDb'
 export default {
   data () {
     return {
-      user: {}
+      photo: {}
     }
   },
   methods: {
     onFormSubmit (event) {
       event.preventDefault()
-      db.collection('users').add(this.user).then(() => {
+      db.collection('photos').add(this.photo).then(() => {
         alert('Користувача успішно створено!')
-        this.user.name = ''
-        this.user.email = ''
-        this.user.phone = ''
+        this.photo.name = ''
+        this.photo.description = ''
+        this.photo.picture = ''
       }).catch((error) => {
         console.log(error)
       })

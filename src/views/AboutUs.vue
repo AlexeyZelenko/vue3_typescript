@@ -30,7 +30,7 @@
     v-for="(product, i) in sections"
     :key="product.title"
     :index="i"
-    :product_data="product"
+    :data="product"
   />
 
 </template>

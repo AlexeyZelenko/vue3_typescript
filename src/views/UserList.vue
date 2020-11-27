@@ -5,21 +5,25 @@
         <table class="table table-striped">
           <thead>
           <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Actions</th>
+            <th>Назва категорії</th>
+            <th>Опис категорії</th>
+            <th>Обкладинка категроії</th>
+            <th>Дії</th>
           </tr>
           </thead>
           <tbody>
-          <tr v-for="user in Users" :key="user.key">
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.phone }}</td>
+          <tr v-for="photo in Photos" :key="photo.key">
+            <td>{{ photo.name }}</td>
+            <td>{{ photo.description }}</td>
+            <td>{{ photo.picture }}</td>
             <td>
-              <router-link :to="{name: 'edit', params: { id: user.key }}" class="btn btn-primary">Редагувати
+              <router-link
+                :to="{name: 'edit', params: { id: photo.key }}"
+                class="btn btn-primary"
+              >
+                Редагувати
               </router-link>
-              <button @click.prevent="deleteUser(user.key)" class="btn btn-danger">Видалити</button>
+              <button @click.prevent="deletePhoto(photo.key)" class="btn btn-danger">Видалити</button>
             </td>
           </tr>
           </tbody>
@@ -35,23 +39,23 @@ import { db } from '@/firebaseDb'
 
 export default {
   setup () {
-    const Users = ref([])
+    const Photos = ref([])
 
-    db.collection('users').onSnapshot((snapshotChange) => {
-      Users.value = []
+    db.collection('photos').onSnapshot((snapshotChange) => {
+      Photos.value = []
       snapshotChange.forEach((doc) => {
-        Users.value.push({
+        Photos.value.push({
           key: doc.id,
           name: doc.data().name,
-          email: doc.data().email,
-          phone: doc.data().phone
+          description: doc.data().description,
+          picture: doc.data().picture
         })
       })
     })
 
-    const deleteUser = (id) => {
+    const deletePhoto = (id) => {
       if (window.confirm('Ви дійсно хочете видалити?')) {
-        db.collection('users').doc(id).delete().then(() => {
+        db.collection('photos').doc(id).delete().then(() => {
           console.log('Документ видалено!')
         })
           .catch((error) => {
@@ -59,9 +63,10 @@ export default {
           })
       }
     }
+    console.log('Photos', Photos)
     return {
-      Users,
-      deleteUser
+      Photos,
+      deletePhoto
     }
   }
 }

@@ -1,20 +1,20 @@
 <template>
   <div class="flex flex-wrap justify-center">
-    <div class="mt-5 mx-4 p-10 max-w-4xl">
-      <h1 class="font-bold text-5xl flex-1 mb-4">Top Games 2020</h1>
+    <div class="mx-4  max-w-4xl justify-center">
+      <h1 class="font-bold text-5xl flex-1 mb-4">Фотогалерея</h1>
       <div class="flex mb-4">
         <input
           type="search"
           v-model="searchInput"
           v-on:keyup.enter="fetchGame"
           class="flex-1 text-black px-4 py-2 bg-gray-800 text-gray-300 rounded-sm"
-          placeholder="Enter your favorite game..."
+          placeholder="Що шукаємо..."
         />
         <button
           @click="fetchGame"
           class="py-2 px-5 uppercase font-bold bg-green-400 rounded-sm ml-2"
         >
-          Search
+          Пошук
         </button>
       </div>
       <template v-if="games">
@@ -30,9 +30,10 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
-import useSWRFetch from '@/composables/useSWRFetch'
+// import useSWRFetch from '@/composables/useSWRFetch'
 import GameList from '@/components/game/GameList.vue'
 import GameListSkeleton from '@/components/game/GameListSkeleton.vue'
+import { db } from '@/firebaseDb'
 
 export default defineComponent({
   name: 'Home',
@@ -41,28 +42,20 @@ export default defineComponent({
     GameListSkeleton
   },
   setup () {
-    const searchInput = ref('')
-    const { data, error, mutate, isValidating } = useSWRFetch(
-      'https://api.rawg.io/api/games?dates=2020-01-01,2020-12-31&ordering=-added',
-      {
-        revalidateOnFocus: false
-      }
-    )
-    function fetchGame () {
-      mutate(async () => {
-        const response = await fetch(
-          `https://api.rawg.io/api/games?search=${searchInput.value}`
-        )
-        const results = await response.json()
-        return results
+    const games = ref([])
+    db.collection('photos').onSnapshot((snapshotChange) => {
+      games.value = []
+      snapshotChange.forEach((doc) => {
+        games.value.push({
+          id: doc.id,
+          picture: doc.data().picture,
+          name: doc.data().name
+        })
       })
-    }
+    })
+    console.log('games', games)
     return {
-      searchInput,
-      games: data,
-      error,
-      fetchGame,
-      isValidating
+      games
     }
   }
 })
