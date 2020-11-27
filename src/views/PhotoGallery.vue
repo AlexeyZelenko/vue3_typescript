@@ -30,7 +30,6 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
-// import useSWRFetch from '@/composables/useSWRFetch'
 import GameList from '@/components/game/GameList.vue'
 import GameListSkeleton from '@/components/game/GameListSkeleton.vue'
 import { db } from '@/firebaseDb'
@@ -53,7 +52,6 @@ export default defineComponent({
         })
       })
     })
-    console.log('games', games)
     return {
       games
     }

@@ -14,43 +14,27 @@
 
 <!--Карточка-->
     <div class="p-5">
-      <h3 class="text-2xl font-bold" style="color: #7f2121">{{ gameName }}</h3>
+      <h3
+        class="text-2xl font-bold"
+        style="color: #f7f4f4"
+      >
+        {{ gameName }}
+      </h3>
     </div>
-    <router-link
-      :to="{name: 'edit', params: { id: photo.key }}"
-      class="btn btn-primary"
-    >
-      Редагувати
-    </router-link>
   </div>
 </template>
 
 <script>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import useIntersectionObserver from '@/composables/useIntersectionObserver'
-import { db } from '@/firebaseDb'
 
 export default {
   name: 'GameCard',
-  data () {
-    return {
-      photo: {
-      }
-    }
-  },
-  created () {
-    const dbRef = db.collection('photos').doc(this.$route.params.id)
-    dbRef.get().then((doc) => {
-      this.photo = doc.data()
-    }).catch((error) => {
-      console.log(error)
-    })
-  },
   props: {
     game: Object
   },
   setup (props) {
-    console.log('1', props.game)
+    const photo = ref({})
     const el = ref(null)
     const { observe, unobserve, isShown } = useIntersectionObserver()
 
@@ -58,8 +42,10 @@ export default {
       return props.game.picture
     })
     const gameName = computed(() => {
-      console.log(props.game.name)
       return props.game.name
+    })
+    const gameKey = computed(() => {
+      return props.game.id
     })
 
     onMounted(() => {
@@ -73,7 +59,9 @@ export default {
       gameImages,
       el,
       isShown,
-      gameName
+      gameName,
+      photo,
+      gameKey
     }
   }
 }
