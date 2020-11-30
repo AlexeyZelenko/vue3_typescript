@@ -4,12 +4,10 @@
     class="bg-gray-800 radius-sm shadow-md rounded-md h-full"
   >
     <!--    Картинка-->
-    <figure class="relative pb-2/3">
-      <img
-        :src="isShown ? photo : null"
-        class="h-full w-full object-cover rounded-t-md"
-      />
-    </figure>
+    <img
+      :src="isShown ? photo : null"
+      class="h-full w-full object-cover rounded-md"
+    />
   </div>
 <!--  <div ref="el" class="card h-100">-->
 <!--    <img-->
