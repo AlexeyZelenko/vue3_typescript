@@ -6,8 +6,8 @@
 <!--    Картинка-->
     <figure class="relative pb-2/3">
       <img
-        :src="isShown ? gameImages : null"
-        :alt="`${gameName} обложка`"
+        :src="isShown ? categoryImages : null"
+        :alt="`${categoryName} обложка`"
         class=" h-full w-full object-cover rounded-t-md"
       />
     </figure>
@@ -18,7 +18,7 @@
         class="text-2xl font-bold"
         style="color: #f7f4f4"
       >
-        {{ gameName }}
+        {{ categoryName }}
       </h3>
     </div>
   </div>
@@ -29,23 +29,23 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import useIntersectionObserver from '@/composables/useIntersectionObserver'
 
 export default {
-  name: 'GameCard',
+  name: 'CategoriesPhotoCard',
   props: {
-    game: Object
+    category: Object
   },
   setup (props) {
     const photo = ref({})
     const el = ref(null)
     const { observe, unobserve, isShown } = useIntersectionObserver()
 
-    const gameImages = computed(() => {
-      return props.game.picture
+    const categoryImages = computed(() => {
+      return props.category.picture
     })
-    const gameName = computed(() => {
-      return props.game.name
+    const categoryName = computed(() => {
+      return props.category.name
     })
-    const gameKey = computed(() => {
-      return props.game.id
+    const categoryKey = computed(() => {
+      return props.category.id
     })
 
     onMounted(() => {
@@ -56,12 +56,12 @@ export default {
       unobserve(el.value)
     })
     return {
-      gameImages,
+      categoryImages,
       el,
       isShown,
-      gameName,
+      categoryName,
       photo,
-      gameKey
+      categoryKey
     }
   }
 }

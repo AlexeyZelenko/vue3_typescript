@@ -21,26 +21,11 @@
     </router-link>
     <div class="mx-4  max-w-4xl justify-center">
       <h1 class="font-bold text-5xl flex-1 mb-4">Фотогалерея</h1>
-      <div class="flex mb-4">
-        <input
-          type="search"
-          v-model="searchInput"
-          v-on:keyup.enter="fetchGame"
-          class="flex-1 text-black px-4 py-2 bg-gray-800 text-gray-300 rounded-sm"
-          placeholder="Що шукаємо..."
-        />
-        <button
-          @click="fetchGame"
-          class="py-2 px-5 uppercase font-bold bg-green-400 rounded-sm ml-2"
-        >
-          Пошук
-        </button>
-      </div>
-      <template v-if="listImages">
-        <PhotoList :games="listImages" />
+      <template v-if="arrayImages">
+        <PhotoList :category="arrayImages" />
       </template>
-      <template v-else-if="!listImages && !error">
-        <GameListSkeleton />
+      <template v-else-if="!arrayImages && !error">
+        <PhotoListSkeleton />
       </template>
     </div>
   </div>
@@ -49,7 +34,7 @@
 <script lang="ts">
 
 import PhotoList from '@/components/photos/PhotoList.vue'
-import GameListSkeleton from '@/components/game/GameListSkeleton.vue'
+import PhotoListSkeleton from '@/components/photos/PhotoListSkeleton.vue'
 import { defineComponent } from 'vue'
 import { db } from '@/firebaseDb'
 
@@ -57,19 +42,19 @@ export default defineComponent({
   name: 'GameProfile',
   components: {
     PhotoList,
-    GameListSkeleton
+    PhotoListSkeleton
   },
   data () {
     return {
-      photo: {},
-      listImages: {}
+      category: {},
+      arrayImages: []
     }
   },
   created () {
     const dbRef = db.collection('photos').doc(this.$route.params.id)
     dbRef.get().then((doc) => {
-      this.photo = doc.data()
-      this.listImages = this.photo.listImages
+      this.category = doc.data()
+      this.arrayImages = this.category.arrayImages
     }).catch((error) => {
       console.log(error)
     })
@@ -79,7 +64,7 @@ export default defineComponent({
       event.preventDefault()
       db.collection('photos').doc(this.$route.params.id)
         .update(this.photo).then(() => {
-          console.log('photo successfully updated!')
+          console.log('category successfully updated!')
           this.$router.push('/list')
         }).catch((error) => {
           console.log(error)
