@@ -6,15 +6,9 @@
     <!--    Картинка-->
     <img
       :src="isShown ? photo : null"
-      class="h-full w-full object-cover rounded-md"
+      class="h-full w-full object-cover rounded-md z-depth-3"
     />
   </div>
-<!--  <div ref="el" class="card h-100">-->
-<!--    <img-->
-<!--      :src="isShown ? game : null"-->
-<!--      class="rounded mx-auto d-block"-->
-<!--    />-->
-<!--  </div>-->
 </template>
 
 <script>
