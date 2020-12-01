@@ -1,70 +1,87 @@
 <template>
-  <div id="nav">
-    <router-link  to="/">Головна</router-link> |
-    <router-link  to="/about">Про церкву</router-link> |
-    <router-link  to="/video">Відео</router-link> |
-    <router-link  to="/about_us">Про нас</router-link> |
-    <router-link  to="/photo">Фото галерея</router-link> |
-
-<!--Выпадающее меню-->
-    <div class="position-relative">
-      <div
-        class="position-absolute bottom-50 right-0"
+  <nav class="navbar navbar-dark navbar-expand-lg " style="background-color: #212;">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarLeftAlignExample"
+        aria-controls="navbarLeftAlignExample"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-        <div
-          class="dropdown"
-        >
-          <svg
-            type="button"  data-toggle="dropdown" aria-expanded="false"
-            @click="showDropdownMenu = !showDropdownMenu"
-            width="2em"
-            height="2em"
-            viewBox="0 0 16 16"
-            class="bi bi-three-dots-vertical"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-            style="color: #42b983"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-            />
-          </svg>
-          <ul
-            class="dropdown-menu dropdown-menu-dark dropdown-menu-right"
-            aria-labelledby="dropdownMenuButton"
-          >
-            <li>
-              <router-link
-                class="dropdown-item"
-                to="/"
-                exact
-              >
-                Головна
-              </router-link>
-            </li>
-            <li>
-              <router-link
-                class="dropdown-item"
-                to="/add_user"
-                exact
-              >Додати користувача
-              </router-link>
-            </li>
-            <li>
-              <router-link
-                class="dropdown-item"
-                to="/list"
-                exact
-              >
-                Список користувачив
-              </router-link>
-            </li>
-          </ul>
-        </div>
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarLeftAlignExample">
+        <!-- Left links -->
+        <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <router-link  to="/" class="nav-link" aria-current="page">Головна</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link  to="/about" class="nav-link">Про церкву</router-link>
+          </li><li class="nav-item">
+          <router-link  to="/video" class="nav-link">Відео</router-link>
+          </li><li class="nav-item">
+            <router-link  to="/about_us" class="nav-link">Про нас</router-link>
+          </li><li class="nav-item">
+          <router-link  to="/photo" class="nav-link">Фото галерея</router-link>
+          </li>
+          <!-- Avatar -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle d-flex align-items-center"
+              href="#"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                style="height: 24px"
+                src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                class="rounded-circle"
+                alt=""
+                loading="lazy"
+              />
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <router-link
+                  class="dropdown-item"
+                  to="/"
+                  exact
+                >
+                  Головна
+                </router-link>
+              </li>
+              <li>
+                <router-link
+                  class="dropdown-item"
+                  to="/add_user"
+                  exact
+                >Додати користувача
+                </router-link>
+              </li>
+              <li>
+                <router-link
+                  class="dropdown-item"
+                  to="/list"
+                  exact
+                >
+                  Список користувачив
+                </router-link>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
+  </nav>
 
   <component :is=layout>
     <router-view/>
@@ -144,30 +161,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style scoped>
-
-#app {
-  margin: 5px;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-  background-color: #212;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #dee3e9;
-  text-decoration: none;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
