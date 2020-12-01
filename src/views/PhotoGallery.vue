@@ -1,7 +1,12 @@
 <template>
   <div class="mx-4 flex flex-wrap justify-center">
     <div class="mx-4  max-w-4xl justify-center">
-      <h1 class="font-bold text-5xl flex-1 mb-4 justify-center">Фотогалерея</h1>
+      <h1
+        style="margin-top: 10px"
+        class="font-bold text-5xl flex-1 mb-4 justify-center"
+      >
+        Фотогалерея
+      </h1>
       <template v-if="categories">
         <CategoriesPhotoList
           :categories="categories"

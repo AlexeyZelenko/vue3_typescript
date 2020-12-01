@@ -77,6 +77,14 @@
         >
           Дивитися останє служіння
         </button>
+        <button
+          style="margin-top: 5px"
+          v-if="LiveVideoData"
+          class="button"
+          @click="showModalOnline = true"
+        >
+          Дивитися онлайн служіння
+        </button>
       </div>
       <video
         loop=""
@@ -99,19 +107,23 @@
       <div class="container">
         <h2>Сервіси</h2>
         <div class="service">
-          <i aria-hidden="true"
-             class="fa fa-tachometer fa-3x"
+          <i
+            aria-hidden="true"
+            class="fas fa-praying-hands fa-3x"
           ></i>
           <p>Молитва</p>
         </div>
         <div class="service">
           <i aria-hidden="true"
-             class="fa fa-calendar fa-3x"
+          class="fas fa-bible fa-3x"
           ></i>
           <p>Навчання практичному Слову Божому</p>
         </div>
         <div class="service">
-          <i aria-hidden="true" class="fa fa-bar-chart fa-3x"></i>
+          <i
+            aria-hidden="true"
+            class="fas fa-hands-helping fa-3x"
+          ></i>
           <p>Підтримка</p>
         </div>
       </div>
@@ -123,13 +135,6 @@
         <h1>
           Ісус відповів: „Поправді, поправді кажу Я тобі: Коли хто не родиться з води й Духа, той не може ввійти в Царство Боже.
           /Івана 3 : 5/</h1>
-        <button
-          v-if="LiveVideoData"
-          class="button"
-          @click="showModalOnline = true"
-        >
-          Дивитися онлайн служіння
-        </button>
       </div>
     </div>
 
@@ -424,6 +429,10 @@ export default defineComponent({
   }
 
   .services .fa {
+    color: #979797;
+    margin-bottom: 15px;
+  }
+  .services .fas {
     color: #979797;
     margin-bottom: 15px;
   }

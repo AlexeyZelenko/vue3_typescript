@@ -4,17 +4,12 @@
     class="grid grid-cols-1 grid-flow-row gap-4 md:grid-cols-2 lg:grid-cols-3"
   >
     <li v-for="photo in category" :key="photo.id">
-      <router-link :to="{name: 'categories', params: { id: category.name }}">
-        <PhotoCard :photo="photo" />
-      </router-link>
+      <PhotoCard
+        :photo="photo"
+      />
     </li>
-<!--    <li-->
-<!--      v-for="photo in category"-->
-<!--      :key="photo.id"-->
-<!--    >-->
-<!--      <PhotoCard :photo="photo" />-->
-<!--    </li>-->
   </ul>
+
 </template>
 
 <script>

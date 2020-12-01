@@ -8,7 +8,10 @@
       v-for="category in categories"
       :key="category.id"
     >
-      <router-link :to="`/categories/${category.id}`">
+      <router-link
+        style="text-decoration: none"
+        :to="`/categories/${category.id}`"
+      >
         <CategoriesPhotoCard :category="category" />
       </router-link>
     </div>

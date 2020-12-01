@@ -20,7 +20,7 @@ export default {
   props: {
     photo: String
   },
-  setup () {
+  setup (props) {
     const el = ref(null)
     const { observe, unobserve, isShown } = useIntersectionObserver()
 

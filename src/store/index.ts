@@ -8,13 +8,13 @@ export default createStore({
   state: {
     icons: [
       {
-        fontawesome: 'fa fa-facebook-official fa-2x',
+        fontawesome: 'fab fa-facebook-f fa-2x',
         icon: 'mdi-facebook',
         name: 'facebook',
         src: 'https://www.facebook.com/%D0%A6%D0%B5%D1%80%D0%BA%D0%BE%D0%B2%D1%8C-%D0%91%D0%BB%D0%B0%D0%B3%D0%B0%D1%8F-%D0%92%D0%B5%D1%81%D1%82%D1%8C-%D0%A7%D0%B5%D1%80%D0%BA%D0%B0%D1%81%D1%81%D1%8B-746415165547326/'
       },
       {
-        fontawesome: 'fa fa-youtube fa-2x',
+        fontawesome: 'fab fa-youtube fa-2x',
         icon: 'mdi-youtube-tv',
         name: 'youtube',
         src: 'https://www.youtube.com/channel/UCSb71yKJmS0eHyhRRl00ioQ'
@@ -26,7 +26,7 @@ export default createStore({
         src: 'mailto:info@bv.ck.ua'
       },
       {
-        fontawesome: 'fa fa-instagram fa-2x',
+        fontawesome: 'fab fa-instagram fa-2x',
         icon: 'mdi-instagram',
         name: 'instagram',
         src: 'https://www.instagram.com/bv.ck.ua/'
