@@ -85,6 +85,10 @@
           role="button"
         >Дивитися онлайн служіння
         </a>
+        <timer
+          v-if="!LiveVideoData"
+          deadline="2020/12/06 10:00:00 GMT-0200"
+        />
       </div>
       <video
         loop=""
@@ -183,13 +187,14 @@
 <script lang="ts">
 import { defineAsyncComponent, defineComponent, computed, onMounted, ref } from 'vue'
 import store from '@/store'
+const timer = defineAsyncComponent(() => import('@/components/timer.vue'))
 const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vue'))
 const Ministries = defineAsyncComponent(() => import('@/components/Ministries.vue'))
 
 export default defineComponent({
   name: 'HelloWorld',
   components: {
-    ModalVideo, Ministries
+    ModalVideo, Ministries, timer
   },
   setup () {
     const titleVideo = computed(() => LastVideoData.value.title)
