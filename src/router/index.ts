@@ -18,7 +18,7 @@ const routes = [
     path: '/video',
     name: 'Video',
     meta: { layout: 'empty' },
-    component: () => import('../views/Video.vue')
+    component: () => import('@/views/Video.vue')
   },
   {
     path: '/about_us',
@@ -50,13 +50,14 @@ const routes = [
     component: () => import('@/views/CategoriesPhotoProfile.vue')
   },
   {
-    path: '/:catchAll(.*)',
-    component: () => import('@/components/NotFound.vue')
+    path: '/photo_gallery',
+    name: 'PhotoGallery',
+    meta: { layout: 'empty' },
+    component: () => import('@/views/PhotoGallery.vue')
   },
   {
-    path: '/photo',
-    name: 'photo',
-    component: () => import('@/views/PhotoGallery.vue')
+    path: '/:catchAll(.*)',
+    component: () => import('@/components/NotFound.vue')
   }
 ]
 

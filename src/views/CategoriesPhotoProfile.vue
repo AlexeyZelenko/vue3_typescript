@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap justify-center">
     <div class="mx-4  max-w-4xl justify-center">
-      <router-link to="/photo">
+      <router-link to="/photo_gallery">
         <span class="d-grid gap-2 flex-1 mb-4">
           <button
             style="margin-top: 10px"
@@ -44,7 +44,7 @@
 import PhotoList from '@/components/photos/PhotoList.vue'
 import PhotoListSkeleton from '@/components/photos/PhotoListSkeleton.vue'
 import { defineComponent } from 'vue'
-import { db } from '@/firebaseDb'
+import { db } from '@/main.ts'
 
 export default defineComponent({
   name: 'GameProfile',

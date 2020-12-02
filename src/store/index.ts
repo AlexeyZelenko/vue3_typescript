@@ -2,7 +2,8 @@ import { createStore } from 'vuex'
 import Note from '@/models/NoteModel'
 import Icon from '@/models/IconModel'
 import Video from '@/models/Video'
-import { db } from '@/firebaseDb'
+import { db } from '@/main.ts'
+import firebase from 'firebase/app'
 
 export default createStore({
   state: {
@@ -36,9 +37,19 @@ export default createStore({
     LastVideoData: [] as any,
     ListVideoData: [] as any,
     LiveVideoData: false as any,
-    videOnPage: 10
+    videOnPage: 10,
+    User_Entrance: false,
+    userEntrance: false,
+    adminEntrance: false,
+    userId: null
   },
   mutations: {
+    USER_ENTRANCE: (state, userEntrance) => {
+      state.userEntrance = userEntrance
+    },
+    USER_ID_ENTRANCE: (state, userID) => {
+      state.userId = userID
+    },
     SET_VIDEO (state, LastVideoData) {
       state.LastVideoData = LastVideoData
     },
@@ -48,22 +59,68 @@ export default createStore({
     SET_VIDEO_LIST (state, ListVideoData) {
       state.ListVideoData = ListVideoData
     },
-    SET_VIDEO_ON_PAGE (state) {
-      state.videOnPage = state.videOnPage + 5
+    ADMIN_ENTRANCE: (state, adminEntrance) => {
+      state.adminEntrance = adminEntrance
     }
   },
   actions: {
+    async logout ({ commit }) {
+      await firebase.auth().signOut()
+        .then(() => {
+          const adminEntrance = !!firebase.auth().currentUser
+          commit('ADMIN_ENTRANCE', adminEntrance)
+        })
+    },
+    getUid () {
+      const user = firebase.auth().currentUser
+      return user ? user.uid : null
+    },
+    async signInWithGoogle ({ commit, dispatch }) {
+      const uid = await dispatch('getUid')
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider()
+        await firebase.auth().signInWithPopup(provider)
+        const uid = await dispatch('getUid')
+
+        // Проверка администратора
+        if (['J4IfR9V40cdfNDKumeiyqvzhyzK2']
+          .some(elem => elem === uid)) {
+          console.log('Администратор вошел!')
+          // router.push('/admin')
+        } else {
+          console.log('Пользователь вошел!')
+        }
+      } catch (e) {
+        commit('setError', e)
+        throw e
+      }
+
+      const userEntrance = !!firebase.auth().currentUser
+      const USER_ID = await dispatch('getUid')
+      if (userEntrance) {
+        const adminEntrance = await ['J4IfR9V40cdfNDKumeiyqvzhyzK2'].includes(USER_ID)
+        commit('ADMIN_ENTRANCE', adminEntrance)
+      }
+      commit('USER_ENTRANCE', userEntrance)
+    },
+    async login ({ commit }, { email, password }) {
+      try {
+        await firebase.auth().signInWithEmailAndPassword(email, password)
+      } catch (e) {
+        commit('setError', e)
+        throw e
+      }
+    },
     async getLastVideoData ({ commit }) {
       const response = await fetch('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSb71yKJmS0eHyhRRl00ioQ&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY&part=snippet&&maxResults=1')
       const data = await response.json()
-      const LastVideoData = data.items[0].snippet || ''
+      const LastVideoData = data.items[0].snippet
       commit('SET_VIDEO', LastVideoData)
     },
     async getLiveVideoData ({ commit }) {
       const response = await fetch('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCSb71yKJmS0eHyhRRl00ioQ&eventType=live&type=video&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY')
       const data = await response.json()
-      const LiveVideoData = data.items[0] || ''
-      console.log(LiveVideoData)
+      const LiveVideoData = data.items[0]
       commit('SET_ONLINE_VIDEO', LiveVideoData)
     },
     async getListVideoData ({ commit }, payload) {
@@ -79,7 +136,13 @@ export default createStore({
     }
   },
   getters: {
-    GET_VIDEO_ON_PAGE: s => s.videOnPage
+    GET_VIDEO_ON_PAGE: s => s.videOnPage,
+    USER_ID (state) {
+      return state.userId
+    },
+    User_Entrance (state) {
+      return state.userEntrance
+    }
   },
   modules: {
   }

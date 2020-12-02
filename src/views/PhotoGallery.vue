@@ -24,10 +24,10 @@ import { defineComponent, ref } from 'vue'
 
 import CategoriesPhotoList from '@/components/photos/CategoriesPhotoList.vue'
 import PhotoListSkeleton from '@/components/photos/PhotoListSkeleton.vue'
-import { db } from '@/firebaseDb'
+import { db } from '@/main.ts'
 
 export default defineComponent({
-  name: 'Home',
+  name: 'PhotoGallery',
   components: {
     CategoriesPhotoList,
     PhotoListSkeleton
@@ -41,7 +41,6 @@ export default defineComponent({
           id: doc.id,
           picture: doc.data().picture,
           name: doc.data().name,
-          listImages: doc.data().listImages,
           arrayImages: doc.data().arrayImages
         })
       })

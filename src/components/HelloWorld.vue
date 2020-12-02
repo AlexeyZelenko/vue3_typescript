@@ -71,20 +71,20 @@
         <h1>
           Так бо Бог полюбив світ, що дав Сина Свого Одноро́дженого, щоб кожен, хто вірує в Нього, не згинув, але мав життя вічне.
         </h1>
-        <button
-          class="button"
+        <a
+          class="btn btn-outline-light btn-lg"
           @click="this.showModal = true"
-        >
-          Дивитися останє служіння
-        </button>
-        <button
-          style="margin-top: 5px"
+          role="button"
+        >Дивитися останє служіння
+        </a>
+        <a
           v-if="LiveVideoData"
-          class="button"
+          style="margin-top: 5px"
+          class="btn btn-outline-light btn-lg"
           @click="showModalOnline = true"
-        >
-          Дивитися онлайн служіння
-        </button>
+          role="button"
+        >Дивитися онлайн служіння
+        </a>
       </div>
       <video
         loop=""
@@ -292,20 +292,20 @@ export default defineComponent({
       text-shadow: 0 0 10px black;
     }
   }
-  .overlay button {
-    cursor: pointer;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 18px;
-    margin-top: 40px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #fa5ba5;
-    padding: 20px 30px;
-    border-radius: 30px;
-    z-index: 99999;
-  }
+  /*.overlay button {*/
+  /*  cursor: pointer;*/
+  /*  color: #fff;*/
+  /*  text-decoration: none;*/
+  /*  font-weight: bold;*/
+  /*  font-size: 18px;*/
+  /*  margin-top: 40px;*/
+  /*  margin-left: auto;*/
+  /*  margin-right: auto;*/
+  /*  background-color: #fa5ba5;*/
+  /*  padding: 20px 30px;*/
+  /*  border-radius: 30px;*/
+  /*  z-index: 99999;*/
+  /*}*/
   iframe {
     width: 100%;
     height: 640px;
@@ -400,17 +400,17 @@ export default defineComponent({
     clear: both;
   }
 
-  .jumbotron .button {
-    display: inline-block;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 18px;
-    margin-top: 40px;
-    background-color: #fa5ba5;
-    padding: 20px 30px;
-    border-radius: 30px;
-  }
+  /*.jumbotron .button {*/
+  /*  display: inline-block;*/
+  /*  color: #fff;*/
+  /*  text-decoration: none;*/
+  /*  font-weight: bold;*/
+  /*  font-size: 18px;*/
+  /*  margin-top: 40px;*/
+  /*  background-color: #fa5ba5;*/
+  /*  padding: 20px 30px;*/
+  /*  border-radius: 30px;*/
+  /*}*/
 
   /* Services */
   .services .service {
