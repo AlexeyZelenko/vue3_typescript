@@ -87,7 +87,7 @@
         </a>
         <timer
           v-if="!LiveVideoData"
-          deadline="2020/12/06 10:00:00 GMT-0200"
+          :deadline = deadLine
         />
       </div>
       <video
@@ -201,6 +201,9 @@ export default defineComponent({
     const codVideo = computed(() => LastVideoData.value.resourceId.videoId)
     const liveTitleVideo = computed(() => LiveVideoData.value.snippet.title)
     const liveCodVideo = computed(() => LiveVideoData.value.id.videoId)
+
+    const deadLine = computed(() => '2020/12/06 10:00:00 GMT-0200')
+
     const showModal = ref(false)
     const showModalOnline = ref(false)
     const icons = computed(() => store.state.icons)
@@ -226,7 +229,8 @@ export default defineComponent({
       titleVideo,
       codVideo,
       liveTitleVideo,
-      liveCodVideo
+      liveCodVideo,
+      deadLine
     }
   }
 })
