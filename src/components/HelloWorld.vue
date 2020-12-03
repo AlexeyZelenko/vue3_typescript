@@ -85,10 +85,11 @@
           role="button"
         >Дивитися онлайн служіння
         </a>
-        <timer
+
+        <Timer
           v-if="!LiveVideoData"
-          :deadline = deadLine
         />
+
       </div>
       <video
         loop=""
@@ -185,24 +186,101 @@
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, defineComponent, computed, onMounted, ref } from 'vue'
+import { defineAsyncComponent, defineComponent, computed, onMounted, ref, provide } from 'vue'
 import store from '@/store'
-const timer = defineAsyncComponent(() => import('@/components/timer.vue'))
+const Timer = defineAsyncComponent(() => import('@/components/Timer.vue'))
 const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vue'))
 const Ministries = defineAsyncComponent(() => import('@/components/Ministries.vue'))
 
 export default defineComponent({
   name: 'HelloWorld',
   components: {
-    ModalVideo, Ministries, timer
+    ModalVideo, Ministries, Timer
   },
   setup () {
+    const deadLine = ref('2020/12/06 10:00:00 GMT-0200')
+    provide('deadline', deadLine)
+
+    const Title = ref('Онлайн служіння почнеться через:')
+    provide('title', Title)
+
+    const timerStyle = ref({
+      'text-align': 'center',
+      'font-family': 'sans-serif',
+      'font-weight': 100
+    })
+    provide('timerStyle', timerStyle)
+
+    const h1Style = ref({
+      color: '#396',
+      'font-weight': 100,
+      'font-size': '40px',
+      margin: '40px 0px 20px'
+    })
+    provide('h1Style', h1Style)
+
+    const clockdiv = ref({
+      'font-family': 'sans-serif',
+      color: '#fff',
+      display: 'inline-block',
+      'font-weight': 100,
+      'text-align': 'center',
+      'font-size': '30px'
+    })
+    provide('clockdiv', clockdiv)
+
+    const clockdivDiv = ref({
+      padding: '10px',
+      'border-radius': '3px',
+      background: '#00BF96',
+      display: 'inline-block',
+      margin: '1px'
+    })
+    provide('clockdivDiv', clockdivDiv)
+
+    const clockdivDivSpan = ref({
+      padding: '15px',
+      'border-radius': '3px',
+      background: '#00816A',
+      display: 'inline-block'
+    })
+    provide('clockdivDivSpan', clockdivDivSpan)
+
+    const styleEndTime = ref({
+      color: '#fff'
+    })
+    provide('styleEndTime', styleEndTime)
+
+    const smalltext = ref({
+      'padding-top': '5px',
+      'font-size': '16px'
+    })
+    provide('smalltext', smalltext)
+
+    const titleDays = ref('Дні')
+    provide('titleDays', titleDays)
+
+    const titleHours = ref('Години')
+    provide('titleHours', titleHours)
+
+    const titleMinutes = ref('Хвилини')
+    provide('titleMinutes', titleMinutes)
+
+    const titleSeconds = ref('Секунди')
+    provide('titleSeconds', titleSeconds)
+
+    const titleEndTime = ref('Час вийшло!')
+    provide('titleEndTime', titleEndTime)
+    // provide('geolocation', {
+    //   longitude: 90,
+    //   latitude: 135
+    // })
     const titleVideo = computed(() => LastVideoData.value.title)
     const codVideo = computed(() => LastVideoData.value.resourceId.videoId)
     const liveTitleVideo = computed(() => LiveVideoData.value.snippet.title)
     const liveCodVideo = computed(() => LiveVideoData.value.id.videoId)
 
-    const deadLine = computed(() => '2020/12/06 10:00:00 GMT-0200')
+    // const deadLine = computed(() => '2020/12/06 10:00:00 GMT-0200')
 
     const showModal = ref(false)
     const showModalOnline = ref(false)
@@ -229,8 +307,7 @@ export default defineComponent({
       titleVideo,
       codVideo,
       liveTitleVideo,
-      liveCodVideo,
-      deadLine
+      liveCodVideo
     }
   }
 })

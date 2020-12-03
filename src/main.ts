@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, reactive, provide } from 'vue'
 import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
@@ -29,10 +29,10 @@ export const db = firebase.initializeApp({
 
 export const storage = firebase.storage()
 
-createApp(App)
-  .use(store)
-  .use(router)
-  .use(VuePlyr, {
-    plyr: {}
-  })
-  .mount('#app')
+const app = createApp(App)
+app.use(store)
+app.use(router)
+app.use(VuePlyr, {
+  plyr: {}
+})
+app.mount('#app')
