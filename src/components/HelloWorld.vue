@@ -87,6 +87,7 @@
         </a>
 
         <Timer
+
           v-if="!LiveVideoData"
         />
 
@@ -185,8 +186,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineAsyncComponent, defineComponent, computed, onMounted, ref, provide } from 'vue'
+<script>
+import { defineAsyncComponent, defineComponent, computed, onMounted, ref, provide, reactive } from 'vue'
 import store from '@/store'
 const Timer = defineAsyncComponent(() => import('@/components/Timer.vue'))
 const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vue'))
@@ -197,8 +198,79 @@ export default defineComponent({
   components: {
     ModalVideo, Ministries, Timer
   },
+  computed: {
+    deadLine () {
+      // iterate over each element in the schedule
+      for (var i = 0; i < this.schedule.length; i++) {
+        var startDate = this.schedule[i][0]
+        var endDate = this.schedule[i][1]
+
+        // put dates in milliseconds for easy comparisons
+        var startMs = Date.parse(startDate)
+        var endMs = Date.parse(endDate)
+        var currentMs = Date.parse(new Date())
+
+        // if current date is between start and end dates, display clock
+        if (endMs > currentMs && currentMs >= startMs) {
+          this.initializeClock('clockdiv', endDate)
+        }
+      }
+
+      this.schedule.forEach(([startDate, endDate]) => {
+        // put dates in milliseconds for easy comparisons
+        const startMs = Date.parse(startDate)
+        const endMs = Date.parse(endDate)
+        const currentMs = Date.parse(new Date())
+
+        // if current date is between start and end dates, display clock
+        if (endMs > currentMs && currentMs >= startMs) {
+          this.initializeClock('clockdiv', endDate)
+        }
+      })
+      return endDate
+    }
+  },
   setup () {
-    const deadLine = ref('2020/12/06 10:00:00 GMT-0200')
+    const schedule = reactive([
+      ['2020/12/01 10:00:00 GMT-0200', '2020/12/06 10:00:00 GMT-0200'],
+      ['2020/12/06 10:00:00 GMT-0200', '2020/12/13 10:00:00 GMT-0200'],
+      ['2020/12/13 10:00:00 GMT-0200', '2020/12/20 10:00:00 GMT-0200'],
+      ['2020/12/20 10:00:00 GMT-0200', '2020/12/27 10:00:00 GMT-0200']
+    ])
+
+    const deadLine = computed(() => {
+      // iterate over each element in the schedule
+      for (var i = 0; i < schedule.length; i++) {
+        var startDate = schedule[i][0]
+        var endDate = schedule[i][1]
+
+        // put dates in milliseconds for easy comparisons
+        var startMs = Date.parse(startDate)
+        var endMs = Date.parse(endDate)
+        var currentMs = Date.parse(new Date())
+
+        // if current date is between start and end dates, display clock
+        if (endMs > currentMs && currentMs >= startMs) {
+          // initializeClock('clockdiv', endDate)
+          return endDate
+        }
+      }
+
+      schedule.forEach(([startDate, endDate]) => {
+        // put dates in milliseconds for easy comparisons
+        const startMs = Date.parse(startDate)
+        const endMs = Date.parse(endDate)
+        const currentMs = Date.parse(new Date())
+
+        // if current date is between start and end dates, display clock
+        if (endMs > currentMs && currentMs >= startMs) {
+          return endDate
+          // initializeClock('clockdiv', endDate)
+        }
+      })
+    })
+
+    // const deadLine = ref('2020/12/06 10:00:00 GMT-0200')
     provide('deadline', deadLine)
 
     const Title = ref('Онлайн служіння почнеться через:')
@@ -307,7 +379,8 @@ export default defineComponent({
       titleVideo,
       codVideo,
       liveTitleVideo,
-      liveCodVideo
+      liveCodVideo,
+      schedule
     }
   }
 })

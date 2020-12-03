@@ -2,8 +2,6 @@ import { createApp, reactive, provide } from 'vue'
 import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
-import VuePlyr from 'vue-plyr'
-import 'vue-plyr/dist/vue-plyr.css'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import firebase from 'firebase'
@@ -11,8 +9,6 @@ import 'firebase/firestore'
 import 'firebase/database'
 import 'firebase/auth'
 import 'firebase/storage'
-// import 'firebase/messaging'
-// import 'firebase/performance'
 import * as mdb from 'mdb-ui-kit'
 // import '@/assets/global.css'
 
@@ -32,7 +28,4 @@ export const storage = firebase.storage()
 const app = createApp(App)
 app.use(store)
 app.use(router)
-app.use(VuePlyr, {
-  plyr: {}
-})
 app.mount('#app')

@@ -188,6 +188,10 @@ const Vue3DownUpButton = defineAsyncComponent(() => import('@/components/Vue3Dow
 const user = defineAsyncComponent(() => import('@/layouts/user.vue'))
 const empty = defineAsyncComponent(() => import('@/layouts/empty.vue'))
 
+interface Show {
+  value: boolean
+}
+
 export default defineComponent({
   components: {
     Vue3DownUpButton,
