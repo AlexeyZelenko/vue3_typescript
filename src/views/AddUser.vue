@@ -27,6 +27,17 @@
           >
         </div>
 
+        <div ref="form">
+          <input
+            type="file"
+            name="file-upload"
+            multiple=""
+            @change="previewFiles"
+            accept="image/jpeg, image/png"
+            tabindex="-1"
+          >
+        </div>
+
 <!--        <div class="form-group">-->
 <!--          <label>Обкладинка</label>-->
 <!--          <input type="text" class="form-control" v-model="photo.picture" required>-->
@@ -50,17 +61,6 @@
 <!--          >-->
 <!--        </div>-->
 
-        <div>
-          <input
-            ref="upload"
-            type="file"
-            name="file-upload"
-            multiple=""
-            accept="image/jpeg, image/png"
-            @change="onUploadFiles"
-          >
-        </div>
-
         <div class="form-group">
           <button class="btn btn-primary btn-block">Додати категорію</button>
         </div>
@@ -71,8 +71,9 @@
 
 <script>
 import { db } from '@/main.ts'
-import firebase from 'firebase'
+// import firebase from 'firebase'
 import 'firebase/storage'
+import firebase from 'firebase/app'
 
 export default {
   data () {
@@ -82,18 +83,26 @@ export default {
     }
   },
   methods: {
-    previewFiles () {
-      this.File = this.$refs.myFiles.files
+    previewFiles (event) {
+      // process your files, read as DataUrl or upload...
+      this.File = event.target.files
+      console.log(event.target.files)
+      console.log(this.File[0].name)
+
+      // if you need to re-use field or drop the same files multiple times
+      // this.$refs.form.reset()
     },
 
     async onFormSubmit (event) {
+      console.log('1', this.File)
       // ЗАГРУЗКА ФОТО
       const promises = []
       const promisesName = []
 
-      if (File) {
-        for (let i = 0; i < File.length; i++) {
+      if (this.File) {
+        for (let i = 0; i < this.File.length; i++) {
           const storageRef = firebase.storage().ref()
+          console.log('storageRef', storageRef)
           // Загрузить файл и метаданные в объект 'assets/images/***.jpg'
 
           // Создайте метаданные файла
@@ -102,7 +111,15 @@ export default {
           }
           const nameTime = +new Date() + '.jpg'
           // ПРОВЕРКА ЗАГРУЗКИ ФОТО
-          const uploadTask = storageRef.child(`${this.photo.name}/images/` + nameTime).put(File[i], metadata)
+
+          console.log(this.File[i])
+          console.log(this.File)
+          const uploadTask = storageRef
+            .child(`${this.photo.name}/images/` + nameTime)
+            .put(this.File[i], metadata)
+            .then(function (snapshot) {
+              console.log('Uploaded a  file!')
+            })
 
           promises.push(
             uploadTask
@@ -120,8 +137,8 @@ export default {
       const NameImages = await Promise.all(promisesName)
 
       console.log(this.photo)
-      console.log(arrayImages)
-      console.log(NameImages)
+      console.log('arrayImages', arrayImages)
+      console.log('NameImages', NameImages)
 
       event.preventDefault()
       db.collection('photos')
