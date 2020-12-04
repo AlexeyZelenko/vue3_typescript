@@ -46,25 +46,43 @@
 <!--        </ul>-->
 
         <div
-          id="carouselExampleControls"
-          class="carousel slide"
+          id="carouselExampleFade"
+          class="carousel slide carousel-fade"
           data-ride="carousel"
         >
           <div class="carousel-inner">
             <div
               class="carousel-item active"
+              data-interval="1000"
               v-for="item in photo.arrayImages" :key="item.id"
             >
               <img
                 :src="photo.arrayImages[this.count]"
                 class="d-block w-100" alt="..."
               >
+              <div class="carousel-caption  d-md-block">
+                <button
+                  @click="deleteFoto(photo, item)"
+                  type="button"
+                  class="btn btn-danger"
+                  style="margin: 5px"
+                >
+                  Видалити
+                </button>
+                <button
+                  @click="FirstFoto(photo, item)"
+                  type="button"
+                  class="btn btn-warning"
+                >
+                  Головна
+                </button>
+              </div>
             </div>
           </div>
           <a
             @click="clickLeft"
             class="carousel-control-prev"
-            href="#carouselExampleControls"
+            href="#carouselExampleFade"
             role="button"
             data-slide="prev"
           >
@@ -74,10 +92,13 @@
           <a
             @click="clickRight"
             class="carousel-control-next"
-            href="#carouselExampleControls"
+            href="#carouselExampleFade"
             role="button"
           >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span
+              class="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span>
             <span
               class="visually-hidden"
             >
@@ -124,6 +145,32 @@ export default defineComponent({
     })
   },
   methods: {
+    deleteFoto (photo, item) {
+      console.log('photo', photo)
+      console.log('item', item)
+      const array = photo.arrayImages
+      const arrayName = photo.NameImages
+
+      const index = array.indexOf(item)
+      if (index > -1) {
+        array.splice(index, 1)
+        arrayName.splice(index, 1)
+      }
+      photo.arrayImages = array
+      photo.NameImages = arrayName
+    },
+    async FirstFoto (photo, item) {
+      const array = photo.arrayImages
+      const arrayName = photo.NameImages
+
+      const index = array.indexOf(item)
+      if (index > -1) {
+        await array.unshift(...array.splice(index, 1))
+        await arrayName.unshift(...arrayName.splice(index, 1))
+      }
+      this.photo.arrayImages = array
+      this.photo.NameImages = arrayName
+    },
     clickRight () {
       if (this.count < this.photo.arrayImages.length - 1) {
         this.count++

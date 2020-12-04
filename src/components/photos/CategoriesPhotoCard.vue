@@ -45,7 +45,7 @@ export default {
     const { observe, unobserve, isShown } = useIntersectionObserver()
 
     const categoryImages = computed(() => {
-      return props.category.picture
+      return props.category.arrayImages[0]
     })
     const categoryName = computed(() => {
       return props.category.name
