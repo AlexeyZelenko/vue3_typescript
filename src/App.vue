@@ -49,12 +49,11 @@
           <!--ВХОД ЧЕРЕЗ ГУГЛ АККАУНТ-->
           <ul class="navbar-nav mr-2 mb-2 mb-lg-0">
             <!-- Avatar -->
-            <li>
-              <slot
-                id="user-name"
-                v-if="adminEntrance"
-              >{{getUserName}}
-              </slot>
+            <li
+              style="color: #3c8baf"
+              v-if="adminEntrance"
+            >
+              {{getUserName}}
             </li>
             <li
               v-if="adminEntrance"
@@ -70,13 +69,16 @@
               >
                 <img
                   style="height: 40px"
-                  :src="(getProfilePicUrl)"
+                  :src="getProfilePicUrl"
                   class="rounded-circle"
                   alt=""
                   loading="lazy"
                 />
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
                 <li>
                   <router-link
                     class="dropdown-item"
@@ -91,7 +93,7 @@
                     class="dropdown-item"
                     to="/add_user"
                     exact
-                  >Додати користувача
+                  >Додати категорію фото
                   </router-link>
                 </li>
                 <li>
@@ -100,7 +102,7 @@
                     to="/list"
                     exact
                   >
-                    Список користувачив
+                    Список категорій фото
                   </router-link>
                 </li>
               </ul>

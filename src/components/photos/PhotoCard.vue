@@ -8,8 +8,6 @@
       :src="isShown ? photo : null"
       class="h-full w-full object-cover rounded-md z-depth-3"
       @click="photoModal(photo)"
-      data-toggle="modal"
-      data-target="#exampleModal"
     />
   </div>
 
@@ -28,6 +26,7 @@ export default {
     const photoElement = ref('')
     const el = ref(null)
     const { observe, unobserve, isShown } = useIntersectionObserver()
+
     const photoModal = (photo) => {
       photoElement.value = photo
       console.log(photoElement.value)

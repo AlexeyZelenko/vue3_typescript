@@ -85,12 +85,6 @@
           role="button"
         >Дивитися онлайн служіння
         </a>
-
-        <Timer
-          v-if="!LiveVideoData"
-        >
-        </Timer>
-
       </div>
       <video
         loop=""
@@ -108,6 +102,10 @@
         >
       </video>
     </div>
+    <Timer
+      v-if="!LiveVideoData"
+    >
+    </Timer>
 
     <div class="services">
       <div class="container">
@@ -454,7 +452,7 @@ export default defineComponent({
   }
 
   h1 {
-    font-size: 40px;
+    font-size: 35px;
     color: #fff;
     text-shadow: 0 0 5px black;
   }

@@ -23,7 +23,13 @@
               >
                 Редагувати
               </router-link>
-              <button @click.prevent="deletePhoto(photo.key)" class="btn btn-danger">Видалити</button>
+              <button
+                @click.prevent="deletePhoto(photo.key)"
+                style="margin-top: 5px"
+                class="btn btn-danger"
+              >
+                Видалити
+              </button>
             </td>
           </tr>
           </tbody>
@@ -35,7 +41,7 @@
 
 <script lang="ts">
 import { ref } from 'vue'
-import { db } from '@/firebaseDb'
+import { db } from '@/main.ts'
 
 export default {
   setup () {

@@ -2,7 +2,9 @@
   <div class="row justify-content-center">
     <div class="col-md-5">
       <h3 class="text-center">Редагувати категорію</h3>
-      <form @submit.prevent="onUpdateForm">
+      <form
+        @submit.prevent="onUpdateForm"
+      >
         <div class="form-group">
           <label>Назва категорії</label>
           <input
@@ -33,8 +35,22 @@
           >
         </div>
 
+<!--        <div class="form-group">-->
+<!--          <label>Фотографіі</label>-->
+<!--          <input-->
+<!--            type="text"-->
+<!--            class="form-control"-->
+<!--            v-model="photo.images"-->
+<!--            required-->
+<!--          >-->
+<!--        </div>-->
+
         <div class="form-group">
-          <button class="btn btn-primary btn-block">Зберегти</button>
+          <button
+            class="btn btn-primary btn-block"
+          >
+            Зберегти
+          </button>
         </div>
       </form>
     </div>
@@ -43,7 +59,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { db } from '@/firebaseDb'
+import { db } from '@/main.ts'
 
 export default defineComponent({
   data () {
