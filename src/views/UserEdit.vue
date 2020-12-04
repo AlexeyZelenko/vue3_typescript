@@ -44,6 +44,16 @@
 <!--            required-->
 <!--          >-->
 <!--        </div>-->
+        <ul
+          v-if="photo.arrayImages"
+          class="grid grid-cols-1 grid-flow-row gap-4 md:grid-cols-2 lg:grid-cols-3"
+        >
+          <li v-for="item in photo.arrayImages" :key="item.id">
+            <PhotoCard
+              :photo="item"
+            />
+          </li>
+        </ul>
 
         <div class="form-group">
           <button
@@ -60,6 +70,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { db } from '@/main.ts'
+import PhotoCard from '@/components/photos/PhotoCard.vue'
 
 export default defineComponent({
   data () {
@@ -68,10 +79,14 @@ export default defineComponent({
       }
     }
   },
+  components: {
+    PhotoCard
+  },
   created () {
     const dbRef = db.collection('photos').doc(this.$route.params.id)
     dbRef.get().then((doc) => {
       this.photo = doc.data()
+      console.log(this.photo)
     }).catch((error) => {
       console.log(error)
     })
