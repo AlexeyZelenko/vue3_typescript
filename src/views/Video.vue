@@ -3,8 +3,9 @@
     <div class="jumbotron">
       <div class="container">
         <h1>
-          Хто вірує в Нього, не буде засуджений; хто ж не вірує, – той вже засуджений, що не повірив в Ім'я Однородженого Сина Божого.
+          {{TextBible.title}}
         </h1>
+        <h1>{{TextBible.verse}}</h1>
       </div>
     </div>
   </div>
@@ -101,6 +102,8 @@ export default defineComponent({
     const videoModalTitle = ref('')
     const ListVideoData = computed(() => store.state.ListVideoData)
 
+    const TextBible = computed(() => store.getters.GET_textBible)
+
     const openModal = (item: any) => {
       showModal.value = true
       videoModal.value = item.snippet.resourceId.videoId
@@ -132,7 +135,8 @@ export default defineComponent({
       showModal,
       videoModalTitle,
       openModal,
-      videoModal
+      videoModal,
+      TextBible
       // cats
     }
   }

@@ -4,8 +4,9 @@
     <div class="fullscreen-bg">
       <div class="overlay">
         <h1>
-          Хто вірує в Сина, той має вічне життя; а хто в Сина не вірує, той життя не побачить – а гнів Божий на нім перебуває“
+          {{TextBible.title}}
         </h1>
+        <h1>{{TextBible.verse}}</h1>
       </div>
       <video
         loop=""
@@ -39,11 +40,19 @@
 
 <script>
 import CatalogItem from '@/components/CatalogItem.vue'
+import { computed } from 'vue'
+import store from '@/store'
 
 export default {
   name: 'About',
   components: {
     CatalogItem
+  },
+  setup () {
+    const TextBible = computed(() => store.getters.GET_textBible)
+    return {
+      TextBible
+    }
   },
   data: () => ({
     sections: [

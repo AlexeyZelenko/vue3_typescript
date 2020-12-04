@@ -1,7 +1,9 @@
 <template>
   <div
+    class="displayTimer"
     :style='[timerStyle]'
   >
+    <h1 class="Mobile_h1_Style">{{title}}</h1>
     <h1 :style="[h1Style]">{{title}}</h1>
     <div :style="[clockdiv]">
       <div :style="clockdivDiv">
@@ -130,3 +132,22 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .Mobile_h1_Style {
+    display: none;
+  }
+  @media (max-width: 767px) {
+  .displayTimer {
+      margin-top: 5px;
+    }
+    h1 {
+      display: none;
+    }
+    .Mobile_h1_Style {
+      display: block;
+      font-size: 14px;
+      color: #396,
+    }
+  }
+</style>

@@ -4,9 +4,9 @@
     <div class="fullscreen-bg">
       <div class="overlay">
         <h1>
-         "Коли Я говорив вам про земне, та не вірите ви, то як же повірите ви, коли Я говоритиму вам про небесне?"
+         {{TextBible.title}}
         </h1>
-        <h1>Івана 3 : 12</h1>
+        <h1>{{TextBible.verse}}</h1>
       </div>
       <video
         loop=""
@@ -36,7 +36,8 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
+import store from '@/store'
 
 const vCatalogItem = defineAsyncComponent(() => import('@/components/CatalogItem.vue'))
 
@@ -69,7 +70,13 @@ export default {
         seen: true
       }
     ]
-  })
+  }),
+  setup () {
+    const TextBible = computed(() => store.getters.GET_textBible)
+    return {
+      TextBible
+    }
+  }
 }
 </script>
 

@@ -69,7 +69,7 @@
     <div class="fullscreen-bg">
       <div class="overlay">
         <h1>
-          Так бо Бог полюбив світ, що дав Сина Свого Одноро́дженого, щоб кожен, хто вірує в Нього, не згинув, але мав життя вічне.
+          {{TextBible.title}}
         </h1>
         <a
           class="btn btn-outline-light btn-lg"
@@ -87,9 +87,9 @@
         </a>
 
         <Timer
-
           v-if="!LiveVideoData"
-        />
+        >
+        </Timer>
 
       </div>
       <video
@@ -187,7 +187,7 @@
 </template>
 
 <script>
-import { defineAsyncComponent, defineComponent, computed, onMounted, ref, provide, reactive } from 'vue'
+import { defineAsyncComponent, defineComponent, computed, onMounted, ref, reactive, provide } from 'vue'
 import store from '@/store'
 const Timer = defineAsyncComponent(() => import('@/components/Timer.vue'))
 const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vue'))
@@ -198,44 +198,17 @@ export default defineComponent({
   components: {
     ModalVideo, Ministries, Timer
   },
-  computed: {
-    deadLine () {
-      // iterate over each element in the schedule
-      for (var i = 0; i < this.schedule.length; i++) {
-        var startDate = this.schedule[i][0]
-        var endDate = this.schedule[i][1]
-
-        // put dates in milliseconds for easy comparisons
-        var startMs = Date.parse(startDate)
-        var endMs = Date.parse(endDate)
-        var currentMs = Date.parse(new Date())
-
-        // if current date is between start and end dates, display clock
-        if (endMs > currentMs && currentMs >= startMs) {
-          this.initializeClock('clockdiv', endDate)
-        }
-      }
-
-      this.schedule.forEach(([startDate, endDate]) => {
-        // put dates in milliseconds for easy comparisons
-        const startMs = Date.parse(startDate)
-        const endMs = Date.parse(endDate)
-        const currentMs = Date.parse(new Date())
-
-        // if current date is between start and end dates, display clock
-        if (endMs > currentMs && currentMs >= startMs) {
-          this.initializeClock('clockdiv', endDate)
-        }
-      })
-      return endDate
-    }
-  },
   setup () {
+    const TextBible = computed(() => store.getters.GET_textBible)
+
     const schedule = reactive([
-      ['2020/12/01 10:00:00 GMT-0200', '2020/12/06 10:00:00 GMT-0200'],
-      ['2020/12/06 10:00:00 GMT-0200', '2020/12/13 10:00:00 GMT-0200'],
-      ['2020/12/13 10:00:00 GMT-0200', '2020/12/20 10:00:00 GMT-0200'],
-      ['2020/12/20 10:00:00 GMT-0200', '2020/12/27 10:00:00 GMT-0200']
+      ['2020/12/01 12:00:00 GMT+0200', '2020/12/06 10:00:00 GMT+0200'],
+      ['2020/12/06 12:00:00 GMT+0200', '2020/12/13 10:00:00 GMT+0200'],
+      ['2020/12/13 12:00:00 GMT+0200', '2020/12/20 10:00:00 GMT+0200'],
+      ['2020/12/20 12:00:00 GMT+0200', '2020/12/27 10:00:00 GMT+0200'],
+      ['2020/12/27 12:00:00 GMT+0200', '2021/01/03 10:00:00 GMT+0200'],
+      ['2021/01/03 12:00:00 GMT+0200', '2021/01/10 10:00:00 GMT+0200'],
+      ['2021/01/10 12:00:00 GMT+0200', '2021/01/17 10:00:00 GMT+0200']
     ])
 
     const deadLine = computed(() => {
@@ -270,10 +243,9 @@ export default defineComponent({
       })
     })
 
-    // const deadLine = ref('2020/12/06 10:00:00 GMT-0200')
     provide('deadline', deadLine)
 
-    const Title = ref('Онлайн служіння почнеться через:')
+    const Title = ref('Онлайн служіння:')
     provide('title', Title)
 
     const timerStyle = ref({
@@ -380,7 +352,7 @@ export default defineComponent({
       codVideo,
       liveTitleVideo,
       liveCodVideo,
-      schedule
+      TextBible
     }
   }
 })
@@ -446,7 +418,7 @@ export default defineComponent({
     .overlay h1 {
       text-align:center;
       color:#fff;
-      font-size: 25px;
+      font-size: 20px;
       margin:5% 5%;
       text-shadow: 0 0 10px black;
     }
