@@ -7,7 +7,6 @@
           <tr>
             <th>Назва категорії</th>
             <th>Опис категорії</th>
-            <th>Обкладинка категроії</th>
             <th>Дії</th>
           </tr>
           </thead>
@@ -15,7 +14,6 @@
           <tr v-for="photo in Photos" :key="photo.key">
             <td>{{ photo.name }}</td>
             <td>{{ photo.description }}</td>
-            <td>{{ photo.picture }}</td>
             <td>
               <router-link
                 :to="{name: 'edit', params: { id: photo.key }}"
