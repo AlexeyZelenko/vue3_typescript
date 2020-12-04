@@ -45,17 +45,24 @@
 <!--          </li>-->
 <!--        </ul>-->
 
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div
+          id="carouselExampleControls"
+          class="carousel slide"
+          data-ride="carousel"
+        >
           <div class="carousel-inner">
             <div
               class="carousel-item active"
               v-for="item in photo.arrayImages" :key="item.id"
             >
-              <img :src="photo.arrayImages[this.count]" class="d-block w-100" alt="...">
+              <img
+                :src="photo.arrayImages[this.count]"
+                class="d-block w-100" alt="..."
+              >
             </div>
           </div>
           <a
-            @click="this.count--"
+            @click="clickLeft"
             class="carousel-control-prev"
             href="#carouselExampleControls"
             role="button"
@@ -65,7 +72,7 @@
             <span class="visually-hidden">Previous</span>
           </a>
           <a
-            @click="this.count++"
+            @click="clickRight"
             class="carousel-control-next"
             href="#carouselExampleControls"
             role="button"
@@ -117,6 +124,20 @@ export default defineComponent({
     })
   },
   methods: {
+    clickRight () {
+      if (this.count < this.photo.arrayImages.length - 1) {
+        this.count++
+      } else {
+        this.count = 0
+      }
+    },
+    clickLeft () {
+      if (this.count > 0) {
+        this.count--
+      } else {
+        this.count = 0
+      }
+    },
     onUpdateForm (event) {
       event.preventDefault()
       db.collection('photos').doc(this.$route.params.id)
