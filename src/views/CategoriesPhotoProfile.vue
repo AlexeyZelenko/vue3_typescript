@@ -30,7 +30,7 @@
         </span>
       </router-link>
       <template v-if="arrayImages">
-        <PhotoList :category="arrayImages" />
+        <PhotoList :photos="arrayImages" />
       </template>
       <template v-else-if="!arrayImages && !error">
         <PhotoListSkeleton />

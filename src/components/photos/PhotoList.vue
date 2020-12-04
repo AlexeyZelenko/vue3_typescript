@@ -1,9 +1,9 @@
 <template>
   <ul
-    v-if="category"
+    v-if="photos"
     class="grid grid-cols-1 grid-flow-row gap-4 md:grid-cols-2 lg:grid-cols-3"
   >
-    <li v-for="photo in category" :key="photo.id">
+    <li v-for="photo in photos" :key="photo.id">
       <PhotoCard
         :photo="photo"
       />
@@ -21,7 +21,7 @@ export default {
     PhotoCard
   },
   props: {
-    category: {
+    photos: {
       type: Object
     }
   }

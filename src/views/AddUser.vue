@@ -26,7 +26,7 @@
             required
           >
         </div>
-
+<!--Фотографии-->
         <div ref="form">
           <input
             type="file"
@@ -37,29 +37,6 @@
             tabindex="-1"
           >
         </div>
-
-<!--        <div class="form-group">-->
-<!--          <label>Обкладинка</label>-->
-<!--          <input type="text" class="form-control" v-model="photo.picture" required>-->
-<!--        </div>-->
-
-<!--        <div-->
-<!--          class="mb-3"-->
-<!--        >-->
-<!--          <label-->
-<!--            for="formFile"-->
-<!--            class="form-label"-->
-<!--          >-->
-<!--            Фото обкладинки-->
-<!--          </label>-->
-<!--          <input-->
-<!--            :change="photo.picture"-->
-<!--            class="form-control"-->
-<!--            type="file"-->
-<!--            id="formFile"-->
-<!--            label="Загрузка фотографій"-->
-<!--          >-->
-<!--        </div>-->
 
         <div class="form-group">
           <button class="btn btn-primary btn-block">Додати категорію</button>
@@ -85,16 +62,15 @@ export default {
   methods: {
     previewFiles (event) {
       // process your files, read as DataUrl or upload...
-      this.File = event.target.files
       console.log(event.target.files)
-      console.log(this.File[0].name)
+      this.File = event.target.files
+      // console.log(event.target.files)
 
       // if you need to re-use field or drop the same files multiple times
       // this.$refs.form.reset()
     },
 
     async onFormSubmit (event) {
-      console.log('1', this.File)
       // ЗАГРУЗКА ФОТО
       const promises = []
       const promisesName = []
@@ -112,14 +88,9 @@ export default {
           const nameTime = +new Date() + '.jpg'
           // ПРОВЕРКА ЗАГРУЗКИ ФОТО
 
-          console.log(this.File[i])
-          console.log(this.File)
           const uploadTask = storageRef
-            .child(`${this.photo.name}/images/` + nameTime)
+            .child(`${this.photo.name}/` + nameTime)
             .put(this.File[i], metadata)
-            .then(function (snapshot) {
-              console.log('Uploaded a  file!')
-            })
 
           promises.push(
             uploadTask
@@ -136,14 +107,12 @@ export default {
       const arrayImages = await Promise.all(promises)
       const NameImages = await Promise.all(promisesName)
 
-      console.log(this.photo)
-      console.log('arrayImages', arrayImages)
-      console.log('NameImages', NameImages)
-
       event.preventDefault()
       db.collection('photos')
         .add({
-          photo: this.photo,
+          name: this.photo.name,
+          description: this.photo.description,
+          picture: '',
           arrayImages,
           NameImages
         })

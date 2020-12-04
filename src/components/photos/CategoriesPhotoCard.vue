@@ -20,6 +20,12 @@
       >
         {{ categoryName }}
       </h3>
+      <h6
+        class="text-sm"
+        style="color: #579f87"
+      >
+        {{ categoryDescription }}
+      </h6>
     </div>
   </div>
 </template>
@@ -44,6 +50,9 @@ export default {
     const categoryName = computed(() => {
       return props.category.name
     })
+    const categoryDescription = computed(() => {
+      return props.category.description
+    })
     const categoryKey = computed(() => {
       return props.category.id
     })
@@ -61,7 +70,8 @@ export default {
       isShown,
       categoryName,
       photo,
-      categoryKey
+      categoryKey,
+      categoryDescription
     }
   }
 }

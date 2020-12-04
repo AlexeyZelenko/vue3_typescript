@@ -41,7 +41,8 @@ export default defineComponent({
           id: doc.id,
           picture: doc.data().picture,
           name: doc.data().name,
-          arrayImages: doc.data().arrayImages
+          arrayImages: doc.data().arrayImages,
+          description: doc.data().description
         })
       })
     })
