@@ -1,5 +1,8 @@
 <template>
-  <div class="row justify-content-center">
+  <div
+    class="row justify-content-center"
+    style="margin: 5px"
+  >
     <div class="col-md-5">
       <h3 class="text-center">Редагувати категорію</h3>
       <form
@@ -15,7 +18,10 @@
           >
         </div>
 
-        <div class="form-group">
+        <div
+          class="form-group"
+          style="margin-bottom: 10px"
+        >
           <label>Опис</label>
           <input
             type="text"
@@ -24,33 +30,28 @@
             required
           >
         </div>
-
-        <div class="form-group">
-          <label>Обкладинка</label>
+        <!--Фотографии-->
+        <div ref="form">
           <input
-            type="text"
-            class="form-control"
-            v-model="photo.picture"
-            required
+            type="file"
+            name="file-upload"
+            multiple=""
+            @change="previewFiles"
+            accept="image/jpeg, image/png"
+            tabindex="-1"
           >
         </div>
-<!--        <ul-->
-<!--          v-if="photo.arrayImages"-->
-<!--          class="grid grid-cols-1 grid-flow-row gap-4 md:grid-cols-2 lg:grid-cols-3"-->
-<!--        >-->
-<!--          <li v-for="item in photo.arrayImages" :key="item.id">-->
-<!--            <PhotoCard-->
-<!--              :photo="item"-->
-<!--            />-->
-<!--          </li>-->
-<!--        </ul>-->
 
+        <!--Слайдер-->
         <div
           id="carouselExampleFade"
           class="carousel slide carousel-fade"
           data-ride="carousel"
+          style="margin-bottom: 10px"
         >
-          <div class="carousel-inner">
+          <div
+            class="carousel-inner"
+          >
             <div
               class="carousel-item active"
               data-interval="1000"
@@ -68,13 +69,6 @@
                   style="margin: 5px"
                 >
                   Видалити
-                </button>
-                <button
-                  @click="FirstFoto(photo, item)"
-                  type="button"
-                  class="btn btn-warning"
-                >
-                  Головна
                 </button>
               </div>
             </div>
@@ -107,6 +101,37 @@
           </a>
         </div>
 
+<!--        Фото-->
+        <ul
+          v-if="photo.arrayImages"
+          class="grid grid-cols-1 grid-flow-row gap-4 md:grid-cols-2 lg:grid-cols-3"
+        >
+          <li
+            v-for="item in photo.arrayImages"
+            :key="item.id"
+          >
+            <PhotoCard
+              :photo="item"
+            />
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <button
+                @click="deleteFoto(photo, item)"
+                type="button"
+                class="btn btn-danger"
+              >
+                Видалити
+              </button>
+              <button
+                @click="FirstFoto(photo, item)"
+                type="button"
+                class="btn btn-warning"
+              >
+                Головна
+              </button>
+            </div>
+          </li>
+        </ul>
+
         <div class="form-group">
           <button
             class="btn btn-primary btn-block"
@@ -120,21 +145,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { db } from '@/main.ts'
-// import PhotoCard from '@/components/photos/PhotoCard.vue'
+import PhotoCard from '@/components/photos/PhotoCard.vue'
 
 export default defineComponent({
-  data () {
+  components: {
+    PhotoCard
+  },
+  setup () {
+    const photo = ref({})
+    const count = ref(0)
     return {
-      count: 0,
-      photo: {
-      }
+      photo, count
     }
   },
-  // components: {
-  //   PhotoCard
-  // },
   created () {
     const dbRef = db.collection('photos').doc(this.$route.params.id)
     dbRef.get().then((doc) => {
@@ -146,8 +171,6 @@ export default defineComponent({
   },
   methods: {
     deleteFoto (photo, item) {
-      console.log('photo', photo)
-      console.log('item', item)
       const array = photo.arrayImages
       const arrayName = photo.NameImages
 
@@ -164,6 +187,7 @@ export default defineComponent({
       const arrayName = photo.NameImages
 
       const index = array.indexOf(item)
+      console.log(index)
       if (index > -1) {
         await array.unshift(...array.splice(index, 1))
         await arrayName.unshift(...arrayName.splice(index, 1))
