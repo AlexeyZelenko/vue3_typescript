@@ -31,12 +31,15 @@
           >
         </div>
         <!--Фотографии-->
-        <div ref="form">
+        <div
+          style="margin-bottom: 10px"
+          ref="form"
+        >
           <input
             type="file"
             name="file-upload"
-            multiple=""
             @change="previewFiles"
+            multiple=""
             accept="image/jpeg, image/png"
             tabindex="-1"
           >
@@ -148,16 +151,18 @@
 import { defineComponent, ref } from 'vue'
 import { db } from '@/main.ts'
 import PhotoCard from '@/components/photos/PhotoCard.vue'
+import firebase from 'firebase'
 
 export default defineComponent({
   components: {
     PhotoCard
   },
   setup () {
+    const File = ref([])
     const photo = ref({})
     const count = ref(0)
     return {
-      photo, count
+      photo, count, File
     }
   },
   created () {
@@ -170,6 +175,15 @@ export default defineComponent({
     })
   },
   methods: {
+    previewFiles (event) {
+      // process your files, read as DataUrl or upload...
+      console.log(event.target.files)
+      this.File = event.target.files
+      // console.log(event.target.files)
+
+      // if you need to re-use field or drop the same files multiple times
+      // this.$refs.form.reset()
+    },
     deleteFoto (photo, item) {
       const array = photo.arrayImages
       const arrayName = photo.NameImages
@@ -209,12 +223,57 @@ export default defineComponent({
         this.count = 0
       }
     },
-    onUpdateForm (event) {
+    async onUpdateForm (event) {
+      // ЗАГРУЗКА ФОТО
+      const promises = []
+      const promisesName = []
+
+      if (this.File) {
+        for (let i = 0; i < this.File.length; i++) {
+          const storageRef = firebase.storage().ref()
+          // Загрузить файл и метаданные в объект 'assets/images/***.jpg'
+
+          // Создайте метаданные файла
+          const metadata = {
+            contentType: 'image/jpeg'
+          }
+          const nameTime = +new Date() + '.jpg'
+          // ПРОВЕРКА ЗАГРУЗКИ ФОТО
+
+          const uploadTask = storageRef
+            .child(`${this.photo.name}/` + nameTime)
+            .put(this.File[i], metadata)
+
+          promises.push(
+            uploadTask
+              .then(snapshot =>
+                snapshot.ref.getDownloadURL()
+              )
+          )
+          promisesName.push(
+            nameTime
+          )
+        }
+      }
+
+      const NameImages = await Promise.all(promisesName)
+      const URLs = await Promise.all(promises)
+      const ArrayOld = await this.photo.arrayImages
+      const NameImagesOld = await this.photo.NameImages
+      const ArrayFile = [...URLs, ...ArrayOld]
+      const ArrayNameImages = [...NameImages, ...NameImagesOld]
+
       event.preventDefault()
       db.collection('photos').doc(this.$route.params.id)
-        .update(this.photo).then(() => {
-          console.log('photo successfully updated!')
-          this.$router.push('/list')
+        .update({
+          name: this.photo.name,
+          description: this.photo.description,
+          arrayImages: ArrayFile,
+          NameImages: ArrayNameImages
+        })
+        .then(() => {
+          console.log('Category of foto successfully updated!')
+          // this.$router.push('/list')
         }).catch((error) => {
           console.log(error)
         })
