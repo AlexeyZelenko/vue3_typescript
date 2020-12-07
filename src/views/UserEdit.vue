@@ -64,16 +64,6 @@
                 :src="photo.arrayImages[this.count]"
                 class="d-block w-100" alt="..."
               >
-              <div class="carousel-caption  d-md-block">
-                <button
-                  @click="deleteFoto(photo, item)"
-                  type="button"
-                  class="btn btn-danger"
-                  style="margin: 5px"
-                >
-                  Видалити
-                </button>
-              </div>
             </div>
           </div>
           <a

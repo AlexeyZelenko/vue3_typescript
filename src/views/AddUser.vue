@@ -1,5 +1,8 @@
 <template>
-  <div class="row justify-content-center">
+  <div
+    style="margin: 10px"
+    class="row justify-content-center"
+  >
     <div class="col-md-5">
       <h3 class="text-center">Додати категорію</h3>
       <form
@@ -27,7 +30,10 @@
           >
         </div>
 <!--Фотографии-->
-        <div ref="form">
+        <div
+          style="margin: 10px"
+          ref="form"
+        >
           <input
             type="file"
             name="file-upload"
@@ -38,7 +44,10 @@
           >
         </div>
 
-        <div class="form-group">
+        <div
+          style="margin: 10px"
+          class="form-group"
+        >
           <button class="btn btn-primary btn-block">Додати категорію</button>
         </div>
       </form>

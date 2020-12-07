@@ -22,7 +22,7 @@
                 Редагувати
               </router-link>
               <button
-                @click.prevent="deletePhoto(photo.key)"
+                @click.prevent="deletePhoto(photo)"
                 style="margin-top: 5px"
                 class="btn btn-danger"
               >
@@ -40,6 +40,8 @@
 <script lang="ts">
 import { ref } from 'vue'
 import { db } from '@/main.ts'
+import 'firebase/storage'
+import firebase from 'firebase/app'
 
 export default {
   setup () {
@@ -52,14 +54,32 @@ export default {
           key: doc.id,
           name: doc.data().name,
           description: doc.data().description,
-          picture: doc.data().picture
+          arrayImages: doc.data().arrayImages,
+          NameImages: doc.data().NameImages
         })
       })
     })
 
-    const deletePhoto = (id) => {
+    const deletePhoto = (photo) => {
       if (window.confirm('Ви дійсно хочете видалити?')) {
-        db.collection('photos').doc(id).delete().then(() => {
+        console.log('id', photo.key)
+        const File = photo.arrayImages
+        console.log(photo.arrayImages)
+
+        if (File) {
+          for (let i = 0; i < File.length; i++) {
+            const storageRef = firebase.storage().ref()
+            const nameTime = photo.NameImages[i]
+            console.log(nameTime)
+            const Ref = storageRef.child(`${photo.name}/` + nameTime)
+            console.log(Ref)
+            Ref.delete().then(function () {
+            }).catch(function (error) {
+              console.log('удаление фото со всем объявлением' + error)
+            })
+          }
+        }
+        db.collection('photos').doc(photo.key).delete().then(() => {
           console.log('Документ видалено!')
         })
           .catch((error) => {
