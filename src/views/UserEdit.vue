@@ -277,6 +277,14 @@ export default defineComponent({
         }).catch((error) => {
           console.log(error)
         })
+
+      const dbRef = await db.collection('photos').doc(this.$route.params.id)
+      dbRef.get().then((doc) => {
+        this.photo = doc.data()
+        console.log(this.photo)
+      }).catch((error) => {
+        console.log(error)
+      })
     }
   }
 })
