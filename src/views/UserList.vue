@@ -62,26 +62,29 @@ export default {
 
     const deletePhoto = (photo) => {
       if (window.confirm('Ви дійсно хочете видалити?')) {
-        console.log('id', photo.key)
         const File = photo.arrayImages
-        console.log(photo.arrayImages)
 
         if (File) {
           for (let i = 0; i < File.length; i++) {
             const storageRef = firebase.storage().ref()
             const nameTime = photo.NameImages[i]
-            console.log(nameTime)
             const Ref = storageRef.child(`${photo.name}/` + nameTime)
-            console.log(Ref)
-            Ref.delete().then(function () {
-            }).catch(function (error) {
-              console.log('удаление фото со всем объявлением' + error)
-            })
+
+            Ref.delete()
+              .then(() => {
+                console.log('удаление фото со всем объявлением')
+              })
+              .catch((error) => {
+                console.log(error)
+              })
           }
         }
-        db.collection('photos').doc(photo.key).delete().then(() => {
-          console.log('Документ видалено!')
-        })
+        db.collection('photos')
+          .doc(photo.key)
+          .delete()
+          .then(() => {
+            console.log('Документ видалено!')
+          })
           .catch((error) => {
             console.error(error)
           })

@@ -177,7 +177,6 @@ export default defineComponent({
   methods: {
     previewFiles (event) {
       // process your files, read as DataUrl or upload...
-      console.log(event.target.files)
       this.File = event.target.files
       // console.log(event.target.files)
 
