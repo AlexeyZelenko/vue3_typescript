@@ -138,7 +138,7 @@ export default {
         this.$swal('Категорію фото успішно створенно!!!')
         this.photo.name = ''
         this.photo.description = ''
-        this.File = []
+        this.photo.arrayImages = []
       } catch (error) {
         console.log(error)
       }

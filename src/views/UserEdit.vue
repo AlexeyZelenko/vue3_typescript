@@ -298,7 +298,7 @@ export default defineComponent({
         this.$swal('Категорію фото успішно оновлено!!!')
         this.photo.name = ''
         this.photo.description = ''
-        this.File = []
+        this.photo.arrayImages = []
       } catch (error) {
         console.log(error)
       }
