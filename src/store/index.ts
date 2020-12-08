@@ -122,6 +122,7 @@ export default createStore({
           console.log('Администратор вошел!')
           // router.push('/admin')
         } else {
+          alert('Тільки адміністратори сайту можуть увійти!!!')
           console.log('Пользователь вошел!')
         }
       } catch (e) {
