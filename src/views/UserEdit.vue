@@ -10,19 +10,20 @@
       >
         <div class="form-group">
           <label>Назва категорії</label>
-          <input
-            type="text"
-            class="form-control"
-            v-model="photo.name"
-            required
-          >
+          <p>{{photo.name}}</p>
+<!--          <input-->
+<!--            type="text"-->
+<!--            class="form-control"-->
+<!--            v-model="photo.name"-->
+<!--            required-->
+<!--          >-->
         </div>
 
         <div
           class="form-group"
           style="margin-bottom: 10px"
         >
-          <label>Опис</label>
+          <label>Редагувати Опис</label>
           <input
             type="text"
             class="form-control"
@@ -35,6 +36,7 @@
           style="margin-bottom: 10px"
           ref="form"
         >
+          <label>Додати фото</label><br>
           <input
             type="file"
             name="file-upload"
@@ -46,6 +48,7 @@
         </div>
 
         <!--Слайдер-->
+        <label>Переглянути фото:</label><br>
         <div
           id="carouselExampleFade"
           class="carousel slide carousel-fade"
@@ -95,6 +98,7 @@
         </div>
 
 <!--        Фото-->
+        <label>Редагувати фото:</label><br>
         <ul
           v-if="photo.arrayImages"
           class="grid grid-cols-1 grid-flow-row gap-4 md:grid-cols-2 lg:grid-cols-3"
@@ -103,24 +107,30 @@
             v-for="item in photo.arrayImages"
             :key="item.id"
           >
-            <PhotoCard
-              :photo="item"
-            />
-            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-              <button
-                @click="deleteFoto(photo, item)"
-                type="button"
-                class="btn btn-danger"
-              >
-                Видалити
-              </button>
-              <button
-                @click="FirstFoto(photo, item)"
-                type="button"
-                class="btn btn-warning"
-              >
-                Головна
-              </button>
+            <div class="card h-100">
+              <PhotoCard :photo="item"/>
+              <div class="card-body">
+                <div
+                  class="btn-group"
+                  role="group"
+                  aria-label="Basic mixed styles example"
+                >
+                  <button
+                    @click="deleteFoto(photo, item)"
+                    type="button"
+                    class="btn btn-danger btn-sm"
+                  >
+                    Видалити
+                  </button>
+                  <button
+                    @click="FirstFoto(photo, item)"
+                    type="button"
+                    class="btn btn-warning btn-sm"
+                  >
+                    Головна
+                  </button>
+                </div>
+              </div>
             </div>
           </li>
         </ul>
