@@ -7,7 +7,6 @@
     <img
       :src="isShown ? photo : null"
       class="h-full w-full object-cover rounded-md z-depth-3"
-      @click="photoModal(photo)"
     />
   </div>
 
@@ -23,14 +22,8 @@ export default {
     photo: String
   },
   setup () {
-    const photoElement = ref('')
     const el = ref(null)
     const { observe, unobserve, isShown } = useIntersectionObserver()
-
-    const photoModal = (photo) => {
-      photoElement.value = photo
-      console.log(photoElement.value)
-    }
 
     onMounted(() => {
       observe(el.value)
@@ -41,9 +34,7 @@ export default {
     })
     return {
       el,
-      isShown,
-      photoModal,
-      photoElement
+      isShown
     }
   }
 }
