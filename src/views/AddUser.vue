@@ -71,7 +71,6 @@ export default {
   methods: {
     previewFiles (event) {
       // process your files, read as DataUrl or upload...
-      console.log(event.target.files)
       this.File = event.target.files
       // console.log(event.target.files)
 
@@ -83,11 +82,11 @@ export default {
       // ЗАГРУЗКА ФОТО
       const promises = []
       const promisesName = []
+      const File = this.File
 
-      if (this.File) {
-        for (let i = 0; i < this.File.length; i++) {
+      if (File) {
+        for (let i = 0; i < File.length; i++) {
           const storageRef = firebase.storage().ref()
-          console.log('storageRef', storageRef)
           // Загрузить файл и метаданные в объект 'assets/images/***.jpg'
 
           // Создайте метаданные файла
@@ -97,19 +96,23 @@ export default {
           const nameTime = +new Date() + '.jpg'
           // ПРОВЕРКА ЗАГРУЗКИ ФОТО
 
-          const uploadTask = storageRef
-            .child(`${this.photo.name}/` + nameTime)
-            .put(this.File[i], metadata)
+          await storageRef.child(`${this.photo.name}/` + nameTime)
+          try {
+            await storageRef.child(`${this.photo.name}/` + nameTime).put(File[i], metadata)
+          } catch (e) {
+            console.log(e.message)
+          }
 
-          promises.push(
-            uploadTask
-              .then(snapshot =>
-                snapshot.ref.getDownloadURL()
-              )
-          )
-          promisesName.push(
-            nameTime
-          )
+          try {
+            promises.push(
+              await storageRef.child(`${this.photo.name}/` + nameTime).getDownloadURL()
+            )
+            promisesName.push(
+              nameTime
+            )
+          } catch (e) {
+            console.log(e.message)
+          }
         }
       }
 
@@ -117,22 +120,21 @@ export default {
       const NameImages = await Promise.all(promisesName)
 
       event.preventDefault()
-      db.collection('photos')
+      await db.collection('photos')
         .add({
           name: this.photo.name,
           description: this.photo.description,
-          picture: '',
           arrayImages,
           NameImages
         })
-        .then(() => {
-          alert('Категорію успішно створено!')
-          this.photo.name = ''
-          this.photo.description = ''
-          this.photo.picture = ''
-        }).catch((error) => {
-          console.log(error)
-        })
+      try {
+        alert('Категорію успішно створено!')
+        this.photo.name = ''
+        this.photo.description = ''
+        this.File = []
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }

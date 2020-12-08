@@ -201,7 +201,6 @@ export default defineComponent({
       const arrayName = photo.NameImages
 
       const index = array.indexOf(item)
-      console.log(index)
       if (index > -1) {
         await array.unshift(...array.splice(index, 1))
         await arrayName.unshift(...arrayName.splice(index, 1))
@@ -227,9 +226,10 @@ export default defineComponent({
       // ЗАГРУЗКА ФОТО
       const promises = []
       const promisesName = []
+      const File = this.File
 
-      if (this.File) {
-        for (let i = 0; i < this.File.length; i++) {
+      if (File) {
+        for (let i = 0; i < File.length; i++) {
           const storageRef = firebase.storage().ref()
           // Загрузить файл и метаданные в объект 'assets/images/***.jpg'
 
@@ -240,19 +240,23 @@ export default defineComponent({
           const nameTime = +new Date() + '.jpg'
           // ПРОВЕРКА ЗАГРУЗКИ ФОТО
 
-          const uploadTask = storageRef
-            .child(`${this.photo.name}/` + nameTime)
-            .put(this.File[i], metadata)
+          await storageRef.child(`${this.photo.name}/` + nameTime)
+          try {
+            await storageRef.child(`${this.photo.name}/` + nameTime).put(File[i], metadata)
+          } catch (e) {
+            console.log(e.message)
+          }
 
-          promises.push(
-            uploadTask
-              .then(snapshot =>
-                snapshot.ref.getDownloadURL()
-              )
-          )
-          promisesName.push(
-            nameTime
-          )
+          try {
+            promises.push(
+              await storageRef.child(`${this.photo.name}/` + nameTime).getDownloadURL()
+            )
+            promisesName.push(
+              nameTime
+            )
+          } catch (e) {
+            console.log(e.message)
+          }
         }
       }
 
@@ -285,6 +289,14 @@ export default defineComponent({
       }).catch((error) => {
         console.log(error)
       })
+      try {
+        alert('Категорію успішно оновленно!')
+        this.photo.name = ''
+        this.photo.description = ''
+        this.File = []
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 })
