@@ -27,8 +27,14 @@ export const db = firebase.initializeApp({
 
 export const storage = firebase.storage()
 
+// Настройки Sweetalert2
+const options = {
+  confirmButtonColor: '#41b882',
+  cancelButtonColor: '#ff7674'
+}
+
 const app = createApp(App)
 app.use(store)
 app.use(router)
-app.use(VueSweetalert2)
+app.use(VueSweetalert2, options)
 app.mount('#app')
