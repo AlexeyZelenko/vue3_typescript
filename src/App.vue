@@ -105,6 +105,15 @@
                     Список категорій фото
                   </router-link>
                 </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="https://squoosh.app/index.html"
+                    target="_blank"
+                  >
+                    Сжати фото
+                  </a>
+                </li>
               </ul>
             </li>
             <li>
