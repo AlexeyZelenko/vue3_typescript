@@ -79,6 +79,13 @@ export default {
     },
 
     async onFormSubmit (event) {
+      this.$swal({
+        title: 'Іде завантаження...',
+        text: '',
+        imageUrl: '352.gif' || '~~/assets/352.gif',
+        showConfirmButton: false
+      })
+
       // ЗАГРУЗКА ФОТО
       const promises = []
       const promisesName = []
@@ -128,7 +135,7 @@ export default {
           NameImages
         })
       try {
-        alert('Категорію успішно створено!')
+        this.$swal('Категорію фото успішно створенно!!!')
         this.photo.name = ''
         this.photo.description = ''
         this.File = []

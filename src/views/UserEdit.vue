@@ -222,6 +222,13 @@ export default defineComponent({
       }
     },
     async onUpdateForm (event) {
+      this.$swal({
+        title: 'Іде завантаження...',
+        text: '',
+        imageUrl: '352.gif' || '~~/assets/352.gif',
+        showConfirmButton: false
+      })
+
       // ЗАГРУЗКА ФОТО
       const promises = []
       const promisesName = []
@@ -284,12 +291,11 @@ export default defineComponent({
       const dbRef = await db.collection('photos').doc(this.$route.params.id)
       dbRef.get().then((doc) => {
         this.photo = doc.data()
-        console.log(this.photo)
       }).catch((error) => {
         console.log(error)
       })
       try {
-        alert('Категорію успішно оновленно!')
+        this.$swal('Категорію фото успішно оновлено!!!')
         this.photo.name = ''
         this.photo.description = ''
         this.File = []
