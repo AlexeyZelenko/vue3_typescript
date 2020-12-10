@@ -1,6 +1,6 @@
 <template>
   <h2>Служіння</h2>
-  <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="row row-cols-1 row-cols-md-3 g-4 text-white">
     <div class="col">
       <div class="card h-100 text-center">
         <div
@@ -140,15 +140,15 @@
         <div
           style="background-color: grey"
           class="card-header">
-          <h5 class="card-title">Загальноцерковне служіння</h5>
+          <h5 class="card-title">Молодіжне служіння</h5>
         </div>
         <img
-          :src="require(`@/assets/ministries/2.jpg`)"
+          :src="require(`@/assets/ministries/young.jpg`)"
           class="card-img-top"
           alt="..."
         >
         <div class="card-footer">
-          <small class="text-muted">Неділя 10:00 та Четвер 18:00</small>
+          <small class="text-muted">Неділя</small>
         </div>
       </div>
     </div>

@@ -1,13 +1,15 @@
 <template>
   <div
     ref="el"
-    class="bg-gray-800 radius-sm shadow-md rounded-md h-full"
+    class="bg-gray-800 radius-sm shadow-md rounded-md h-full bg-image hover-zoom hover-shadow"
   >
     <!--    Картинка-->
-    <img
-      :src="isShown ? photo : null"
-      class="h-full w-full object-cover rounded-md z-depth-3"
-    />
+    <a href="#!">
+      <img
+        :src="isShown ? photo : null"
+        class="h-full w-full object-cover rounded-md z-depth-3 w-100"
+      />
+    </a>
   </div>
 
 </template>

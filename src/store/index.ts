@@ -127,6 +127,11 @@ export default createStore({
     },
     ADMIN_ENTRANCE: (state, adminEntrance) => {
       state.adminEntrance = adminEntrance
+    },
+    AddVideoOnPage: (state, payload) => {
+      console.log(payload.count)
+      state.videOnPage = payload.count + state.videOnPage
+      console.log(state.videOnPage)
     }
   },
   actions: {
@@ -190,10 +195,10 @@ export default createStore({
       const LiveVideoData = data.items[0]
       commit('SET_ONLINE_VIDEO', LiveVideoData)
     },
-    async getListVideoData ({ commit }, payload) {
+    async getListVideoData ({ commit, getters }, payload) {
       const value = payload ? payload.value : 'UUSb71yKJmS0eHyhRRl00ioQ'
       const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${value}&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY&part=snippet&maxResults=15`)
+        `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${value}&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY&part=snippet&maxResults=${getters.GET_VIDEO_ON_PAGE}`)
       const data = await response.json()
       const ListVideoData = data.items || ''
       commit('SET_VIDEO_LIST', ListVideoData)
