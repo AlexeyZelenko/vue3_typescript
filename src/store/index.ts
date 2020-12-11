@@ -175,14 +175,6 @@ export default createStore({
       }
       commit('USER_ENTRANCE', userEntrance)
     },
-    async login ({ commit }, { email, password }) {
-      try {
-        await firebase.auth().signInWithEmailAndPassword(email, password)
-      } catch (e) {
-        commit('setError', e)
-        throw e
-      }
-    },
     async getLastVideoData ({ commit }) {
       const response = await fetch('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSb71yKJmS0eHyhRRl00ioQ&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY&part=snippet&&maxResults=1')
       const data = await response.json()

@@ -276,32 +276,6 @@ export default defineComponent({
     margin:10% 10%;
     text-shadow: 0 0 10px black;
   }
-  @media (max-width: 767px) {
-    iframe {
-      width: 100%;
-      height: 240px;
-    }
-    td img {
-      width: 96px;
-    }
-    td h3 {
-      font-size: 16px;
-    }
-    .fullscreen-bg {
-      background: url('../assets/images/jumbotron.png') center center / cover no-repeat;
-      padding-top: 100%;
-    }
-    .fullscreen-bg__video {
-      display: none;
-    }
-    .overlay h1 {
-      text-align:center;
-      color:#fff;
-      font-size: 20px;
-      margin:5% 5%;
-      text-shadow: 0 0 10px black;
-    }
-  }
   iframe {
     width: 100%;
     height: 640px;
@@ -319,7 +293,7 @@ export default defineComponent({
   }
 
   h1 {
-    font-size: 35px;
+    font-size: 30px;
     color: #fff;
     text-shadow: 0 0 5px black;
   }
@@ -474,7 +448,39 @@ export default defineComponent({
   }
 
   /* Media Queries */
+  @media (max-width: 767px) {
+    h1 {
+      font-size: 30px;
+    }
+    iframe {
+      width: 100%;
+      height: 240px;
+    }
+    td img {
+      width: 96px;
+    }
+    td h3 {
+      font-size: 16px;
+    }
+    .fullscreen-bg {
+      background: url('../assets/images/jumbotron.png') center center / cover no-repeat;
+      padding-top: 100%;
+    }
+    .fullscreen-bg__video {
+      display: none;
+    }
+    .overlay h1 {
+      text-align:center;
+      color:#fff;
+      font-size: 20px;
+      margin:5% 5%;
+      text-shadow: 0 0 10px black;
+    }
+  }
   @media (max-width: 575px) {
+    h1 {
+      font-size: 25px;
+    }
     iframe {
       margin-top: 20%;
       width: 100%;

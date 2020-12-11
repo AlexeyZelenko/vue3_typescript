@@ -2,10 +2,16 @@
   <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
-        <div class="modal-header">
+<!--        <div-->
+<!--          style="margin-top: 50px"-->
+<!--          class="modal-header"-->
+<!--        >-->
+<!--        </div>-->
+        <div class="modal-container">
           <div
             type="button"
             class="modal-close"
+            style="margin: 30px"
           >
             <svg
               style="cursor: pointer"
@@ -18,9 +24,6 @@
               ></path>
             </svg>
           </div>
-        </div>
-        <div class="modal-container">
-
           <div
             class="modal-body"
           >
