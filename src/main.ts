@@ -33,6 +33,7 @@ const options = {
 }
 
 const app = createApp(App)
+app.use(mdb)
 app.use(store)
 app.use(router)
 app.use(VueSweetalert2, options)

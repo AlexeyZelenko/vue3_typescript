@@ -6,17 +6,36 @@
     <!-- Container wrapper -->
     <div class="container-fluid">
       <!-- Кнопка для мобильника -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarLeftAlignExample"
-        aria-controls="navbarLeftAlignExample"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
+      <div class="dropdown">
+        <button
+          @click="myFunction"
+          class="dropbtn"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+        <div
+          id="myDropdown"
+          class="dropdown-content"
+          @click="myFunction"
+        >
+          <router-link
+            to="/"
+            class="nav-link"
+            aria-current="page"
+          >
+            Головна
+          </router-link>
+          <router-link  to="/about" class="nav-link">Про церкву</router-link>
+          <router-link  to="/video" class="nav-link">Відео</router-link>
+          <router-link to="/about_us" class="nav-link">Про нас</router-link>
+          <router-link
+            to='/photo_gallery'
+            class="nav-link"
+          >
+            Фото галерея
+          </router-link>
+        </div>
+      </div>
 
       <!-- Меню -->
       <div
@@ -98,28 +117,76 @@
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, defineComponent, ref } from 'vue'
+import { defineAsyncComponent, defineComponent } from 'vue'
 const Vue3DownUpButton = defineAsyncComponent(() => import('@/components/Vue3DownUpButton.vue'))
 const google = defineAsyncComponent(() => import('@/components/auth/google.vue'))
-
-interface Show {
-  value: boolean
-}
 
 export default defineComponent({
   components: {
     Vue3DownUpButton,
     google
   },
-  setup () {
-    const showDropdownMenu = ref(false)
-    return {
-      showDropdownMenu
+  data: () => ({
+    showDropdownMenu: false
+  }),
+  methods: {
+    myFunction () {
+      document.getElementById('myDropdown').classList.toggle('show')
+    },
+    filterFunction () {
+      this.input = document.getElementById('myInput')
+      const filter = this.input.value.toUpperCase()
+      const div = document.getElementById('myDropdown')
+      const a = div.getElementsByTagName('a')
+      for (let i = 0; i < a.length; i++) {
+        if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+          a[i].style.display = ''
+        } else {
+          a[i].style.display = 'none'
+        }
+      }
     }
-  },
-  beforeRouteLeave (to, from, next) {
-    this.clearNote()
-    next()
   }
 })
 </script>
+
+<style scoped>
+  .dropbtn {
+    /*background-color: #4CAF50;*/
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #392139;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 99999;
+  }
+
+  .dropdown-content a {
+    color: #b69999;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown a:hover {background-color: #212;}
+
+  .show {display: block;}
+</style>
