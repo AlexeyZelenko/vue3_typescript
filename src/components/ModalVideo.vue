@@ -57,7 +57,7 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(8, 8, 8, 0.8);
+    background-color: rgba(7, 7, 7, 0.8);
     display: table;
   }
 

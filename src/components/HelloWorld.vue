@@ -185,7 +185,7 @@
 </template>
 
 <script>
-import { defineAsyncComponent, defineComponent, computed, onMounted, ref, reactive, provide } from 'vue'
+import { defineAsyncComponent, defineComponent, computed, onMounted, ref } from 'vue'
 import store from '@/store'
 const Timer = defineAsyncComponent(() => import('@/components/Timer.vue'))
 const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vue'))
@@ -199,154 +199,17 @@ export default defineComponent({
   setup () {
     const TextBible = computed(() => store.getters.GET_textBible)
 
-    const schedule = reactive([
-      ['2020/12/01 12:00:00 GMT+0200', '2020/12/06 10:00:00 GMT+0200'],
-      ['2020/12/06 12:00:00 GMT+0200', '2020/12/13 10:00:00 GMT+0200'],
-      ['2020/12/13 12:00:00 GMT+0200', '2020/12/20 10:00:00 GMT+0200'],
-      ['2020/12/20 12:00:00 GMT+0200', '2020/12/27 10:00:00 GMT+0200'],
-      ['2020/12/27 12:00:00 GMT+0200', '2021/01/03 10:00:00 GMT+0200'],
-      ['2021/01/03 12:00:00 GMT+0200', '2021/01/10 10:00:00 GMT+0200'],
-      ['2021/01/10 12:00:00 GMT+0200', '2021/01/17 10:00:00 GMT+0200'],
-      ['2021/01/17 12:00:00 GMT+0200', '2021/01/24 10:00:00 GMT+0200'],
-      ['2021/01/24 12:00:00 GMT+0200', '2021/01/31 10:00:00 GMT+0200'],
-      ['2021/01/31 12:00:00 GMT+0200', '2021/02/07 10:00:00 GMT+0200'],
-      ['2021/02/07 12:00:00 GMT+0200', '2021/02/14 10:00:00 GMT+0200'],
-      ['2021/02/14 12:00:00 GMT+0200', '2021/02/21 10:00:00 GMT+0200'],
-      ['2021/02/21 12:00:00 GMT+0200', '2021/02/28 10:00:00 GMT+0200'],
-      ['2021/02/28 12:00:00 GMT+0200', '2021/03/07 10:00:00 GMT+0200'],
-      ['2021/03/07 12:00:00 GMT+0200', '2021/03/14 10:00:00 GMT+0200'],
-      ['2021/03/14 12:00:00 GMT+0200', '2021/03/21 10:00:00 GMT+0200'],
-      ['2021/03/21 12:00:00 GMT+0200', '2021/03/28 10:00:00 GMT+0200'],
-      ['2021/03/28 12:00:00 GMT+0200', '2021/04/04 10:00:00 GMT+0200'],
-      ['2021/03/28 12:00:00 GMT+0200', '2021/04/04 10:00:00 GMT+0200'],
-      ['2021/04/04 12:00:00 GMT+0200', '2021/04/11 10:00:00 GMT+0200'],
-      ['2021/04/11 12:00:00 GMT+0200', '2021/04/18 10:00:00 GMT+0200'],
-      ['2021/04/18 12:00:00 GMT+0200', '2021/04/25 10:00:00 GMT+0200'],
-      ['2021/04/25 12:00:00 GMT+0200', '2021/05/02 10:00:00 GMT+0200'],
-      ['2021/05/02 12:00:00 GMT+0200', '2021/05/09 10:00:00 GMT+0200'],
-      ['2021/05/09 12:00:00 GMT+0200', '2021/05/16 10:00:00 GMT+0200']
-    ])
-
-    const deadLine = computed(() => {
-      // iterate over each element in the schedule
-      for (var i = 0; i < schedule.length; i++) {
-        var startDate = schedule[i][0]
-        var endDate = schedule[i][1]
-
-        // put dates in milliseconds for easy comparisons
-        var startMs = Date.parse(startDate)
-        var endMs = Date.parse(endDate)
-        var currentMs = Date.parse(new Date())
-
-        // if current date is between start and end dates, display clock
-        if (endMs > currentMs && currentMs >= startMs) {
-          // initializeClock('clockdiv', endDate)
-          return endDate
-        }
-      }
-
-      schedule.forEach(([startDate, endDate]) => {
-        // put dates in milliseconds for easy comparisons
-        const startMs = Date.parse(startDate)
-        const endMs = Date.parse(endDate)
-        const currentMs = Date.parse(new Date())
-
-        // if current date is between start and end dates, display clock
-        if (endMs > currentMs && currentMs >= startMs) {
-          return endDate
-          // initializeClock('clockdiv', endDate)
-        }
-      })
-    })
-
-    provide('deadline', deadLine)
-
-    const Title = ref('Онлайн служіння:')
-    provide('title', Title)
-
-    const timerStyle = ref({
-      'text-align': 'center',
-      'font-family': 'sans-serif',
-      'font-weight': 100
-    })
-    provide('timerStyle', timerStyle)
-
-    const h1Style = ref({
-      color: '#396',
-      'font-weight': 100,
-      'font-size': '40px',
-      margin: '40px 0px 20px'
-    })
-    provide('h1Style', h1Style)
-
-    const clockdiv = ref({
-      'font-family': 'sans-serif',
-      color: '#fff',
-      display: 'inline-block',
-      'font-weight': 100,
-      'text-align': 'center',
-      'font-size': '30px'
-    })
-    provide('clockdiv', clockdiv)
-
-    const clockdivDiv = ref({
-      padding: '10px',
-      'border-radius': '3px',
-      background: '#00BF96',
-      display: 'inline-block',
-      margin: '1px'
-    })
-    provide('clockdivDiv', clockdivDiv)
-
-    const clockdivDivSpan = ref({
-      padding: '15px',
-      'border-radius': '3px',
-      background: '#00816A',
-      display: 'inline-block'
-    })
-    provide('clockdivDivSpan', clockdivDivSpan)
-
-    const styleEndTime = ref({
-      color: '#fff'
-    })
-    provide('styleEndTime', styleEndTime)
-
-    const smalltext = ref({
-      'padding-top': '5px',
-      'font-size': '16px'
-    })
-    provide('smalltext', smalltext)
-
-    const titleDays = ref('Дні')
-    provide('titleDays', titleDays)
-
-    const titleHours = ref('Години')
-    provide('titleHours', titleHours)
-
-    const titleMinutes = ref('Хвилини')
-    provide('titleMinutes', titleMinutes)
-
-    const titleSeconds = ref('Секунди')
-    provide('titleSeconds', titleSeconds)
-
-    const titleEndTime = ref('Час вийшло!')
-    provide('titleEndTime', titleEndTime)
-    // provide('geolocation', {
-    //   longitude: 90,
-    //   latitude: 135
-    // })
     const titleVideo = computed(() => LastVideoData.value.title)
     const codVideo = computed(() => LastVideoData.value.resourceId.videoId)
     const liveTitleVideo = computed(() => LiveVideoData.value.snippet.title)
     const liveCodVideo = computed(() => LiveVideoData.value.id.videoId)
-
-    // const deadLine = computed(() => '2020/12/06 10:00:00 GMT-0200')
+    const LiveVideoData = computed(() => store.state.LiveVideoData)
 
     const showModal = ref(false)
     const showModalOnline = ref(false)
+
     const icons = computed(() => store.state.icons)
     const LastVideoData = computed(() => store.state.LastVideoData)
-    const LiveVideoData = computed(() => store.state.LiveVideoData)
 
     const getCodeVideo = () => {
       store.dispatch('getLastVideoData')
@@ -439,20 +302,6 @@ export default defineComponent({
       text-shadow: 0 0 10px black;
     }
   }
-  /*.overlay button {*/
-  /*  cursor: pointer;*/
-  /*  color: #fff;*/
-  /*  text-decoration: none;*/
-  /*  font-weight: bold;*/
-  /*  font-size: 18px;*/
-  /*  margin-top: 40px;*/
-  /*  margin-left: auto;*/
-  /*  margin-right: auto;*/
-  /*  background-color: #fa5ba5;*/
-  /*  padding: 20px 30px;*/
-  /*  border-radius: 30px;*/
-  /*  z-index: 99999;*/
-  /*}*/
   iframe {
     width: 100%;
     height: 640px;
@@ -520,7 +369,6 @@ export default defineComponent({
 
   img {
     display: block;
-    /*max-width: 300px;*/
     height: auto;
   }
 

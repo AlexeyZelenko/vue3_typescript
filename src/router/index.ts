@@ -5,43 +5,36 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
-    meta: { layout: 'empty' }
+    component: Home
   },
   {
     path: '/about',
     name: 'About',
-    meta: { layout: 'empty' },
     component: () => import('@/views/About.vue')
   },
   {
     path: '/video',
     name: 'Video',
-    meta: { layout: 'empty' },
     component: () => import('@/views/Video.vue')
   },
   {
     path: '/about_us',
     name: 'AboutUs',
-    meta: { layout: 'empty' },
     component: () => import('@/views/AboutUs.vue')
   },
   {
     path: '/add_user',
     name: 'AddUser',
-    meta: { layout: 'user' },
     component: () => import('@/views/AddUser.vue')
   },
   {
     path: '/list',
     name: 'list',
-    meta: { layout: 'user' },
     component: () => import('@/views/UserList.vue')
   },
   {
     path: '/edit/:id',
     name: 'edit',
-    meta: { layout: 'user' },
     component: () => import('@/views/UserEdit.vue')
   },
   {
@@ -52,7 +45,6 @@ const routes = [
   {
     path: '/photo_gallery',
     name: 'PhotoGallery',
-    meta: { layout: 'empty' },
     component: () => import('@/views/PhotoGallery.vue')
   },
   {
