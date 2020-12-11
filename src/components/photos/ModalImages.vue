@@ -3,7 +3,6 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-header">
-          <slot name="header" ></slot>
           <div
             type="button"
             class="modal-close"
@@ -22,12 +21,10 @@
         </div>
         <div class="modal-container">
 
-          <div class="modal-body">
+          <div
+            class="modal-body"
+          >
             <slot name="body"></slot>
-          </div>
-
-          <div class="modal-footer">
-            <slot name="footer"></slot>
           </div>
 
         </div>
@@ -38,20 +35,11 @@
 
 <script>
 export default {
-  name: 'ModalImages',
-  props: {
-    photo: String
-  }
+  name: 'ModalImages'
 }
 </script>
 
-<style>
-  .modal-header {
-    padding: 20px 20px 10px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-  }
+<style scoped>
   .modal-mask {
     position: fixed;
     z-index: 9998;
@@ -64,26 +52,13 @@ export default {
   }
 
   .modal-wrapper {
-    height: 80%;
-    vertical-align: middle;
+    height: 100%;
   }
 
   .modal-container {
-    height: 640px;
-    width: 80%;
+    height: 600px;
+    width: 33%;
     margin: 0px auto;
-    background-repeat: no-repeat, repeat;
-    background-position: center center;
-    border-radius: 2px;
-  }
-
-  .modal-header h4 {
-    margin-left: 20px;
-    height: 100%;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 30px;
-    margin-top: 0;
-    color: #eff4f1;
   }
 
   .modal-close {
@@ -92,16 +67,10 @@ export default {
     height: 40px;
   }
 
-  .modal-default-button {
-    float: right;
-  }
-
   @media (max-width: 767px) {
     .modal-container {
-      height: 50%
-    }
-    .modal-header h4 {
-      font-size: 18px;
+      height: 80%;
+      width: 90%;
     }
   }
 </style>

@@ -19,13 +19,11 @@
       v-if="showModal"
       @click="showModal = false"
     >
-      <template #header>
-        <h4>{{photo}}</h4>
-      </template>
-
       <template #body>
         <img
           :src="photo"
+          style="max-height: 600px;"
+          class="rounded-md"
         />
       </template>
     </ModalImages>
@@ -71,3 +69,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+</style>
