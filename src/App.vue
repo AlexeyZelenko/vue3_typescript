@@ -6,35 +6,41 @@
     <!-- Container wrapper -->
     <div class="container-fluid">
       <!-- Кнопка для мобильника -->
-      <div class="dropdown">
-        <button
-          @click="myFunction"
-          class="dropbtn"
+      <span
+        style="font-size:24px; cursor:pointer; color: #847e7e; margin-right: 10px"
+        @click="openNav"
+      >
+      ☰
+    </span>
+
+      <!--    Боковое меню-->
+      <div
+        id="mySidenavMain"
+        class="sidenav"
+      >
+        <a
+          href="javascript:void(0)"
+          class="closebtn"
+          @click="closeNav"
         >
-          <i class="fas fa-bars"></i>
-        </button>
-        <div
-          id="myDropdown"
-          class="dropdown-content"
-          @click="myFunction"
+          ×
+        </a>
+        <router-link
+          to="/"
+          class="nav-link"
+          aria-current="page"
         >
-          <router-link
-            to="/"
-            class="nav-link"
-            aria-current="page"
-          >
-            Головна
-          </router-link>
-          <router-link  to="/about" class="nav-link">Про церкву</router-link>
-          <router-link  to="/video" class="nav-link">Відео</router-link>
-          <router-link to="/about_us" class="nav-link">Про нас</router-link>
-          <router-link
-            to='/photo_gallery'
-            class="nav-link"
-          >
-            Фото галерея
-          </router-link>
-        </div>
+          Головна
+        </router-link>
+        <router-link  to="/about" class="nav-link">Про церкву</router-link>
+        <router-link  to="/video" class="nav-link">Відео</router-link>
+        <router-link to="/about_us" class="nav-link">Про нас</router-link>
+        <router-link
+          to='/photo_gallery'
+          class="nav-link"
+        >
+          Фото галерея
+        </router-link>
       </div>
 
       <!-- Меню -->
@@ -130,63 +136,59 @@ export default defineComponent({
     showDropdownMenu: false
   }),
   methods: {
-    myFunction () {
-      document.getElementById('myDropdown').classList.toggle('show')
+    openNav () {
+      console.log('openNav')
+      document.getElementById('mySidenavMain').style.width = '250px'
     },
-    filterFunction () {
-      this.input = document.getElementById('myInput')
-      const filter = this.input.value.toUpperCase()
-      const div = document.getElementById('myDropdown')
-      const a = div.getElementsByTagName('a')
-      for (let i = 0; i < a.length; i++) {
-        if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-          a[i].style.display = ''
-        } else {
-          a[i].style.display = 'none'
-        }
-      }
+    closeNav () {
+      document.getElementById('mySidenavMain').style.width = '0'
     }
   }
 })
 </script>
 
 <style scoped>
-  .dropbtn {
-    /*background-color: #4CAF50;*/
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    background-color: #040303;
+    opacity: 0.9;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
   }
 
-  .dropbtn:hover, .dropbtn:focus {
-    background-color: #392139;
-  }
-
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f6f6f6;
-    min-width: 230px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 99999;
-  }
-
-  .dropdown-content a {
-    color: #b69999;
-    padding: 12px 16px;
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
     text-decoration: none;
+    font-size: 24px;
+    color: #f7f5f5;
     display: block;
+    transition: 0.3s;
   }
 
-  .dropdown a:hover {background-color: #212;}
+  .sidenav a:hover {
+    color: #21b786;
+    background-color: #282828;
+  }
 
-  .show {display: block;}
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {
+      font-size: 18px;
+      color: #0f6883;
+    }
+  }
 </style>
