@@ -12,6 +12,7 @@ export default function useIntersectionObserver () {
     const component = entries[0]
 
     if (component.isIntersecting && !isShown.value) {
+      console.log('isShown=true')
       isIntersecting.value = true
       isShown.value = true
     } else {

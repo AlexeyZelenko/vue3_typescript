@@ -5,8 +5,7 @@
   >
     <!--    Картинка-->
     <a
-      href="#!"
-      @click="clickFoto"
+      href="#!"      @click="clickFoto"
     >
       <img
         :src="isShown ? photo : null"
