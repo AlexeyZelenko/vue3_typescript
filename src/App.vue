@@ -35,6 +35,7 @@
         <router-link  to="/about" class="nav-link">Про церкву</router-link>
         <router-link  to="/video" class="nav-link">Відео</router-link>
         <router-link to="/about_us" class="nav-link">Про нас</router-link>
+        <router-link to="/history" class="nav-link">Історія</router-link>
         <router-link
           to='/photo_gallery'
           class="nav-link"
@@ -75,6 +76,9 @@
             >
               Фото галерея
             </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/history" class="nav-link">Історія</router-link>
           </li>
         </ul>
           <!--ВХОД ЧЕРЕЗ ГУГЛ АККАУНТ-->

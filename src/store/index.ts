@@ -176,13 +176,13 @@ export default createStore({
       commit('USER_ENTRANCE', userEntrance)
     },
     async getLastVideoData ({ commit }) {
-      const response = await fetch('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSb71yKJmS0eHyhRRl00ioQ&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY&part=snippet&&maxResults=1')
+      const response = await fetch('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSb71yKJmS0eHyhRRl00ioQ&key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU&part=snippet&&maxResults=1')
       const data = await response.json()
       const LastVideoData = data.items[0].snippet
       commit('SET_VIDEO', LastVideoData)
     },
     async getLiveVideoData ({ commit }) {
-      const response = await fetch('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCSb71yKJmS0eHyhRRl00ioQ&eventType=live&type=video&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY')
+      const response = await fetch('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCSb71yKJmS0eHyhRRl00ioQ&eventType=live&type=video&key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU')
       const data = await response.json()
       const LiveVideoData = data.items[0]
       commit('SET_ONLINE_VIDEO', LiveVideoData)
@@ -190,7 +190,7 @@ export default createStore({
     async getListVideoData ({ commit, getters }, payload) {
       const value = payload ? payload.value : 'UUSb71yKJmS0eHyhRRl00ioQ'
       const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${value}&key=AIzaSyAzu641YEewkYY6zzS8nAzTxY6XDLxCCkY&part=snippet&maxResults=${getters.GET_VIDEO_ON_PAGE}`)
+        `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${value}&key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU&part=snippet&maxResults=${getters.GET_VIDEO_ON_PAGE}`)
       const data = await response.json()
       const ListVideoData = data.items || ''
       commit('SET_VIDEO_LIST', ListVideoData)

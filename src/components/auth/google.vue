@@ -79,6 +79,13 @@
       >
         Список категорій фото
       </router-link>
+      <router-link
+        class="dropdown-item"
+        to="/add_history"
+        exact
+      >
+        Додати фото в Історію
+      </router-link>
       <a
         class="dropdown-item"
         href="https://squoosh.app/index.html"
