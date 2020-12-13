@@ -72,6 +72,7 @@
           {{TextBible.title}}
         </h1>
         <a
+          v-if="!LiveVideoData"
           class="btn btn-outline-light btn-lg"
           @click="this.showModal = true"
           role="button"
