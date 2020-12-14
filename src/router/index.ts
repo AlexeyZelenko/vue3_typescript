@@ -23,6 +23,16 @@ const routes = [
     component: () => import('@/views/AddHistoryPhoto.vue')
   },
   {
+    path: '/list_history',
+    name: 'listHistory',
+    component: () => import('@/views/HistoryPhotoList.vue')
+  },
+  {
+    path: '/edit_history/:id',
+    name: 'edit_history',
+    component: () => import('@/views/HistoryEditPhoto.vue')
+  },
+  {
     path: '/video',
     name: 'Video',
     component: () => import('@/views/Video.vue')

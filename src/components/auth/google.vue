@@ -86,6 +86,13 @@
       >
         Додати фото в Історію
       </router-link>
+      <router-link
+        class="dropdown-item"
+        to="/list_history"
+        exact
+      >
+        Список фото в Історіі
+      </router-link>
       <a
         class="dropdown-item"
         href="https://squoosh.app/index.html"

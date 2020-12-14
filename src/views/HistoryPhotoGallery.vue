@@ -69,7 +69,7 @@ export default defineComponent({
         })
       })
     }
-    db.collection('history').where('year', '==', `${sortYear.value}`).onSnapshot((snapshotChange) => {
+    db.collection('history').onSnapshot((snapshotChange) => {
       categories.value = []
       snapshotChange.forEach((doc) => {
         categories.value.push({
