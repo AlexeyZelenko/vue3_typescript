@@ -131,10 +131,30 @@ export default createStore({
     AddVideoOnPage: (state, payload) => {
       console.log(payload.count)
       state.videOnPage = payload.count + state.videOnPage
-      console.log(state.videOnPage)
+    },
+    ADD_VERSE: (state, newText) => {
+      state.textBibleArray.push(newText)
     }
   },
   actions: {
+    async getTextBible ({ commit }) {
+      const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json')
+      const data = await response.json()
+      console.log(data)
+      commit('ADD_VERSE', data)
+    },
+    async createTextBible ({ commit }, payload) {
+      const newText = payload
+      const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newText)
+      })
+      const data = await response.json()
+      console.log(data)
+    },
     async logout ({ commit }) {
       await firebase.auth().signOut()
         .then(() => {

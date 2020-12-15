@@ -102,6 +102,31 @@ export default defineComponent({
   components: {
     ModalVideo
   },
+  data () {
+    return {
+      TextBible: {},
+      arrayVerse: []
+    }
+  },
+  async mounted () {
+    const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json')
+    const data = await response.json()
+    console.log(data)
+
+    this.arrayVerse = Object.keys(data).map(key => {
+      return { ...data[key], id: key }
+    })
+
+    this.TextBible = this.arrayVerse[Math.floor(Math.random() * this.arrayVerse.length)]
+    console.log(this.TextBible)
+  },
+  // computed: {
+  //   verseBible () {
+  //     console.log(this.TextBible)
+  //     console.log(this.TextBible[Math.floor(Math.random() * this.TextBible.length)])
+  //     return this.TextBible[Math.floor(Math.random() * this.TextBible.length)]
+  //   }
+  // },
   setup () {
     const idList = ref('UUSb71yKJmS0eHyhRRl00ioQ')
     const showModal = ref(false)
@@ -109,7 +134,7 @@ export default defineComponent({
     const videoModalTitle = ref('')
     const ListVideoData = computed(() => store.state.ListVideoData)
 
-    const TextBible = computed(() => store.getters.GET_textBible)
+    // const TextBible = computed(() => store.getters.GET_textBible)
 
     const openModal = (item) => {
       showModal.value = true
@@ -142,7 +167,7 @@ export default defineComponent({
       videoModalTitle,
       openModal,
       videoModal,
-      TextBible,
+      // TextBible,
       countVideo
     }
   }

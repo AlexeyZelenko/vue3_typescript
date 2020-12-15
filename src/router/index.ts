@@ -70,6 +70,10 @@ const routes = [
   {
     path: '/:catchAll(.*)',
     component: () => import('@/components/NotFound.vue')
+  },
+  {
+    path: '/add_text_bible',
+    component: () => import('@/views/AddTextBible.vue')
   }
 ]
 

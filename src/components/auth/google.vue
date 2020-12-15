@@ -93,6 +93,13 @@
       >
         Список фото в Історіі
       </router-link>
+      <router-link
+        class="dropdown-item"
+        to="/add_text_bible"
+        exact
+      >
+        Додати вірш Біблії
+      </router-link>
       <a
         class="dropdown-item"
         href="https://squoosh.app/index.html"
@@ -105,7 +112,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent } from 'vue'
 import store from '@/store'
 import firebase from 'firebase'
 
@@ -120,8 +127,6 @@ export default defineComponent({
     }
   },
   setup () {
-    const showDropdownMenu = ref(false)
-
     const adminEntrance = computed(() => store.state.adminEntrance)
     const signInWithGoogle = () => {
       try {
@@ -141,7 +146,6 @@ export default defineComponent({
       getUserName,
       logout,
       signInWithGoogle,
-      showDropdownMenu,
       adminEntrance
     }
   }
