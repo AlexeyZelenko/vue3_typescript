@@ -16,10 +16,10 @@
         class="fullscreen-bg__video"
       >
         <source
-          :src="require(`../assets/video/cloude.mp4`)"
+          src="https://firebasestorage.googleapis.com/v0/b/blv-vue3-tp.appspot.com/o/assets%2Fcloude.mp4?alt=media&token=ae94a048-d272-42b9-9328-d4603e5bdafa"
         >
         <source
-          :src="require(`../assets/video/cloude.webm`)"
+          src="https://firebasestorage.googleapis.com/v0/b/blv-vue3-tp.appspot.com/o/assets%2Fcloude.webm?alt=media&token=11351eb6-2e9e-4cf6-9e45-3ba7237fd171"
           type="video/webm"
         >
       </video>

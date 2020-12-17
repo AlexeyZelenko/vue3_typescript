@@ -55,7 +55,6 @@ export default {
   },
   methods: {
     async deleteText (id) {
-      console.log(id)
       this.$swal({
         title: 'Зачекайте...',
         text: '',

@@ -95,10 +95,10 @@
         class="fullscreen-bg__video"
       >
         <source
-          :src="require(`../assets/video/plane.mp4`)"
+          src="https://firebasestorage.googleapis.com/v0/b/blv-vue3-tp.appspot.com/o/assets%2Fplane.mp4?alt=media&token=b4fb59e3-ea40-43e2-9b91-52e781857984"
         >
         <source
-          :src="require(`../assets/video/plane.webm`)"
+          src="https://firebasestorage.googleapis.com/v0/b/blv-vue3-tp.appspot.com/o/assets%2Fplane.webm?alt=media&token=5e543b97-1310-435d-8d4b-36adecdec3bc"
           type="video/webm"
         >
       </video>
@@ -200,16 +200,6 @@ export default defineComponent({
   data: () => ({
     TextBible: {}
   }),
-  async mounted () {
-    const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json')
-    const data = await response.json()
-
-    const arrayVerse = Object.keys(data).map(key => {
-      return { ...data[key], id: key }
-    })
-
-    this.TextBible = arrayVerse[Math.floor(Math.random() * arrayVerse.length)]
-  },
   setup () {
     const titleVideo = computed(() => LastVideoData.value.title)
     const codVideo = computed(() => LastVideoData.value.resourceId.videoId)
@@ -244,6 +234,16 @@ export default defineComponent({
       liveTitleVideo,
       liveCodVideo
     }
+  },
+  async mounted () {
+    const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json')
+    const data = await response.json()
+
+    const arrayVerse = Object.keys(data).map(key => {
+      return { ...data[key], id: key }
+    })
+
+    this.TextBible = arrayVerse[Math.floor(Math.random() * arrayVerse.length)]
   }
 })
 </script>
