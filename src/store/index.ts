@@ -41,73 +41,7 @@ export default createStore({
     User_Entrance: false,
     userEntrance: false,
     adminEntrance: false,
-    userId: null,
-    textBibleArray: [
-      {
-        title: 'Хто вірує в Нього, не буде засуджений; хто ж не вірує, – той вже засуджений, що не повірив в Ім\'я Однородженого Сина Божого.',
-        verse: 'Івана 3 : 18'
-      },
-      {
-        title: 'Істино, істино глаголю тобі: Коли хто не народить ся звиш, не може видїти царства Божого.',
-        verse: 'Івана 3 : 3'
-      },
-      {
-        title: 'Бо як тіло без духа ме́ртве, так і віра без діл – мертва!',
-        verse: 'Якова 2 : 26'
-      },
-      {
-        title: 'Так бо Бог полюбив світ, що дав Сина Свого Одноро́дженого, щоб кожен, хто вірує в Нього, не згинув, але мав життя вічне.',
-        verse: 'Івана 3 : 16'
-      },
-      {
-        title: 'Хто вірує в Сина, той має вічне життя; а хто в Сина не вірує, той життя не побачить – а гнів Божий на нім перебуває',
-        verse: 'Івана 3 : 36'
-      },
-      {
-        title: '"Коли Я говорив вам про земне, та не вірите ви, то як же повірите ви, коли Я говоритиму вам про небесне?"',
-        verse: 'Івана 3 : 12'
-      },
-      {
-        title: 'Тож підкоріться Богові та спротивляйтесь дияволові, – то й утече він від вас',
-        verse: 'Якова 4 : 7-8'
-      },
-      {
-        title: 'Отож, хто знає, як чинити добро, та не чинить, – той має гріх!',
-        verse: 'Якова 4 : 17'
-      },
-      {
-        title: 'А якщо кому з вас не стачає мудрости, нехай просить від Бога, що всім дає просто, та не докоряє, – і бу́де вона йому да́на.',
-        verse: 'Якова 1 : 5'
-      },
-      {
-        title: 'Коли ж хто гада́є, що він побожний, і свого язика не вгамо́вує, та своє серце обманює, – марна́ побожність того́!',
-        verse: 'Якова 1 : 26'
-      },
-      {
-        title: 'Чи хочеш ти знати, о марна́ люди́но, що віра без діл – ме́ртва?',
-        verse: 'Якова 2 : 20'
-      },
-      {
-        title: 'Бо як тіло без духа ме́ртве, так і віра без діл – мертва!',
-        verse: 'Якова 2 : 26'
-      },
-      {
-        title: 'Хто мудрий і розумний між вами, нехай він покаже діла́ свої в ла́гідній мудрості добрим поводженням!',
-        verse: 'Якова 3 : 13'
-      },
-      {
-        title: 'Отож, хто знає, як чинити добро, та не чинить, – той має гріх!',
-        verse: 'Якова 4 : 17'
-      },
-      {
-        title: 'Слово Господнє повік пробуває“! А це те Слово, яке звіщене вам у Єва́нгелії.',
-        verse: '1 Петра 1 : 25'
-      },
-      {
-        title: 'Але ви – ви́браний рід, свяще́нство царське́, наро́д святий, люд власности Божої, щоб звіщали чесно́ти Того, Хто покликав вас із те́мряви до дивного світла Свого́',
-        verse: '1 Петра 2 : 9'
-      }
-    ]
+    userId: null
   },
   mutations: {
     USER_ENTRANCE: (state, userEntrance) => {
@@ -131,9 +65,6 @@ export default createStore({
     AddVideoOnPage: (state, payload) => {
       console.log(payload.count)
       state.videOnPage = payload.count + state.videOnPage
-    },
-    ADD_VERSE: (state, newText) => {
-      state.textBibleArray.push(newText)
     }
   },
   actions: {
@@ -153,7 +84,6 @@ export default createStore({
         body: JSON.stringify(newText)
       })
       const data = await response.json()
-      console.log(data)
     },
     async logout ({ commit }) {
       await firebase.auth().signOut()
@@ -220,7 +150,7 @@ export default createStore({
     }
   },
   getters: {
-    GET_textBible: s => (s.textBibleArray[Math.floor(Math.random() * s.textBibleArray.length)]),
+    // GET_textBible: s => (s.textBibleArray[Math.floor(Math.random() * s.textBibleArray.length)]),
     GET_VIDEO_ON_PAGE: s => s.videOnPage,
     USER_ID (state) {
       return state.userId

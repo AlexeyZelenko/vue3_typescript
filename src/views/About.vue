@@ -40,21 +40,14 @@
 
 <script>
 import CatalogItem from '@/components/CatalogItem.vue'
-import { computed } from 'vue'
-import store from '@/store'
 
 export default {
   name: 'About',
   components: {
     CatalogItem
   },
-  setup () {
-    const TextBible = computed(() => store.getters.GET_textBible)
-    return {
-      TextBible
-    }
-  },
   data: () => ({
+    TextBible: {},
     sections: [
       {
         title: 'Таїнство святого причастя',
@@ -98,7 +91,17 @@ export default {
         seen: false
       }
     ]
-  })
+  }),
+  async mounted () {
+    const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json')
+    const data = await response.json()
+
+    const arrayVerse = Object.keys(data).map(key => {
+      return { ...data[key], id: key }
+    })
+
+    this.TextBible = arrayVerse[Math.floor(Math.random() * arrayVerse.length)]
+  }
 }
 </script>
 

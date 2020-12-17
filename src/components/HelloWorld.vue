@@ -197,9 +197,20 @@ export default defineComponent({
   components: {
     ModalVideo, Ministries, Timer
   },
-  setup () {
-    const TextBible = computed(() => store.getters.GET_textBible)
+  data: () => ({
+    TextBible: {}
+  }),
+  async mounted () {
+    const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json')
+    const data = await response.json()
 
+    const arrayVerse = Object.keys(data).map(key => {
+      return { ...data[key], id: key }
+    })
+
+    this.TextBible = arrayVerse[Math.floor(Math.random() * arrayVerse.length)]
+  },
+  setup () {
     const titleVideo = computed(() => LastVideoData.value.title)
     const codVideo = computed(() => LastVideoData.value.resourceId.videoId)
     const liveTitleVideo = computed(() => LiveVideoData.value.snippet.title)
@@ -231,8 +242,7 @@ export default defineComponent({
       titleVideo,
       codVideo,
       liveTitleVideo,
-      liveCodVideo,
-      TextBible
+      liveCodVideo
     }
   }
 })

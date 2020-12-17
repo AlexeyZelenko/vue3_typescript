@@ -36,8 +36,7 @@
 </template>
 
 <script>
-import { computed, defineAsyncComponent } from 'vue'
-import store from '@/store'
+import { defineAsyncComponent } from 'vue'
 
 const vCatalogItem = defineAsyncComponent(() => import('@/components/CatalogItem.vue'))
 
@@ -69,13 +68,18 @@ export default {
         sectionClass: 'sec9',
         seen: true
       }
-    ]
+    ],
+    TextBible: {}
   }),
-  setup () {
-    const TextBible = computed(() => store.getters.GET_textBible)
-    return {
-      TextBible
-    }
+  async mounted () {
+    const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json')
+    const data = await response.json()
+
+    const arrayVerse = Object.keys(data).map(key => {
+      return { ...data[key], id: key }
+    })
+
+    this.TextBible = arrayVerse[Math.floor(Math.random() * arrayVerse.length)]
   }
 }
 </script>
