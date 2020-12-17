@@ -102,7 +102,10 @@ export default {
 </script>
 
 <style>
-  .btn-primary {
-    margin-right: 12px;
+  /*.btn-primary {*/
+  /*  margin-right: 12px;*/
+  /*}*/
+  ol, ul {
+    padding-left: 0.5rem;
   }
 </style>

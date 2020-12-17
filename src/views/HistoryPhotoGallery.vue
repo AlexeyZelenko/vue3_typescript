@@ -1,37 +1,43 @@
 <template>
   <div
-    class="flex flex-wrap justify-center"
+    class="bg-gray-900 h-full text-white py-4"
   >
-    <div class="mx-4 max-w-4xl justify-center">
-      <h1
-        style="margin-top: 10px"
-        class="font-bold text-5xl flex-1 mb-4 justify-center"
+    <div
+      class="flex flex-wrap justify-center m-2"
+    >
+      <div
+        class="mt-5 mx-4 p-10 max-w-4xl"
       >
-        Історія в фото...
-      </h1>
-      <div class="flex mb-4">
-        <input
-          type="search"
-          v-model="searchInput"
-          v-on:keyup.enter="fetchGame(searchInput)"
-          class="flex-1 text-white px-4 py-2 bg-gray-800 text-gray-300 rounded-sm"
-          placeholder="Введіть рік..."
-        />
-        <button
-          @click="fetchGame(searchInput)"
-          class="py-2 px-5 uppercase font-bold bg-green-400 rounded-sm ml-2"
+        <h1
+          style="margin: 0 auto"
+          class="font-bold text-4xl flex-1 mb-4"
         >
-          Пошук
-        </button>
+          Історія в фото...
+        </h1>
+        <div class="flex mb-4">
+          <input
+            type="search"
+            v-model="searchInput"
+            v-on:keyup.enter="fetchGame(searchInput)"
+            class="flex-1 text-white px-4 py-2 bg-gray-800 text-gray-300 rounded-sm"
+            placeholder="Введіть рік..."
+          />
+          <button
+            @click="fetchGame(searchInput)"
+            class="py-2 px-5 uppercase font-bold bg-green-400 rounded-sm ml-2"
+          >
+            Пошук
+          </button>
+        </div>
+        <template v-if="categories">
+          <HistoryCategoriesPhotoList
+            :categories="categories"
+          />
+        </template>
+        <template v-else-if="!categories && !error">
+          <PhotoListSkeleton />
+        </template>
       </div>
-      <template v-if="categories">
-        <HistoryCategoriesPhotoList
-          :categories="categories"
-        />
-      </template>
-      <template v-else-if="!categories && !error">
-        <PhotoListSkeleton />
-      </template>
     </div>
   </div>
 </template>

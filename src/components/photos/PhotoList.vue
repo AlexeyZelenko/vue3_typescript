@@ -49,3 +49,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  ol, ul {
+   padding-left: 0.5rem;
+  }
+</style>
