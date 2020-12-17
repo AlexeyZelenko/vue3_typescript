@@ -68,12 +68,6 @@ export default createStore({
     }
   },
   actions: {
-    async getTextBible ({ commit }) {
-      const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json')
-      const data = await response.json()
-      console.log(data)
-      commit('ADD_VERSE', data)
-    },
     async createTextBible ({ commit }, payload) {
       const newText = payload
       const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json', {

@@ -2,7 +2,14 @@
   <div class="about">
     <!--    ВидеоОбложка-->
     <div class="fullscreen-bg">
-      <div class="overlay">
+      <div
+        class="loader"
+        v-if="loading"
+      ></div>
+      <div
+        class="overlay"
+        v-else
+      >
         <h1>
           {{TextBible.title}}
         </h1>
@@ -26,15 +33,12 @@
     </div>
   </div>
 <!--  Фото с описанием-->
-  <Suspense>
-    <CatalogItem
-      v-for="(product, i) in sections"
-      :key="product.title"
-      :index="i"
-      :data="product"
-    ></CatalogItem>
-
-  </Suspense>
+  <CatalogItem
+    v-for="(product, i) in sections"
+    :key="product.title"
+    :index="i"
+    :data="product"
+  ></CatalogItem>
 
 </template>
 
@@ -48,6 +52,7 @@ export default {
   },
   data: () => ({
     TextBible: {},
+    loading: false,
     sections: [
       {
         title: 'Таїнство святого причастя',
@@ -93,6 +98,7 @@ export default {
     ]
   }),
   async mounted () {
+    this.loading = true
     const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json')
     const data = await response.json()
 
@@ -101,6 +107,8 @@ export default {
     })
 
     this.TextBible = arrayVerse[Math.floor(Math.random() * arrayVerse.length)]
+
+    this.loading = false
   }
 }
 </script>

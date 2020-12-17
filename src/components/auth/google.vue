@@ -100,6 +100,13 @@
       >
         Додати вірш Біблії
       </router-link>
+      <router-link
+        class="dropdown-item"
+        to="/list_text_bible"
+        exact
+      >
+        Список віршів Біблії
+      </router-link>
       <a
         class="dropdown-item"
         href="https://squoosh.app/index.html"

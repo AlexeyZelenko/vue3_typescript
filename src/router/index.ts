@@ -74,6 +74,10 @@ const routes = [
   {
     path: '/add_text_bible',
     component: () => import('@/views/AddTextBible.vue')
+  },
+  {
+    path: '/list_text_bible',
+    component: () => import('@/views/ListTextBible.vue')
   }
 ]
 
