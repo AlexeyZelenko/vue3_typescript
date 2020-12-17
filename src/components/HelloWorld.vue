@@ -173,7 +173,8 @@
                       <a :href="icon.src">
                         <i
                           :class="icon.fontawesome"
-                          aria-hidden="true"></i>
+                          aria-hidden="true">
+                        </i>
                       </a>
                     </li>
                   </template>

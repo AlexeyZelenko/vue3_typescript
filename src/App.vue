@@ -141,7 +141,6 @@ export default defineComponent({
   }),
   methods: {
     openNav () {
-      console.log('openNav')
       document.getElementById('mySidenavMain').style.width = '250px'
     },
     closeNav () {
@@ -151,7 +150,7 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style>
   .sidenav {
     height: 100%;
     width: 0;

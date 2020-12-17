@@ -27,8 +27,98 @@
       >
         ПІСНІ
       </section>
+      <section class="button_tab"
+               @click="listVideo('PLlURDWJlf7fTuF3VfkKrsesTtfQtuNwo9')"
+      >
+        ЖИТТЯ
+      </section>
+      <section class="button_tab"
+               @click="listVideo('PL710D2E34967FEFA9')"
+      >
+        РІЗНЕ
+      </section>
+      <section class="button_tab"
+               @click="listVideo('PLlURDWJlf7fS9RdrfemM6deAzy1zLyhug')"
+      >
+        ДІТИ
+      </section>
+      <section class="button_tab"
+               @click="listVideo('PLlURDWJlf7fRBQIzxcvFHMMBQqNuKIl46')"
+      >
+        БІБЛІЯ
+      </section>
       <div class="div2"></div>
     </nav>
+    <!-- Кнопка для мобильника -->
+    <div
+      class="btn_mobile"
+    >
+      <span
+        style="font-size:24px; cursor:pointer; color: #847e7e"
+        @click="openNav"
+      >
+        <i
+          class="fas fa-align-justify"
+        ></i>
+        МЕНЮ ВІДЕО
+        <i class="fas fa-video"></i>
+    </span>
+    </div>
+  </div>
+  <!--    Боковое меню-->
+  <div
+    id="mySidenavVideo"
+    class="sidenav"
+  >
+    <a
+      href="javascript:void(0)"
+      class="closebtn"
+      @click="closeNav"
+    >
+      ×
+    </a>
+    <a
+      @click="listVideo('UUSb71yKJmS0eHyhRRl00ioQ')"
+      class="nav-link"
+    >
+      ВСІ
+    </a>
+    <a
+      @click="listVideo('PLlURDWJlf7fQyA3kIfQ9Pa3Dtd_tM97-z')"
+      class="nav-link"
+    >
+      ПІСНІ
+    </a>
+    <a
+      @click="listVideo('PLlURDWJlf7fS8-Z9hz4ShqtXdjg2tIGil')"
+      class="nav-link"
+    >
+      ПРОПОВІДІ
+    </a>
+    <a
+      @click="listVideo('PLlURDWJlf7fTuF3VfkKrsesTtfQtuNwo9')"
+      class="nav-link"
+    >
+      ЖИТТЯ
+    </a>
+    <a
+      @click="listVideo('PL710D2E34967FEFA9')"
+      class="nav-link"
+    >
+      РІЗНЕ
+    </a>
+    <a
+      @click="listVideo('PLlURDWJlf7fS9RdrfemM6deAzy1zLyhug')"
+      class="nav-link"
+    >
+      ДІТИ
+    </a>
+    <a
+      @click="listVideo('PLlURDWJlf7fRBQIzxcvFHMMBQqNuKIl46')"
+      class="nav-link"
+    >
+      БІБЛІЯ
+    </a>
   </div>
 
 <!--  Лист видео-->
@@ -107,6 +197,14 @@ export default defineComponent({
       TextBible: {}
     }
   },
+  methods: {
+    openNav () {
+      document.getElementById('mySidenavVideo').style.width = '250px'
+    },
+    closeNav () {
+      document.getElementById('mySidenavVideo').style.width = '0'
+    }
+  },
   async mounted () {
     const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json')
     const data = await response.json()
@@ -163,6 +261,11 @@ export default defineComponent({
 </script>
 
 <style scoped>
+  .btn_mobile {
+    text-align: center;
+    padding-top: 20px;
+    display: none;
+  }
   /*кнопка звонка*/
 
   .callback-bt {
@@ -402,7 +505,7 @@ export default defineComponent({
     height: 100px;
     font-family: 'Oswald', sans-serif;
     background-color:#212;
-    position: relative
+    position: relative;
   }
 
   nav{
@@ -412,7 +515,8 @@ export default defineComponent({
     top: 50%;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%);
+    display: inline-block;
   }
   .button_tab{
     cursor: pointer;
@@ -451,8 +555,32 @@ export default defineComponent({
   }
   .button_tab:nth-child(4):hover ~ div {
     transform:translate(100px);
-    -webkit-transform:translate(360px);
+    -webkit-transform:translate(300px);
     background-color:#f39c12;
+    color:#03C9A9;
+    transition:all .33s linear;
+    -webkit-transition:all .33s linear;
+  }
+  .button_tab:nth-child(5):hover ~ div {
+    transform:translate(100px);
+    -webkit-transform:translate(400px);
+    background-color:#12f361;
+    color:#03C9A9;
+    transition:all .33s linear;
+    -webkit-transition:all .33s linear;
+  }
+  .button_tab:nth-child(6):hover ~ div {
+    transform:translate(100px);
+    -webkit-transform:translate(500px);
+    background-color: #12f3e0;
+    color:#03C9A9;
+    transition:all .33s linear;
+    -webkit-transition:all .33s linear;
+  }
+  .button_tab:nth-child(7):hover ~ div {
+    transform:translate(100px);
+    -webkit-transform:translate(600px);
+    background-color: #1283f3;
     color:#03C9A9;
     transition:all .33s linear;
     -webkit-transition:all .33s linear;
@@ -467,6 +595,15 @@ export default defineComponent({
 
   .button_tab:nth-child(4):hover {
     color:#f39c12;
+  }
+  .button_tab:nth-child(5):hover {
+    color: #12f361;
+  }
+  .button_tab:nth-child(6):hover {
+    color: #12f3e0;
+  }
+  .button_tab:nth-child(7):hover {
+    color: #1283f3;
   }
 
   ---------
@@ -502,10 +639,16 @@ export default defineComponent({
     box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 16px 20px rgba(0,0,0,0.2);
   }
 
-  @media (max-width: 570px) {
+  @media (max-width: 670px) {
     .youtube-list .change-youtube {
       width: 100%;
       float: none;
+    }
+    nav {
+      display: none;
+    }
+    .btn_mobile {
+      display: block
     }
   }
 </style>
