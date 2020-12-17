@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { computed, inject, reactive } from 'vue'
+import { computed, reactive } from 'vue'
 
 export default {
   props: {
@@ -113,13 +113,9 @@ export default {
         }
       })
     })
-    const timerStyle = inject('timerStyle')
-    const styleEndTime = inject('styleEndTime')
 
     return {
-      deadline,
-      timerStyle,
-      styleEndTime
+      deadline
     }
   },
   data () {
