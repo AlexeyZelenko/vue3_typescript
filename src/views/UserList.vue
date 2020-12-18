@@ -17,9 +17,12 @@
             <td>
               <router-link
                 :to="{name: 'edit', params: { id: photo.key }}"
-                class="btn btn-primary"
               >
-                Редагувати
+                <button
+                  class="btn btn-primary"
+                >
+                  Редагувати
+                </button>
               </router-link>
               <button
                 @click.prevent="deletePhoto(photo)"

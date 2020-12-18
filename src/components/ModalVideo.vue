@@ -73,7 +73,7 @@ export default {
 
   .modal-container {
     height: 640px;
-    width: 90%;
+    width: 100%;
     margin: 0px auto;
     background-image: url('../assets/img/loading.svg');
     background-repeat: no-repeat, repeat;

@@ -3,7 +3,7 @@
     class="bg-gray-900 relative pr-4 py-1 object-contain justify-center"
   >
     <div
-      class="flex flex-wrap object-contain justify-center"
+      class="flex flex-wrap object-contain justify-center w-full"
     >
       <div
         class="px-1 max-w-4xl"
