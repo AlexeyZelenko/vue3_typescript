@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap justify-center bg-gray-900">
     <div class="mx-4  max-w-4xl justify-center">
-      <div class="flex mt-2">
+      <div>
           <input
             type="search"
             v-model="searchInput"
@@ -15,7 +15,7 @@
           >
             Пошук
           </button>
-        </div>
+      </div>
       <h1
         style="margin-top: 10px"
         class="font-bold text-5xl text-white-50 flex-1 mb-4 justify-center"
