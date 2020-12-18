@@ -9,12 +9,6 @@
       :key="category.id"
     >
       <HistoryCategoriesPhotoCard :category="category" />
-<!--      <router-link-->
-<!--        style="text-decoration: none"-->
-<!--        :to="`/categories/${category.id}`"-->
-<!--      >-->
-<!--        <CategoriesPhotoCard :category="category" />-->
-<!--      </router-link>-->
     </div>
   </div>
 </template>

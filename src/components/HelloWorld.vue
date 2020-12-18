@@ -20,8 +20,8 @@
         ></iframe>
       </template>
 
-      <template v-slot:footer>
-      </template>
+<!--      <template v-slot:footer>-->
+<!--      </template>-->
 
     </ModalVideo>
     <!--    Модальное окно -  Прямая трансляция-->
@@ -68,24 +68,28 @@
 <!--    ВидеоОбложка-->
     <div class="fullscreen-bg">
       <div class="overlay">
-        <h1>
-          {{TextBible.title}}
-        </h1>
-        <a
-          v-if="!LiveVideoData"
-          class="btn btn-outline-light btn-lg"
-          @click="this.showModal = true"
-          role="button"
-        >Дивитися останє служіння
-        </a>
-        <a
-          v-if="LiveVideoData"
-          style="margin-top: 5px"
-          class="btn btn-outline-light btn-lg"
-          @click="showModalOnline = true"
-          role="button"
-        >Дивитися онлайн служіння
-        </a>
+        <div
+          class="overlay_min"
+        >
+          <h1>
+            {{TextBible.title}}
+          </h1>
+          <a
+            v-if="!LiveVideoData"
+            class="btn btn-outline-light btn-lg"
+            @click="showModal = true"
+            role="button"
+          >Дивитися останє служіння
+          </a>
+          <a
+            v-if="LiveVideoData"
+            style="margin-top: 5px"
+            class="btn btn-outline-light btn-lg"
+            @click="showModalOnline = true"
+            role="button"
+          >Дивитися онлайн служіння
+          </a>
+        </div>
       </div>
       <video
         loop=""
@@ -95,10 +99,10 @@
         class="fullscreen-bg__video"
       >
         <source
-          src="https://firebasestorage.googleapis.com/v0/b/blv-vue3-tp.appspot.com/o/assets%2Fplane.mp4?alt=media&token=b4fb59e3-ea40-43e2-9b91-52e781857984"
+          :src="require('@/assets/video/plane.mp4')"
         >
         <source
-          src="https://firebasestorage.googleapis.com/v0/b/blv-vue3-tp.appspot.com/o/assets%2Fplane.webm?alt=media&token=5e543b97-1310-435d-8d4b-36adecdec3bc"
+          :src="require('@/assets/video/plane.webm')"
           type="video/webm"
         >
       </video>
@@ -249,7 +253,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped>
   table {  border-collapse: collapse; }
   td {
     height: 100px;
@@ -461,6 +465,9 @@ export default defineComponent({
 
   /* Media Queries */
   @media (max-width: 767px) {
+    .overlay_min {
+      padding-top: 10%;
+    }
     h1 {
       font-size: 30px;
     }
@@ -490,6 +497,9 @@ export default defineComponent({
     }
   }
   @media (max-width: 575px) {
+    .overlay_min {
+      padding-top: 30%;
+    }
     h1 {
       font-size: 25px;
     }

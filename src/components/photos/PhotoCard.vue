@@ -10,7 +10,7 @@
     >
       <img
         :src="isShown ? photo : null"
-        class="h-full w-full object-cover rounded-md z-depth-3 w-100"
+        class="h-full w-full object-cover rounded-md z-depth-3 w-100 "
         @click="openModal(photo)"
       />
     </a>
@@ -22,7 +22,7 @@
       <template #body>
         <img
           :src="photo"
-          style="max-height: 600px;"
+          style="max-height: 80%;"
           class="rounded-md"
         />
       </template>

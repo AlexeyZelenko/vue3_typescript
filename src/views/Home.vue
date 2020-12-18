@@ -15,3 +15,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style>
+  .home {
+    width: 100%;
+  }
+</style>

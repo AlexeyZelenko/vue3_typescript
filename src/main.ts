@@ -9,9 +9,10 @@ import 'firebase/firestore'
 import 'firebase/database'
 import 'firebase/auth'
 import 'firebase/storage'
-import * as mdb from 'mdb-ui-kit'
+import mdb from 'mdb-ui-kit'
 import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
+import './index.css'
 
 export const db = firebase.initializeApp({
   apiKey: 'AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU',

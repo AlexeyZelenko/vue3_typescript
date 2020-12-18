@@ -1,14 +1,14 @@
 <template>
   <div
     ref="el"
-    class="bg-gray-800 radius-sm shadow-md rounded-md h-full"
+    class="bg-gray-800 radius-sm shadow-md rounded-md h-full w-full"
   >
 <!--    Картинка-->
-    <figure class="relative pb-2/3">
+    <figure class="relative">
       <img
         :src="isShown ? categoryImages : null"
         :alt="`${categoryName} обложка`"
-        class=" h-full w-full object-cover rounded-t-md"
+        class=" h-100 w-full object-cover rounded-t-md"
       />
     </figure>
 

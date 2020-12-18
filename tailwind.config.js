@@ -32,6 +32,11 @@ module.exports = {
       }
     }
   },
-  variants: {},
+  variants: {
+    extend: {
+      // ...
+      objectFit: ['hover', 'focus'],
+    }
+  },
   plugins: []
 }

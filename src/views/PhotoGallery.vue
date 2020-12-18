@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-4 flex flex-wrap justify-center">
+  <div class="flex flex-wrap justify-center">
     <div class="mx-4  max-w-4xl justify-center">
       <h1
         style="margin-top: 10px"
@@ -7,8 +7,11 @@
       >
         Фотогалерея
       </h1>
-      <template v-if="categories">
+      <template
+        v-if="categories"
+      >
         <CategoriesPhotoList
+          class="pr-4 justify-center sm:pr-2"
           :categories="categories"
         />
       </template>

@@ -1,7 +1,7 @@
 <template>
   <div
     ref="el"
-    class="bg-gray-800 radius-sm shadow-md rounded-md h-full"
+    class="bg-gray-800 radius-sm shadow-md rounded-md h-full w-full mx-1 inline-block"
   >
     <!--    Картинка-->
     <a
@@ -9,7 +9,7 @@
       @click="clickFoto"
     >
       <figure
-        class="relative pb-2/3"
+        class="object-contain h-50 w-full"
       >
         <img
           @click="openModal(categoryImages)"
@@ -23,18 +23,17 @@
     <!--Карточка-->
     <div class="p-5">
       <p
-        class="text-2xl font-semibold border-solid border-4 border-blue-600 w-100 text-center"
+        class="text-2xl text-white-50 font-semibold border-solid border-4 border-blue-600 w-100 mt-2 text-center"
       >
         {{ categoryYear }} рік
       </p>
       <h3
-        class="text-2xl font-bold"
-        style="color: #f7f4f4"
+        class="text-xl font-bold mt-md-2 text-white"
       >
         {{ categoryName }}
       </h3>
       <h6
-        class="text-sm"
+        class="text-sm mt-md-2"
         style="color: #579f87"
       >
         {{ categoryDescription }}
@@ -48,7 +47,7 @@
     <template #body>
       <img
         :src="categoryImages"
-        style="max-height: 600px;"
+        style="max-height: 80%"
         class="rounded-md"
       />
     </template>
@@ -113,3 +112,5 @@ export default {
   }
 }
 </script>
+
+<style scoped></style>

@@ -1,19 +1,19 @@
 <template>
   <div
-    class="bg-gray-900 h-full text-white py-4"
+    class="bg-gray-900 relative px-4 py-1 sm:p-5"
   >
     <div
-      class="flex flex-wrap justify-center m-2"
+      class="flex flex-wrap justify-center sm:m-5"
     >
       <div
-        class="mt-5 mx-4 p-10 max-w-4xl"
+        class="p-1 max-w-4xl"
       >
         <h1
-          style="margin: 0 auto"
-          class="font-bold text-4xl flex-1 mb-4"
+          class="font-bold text-4xl text-white flex-1 mb-4"
         >
           Історія в фото...
         </h1>
+
         <div class="flex mb-4">
           <input
             type="search"
@@ -29,14 +29,17 @@
             Пошук
           </button>
         </div>
+
         <template v-if="categories">
           <HistoryCategoriesPhotoList
             :categories="categories"
           />
         </template>
+
         <template v-else-if="!categories && !error">
           <PhotoListSkeleton />
         </template>
+
       </div>
     </div>
   </div>
@@ -60,7 +63,6 @@ export default defineComponent({
     const sortYear = ref(2019)
     const categories = ref([])
     const fetchGame = (searchInput) => {
-      console.log(searchInput)
       sortYear.value = searchInput
       db.collection('history').where('year', '==', `${sortYear.value}`).onSnapshot((snapshotChange) => {
         categories.value = []

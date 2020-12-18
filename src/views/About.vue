@@ -23,10 +23,9 @@
         class="fullscreen-bg__video"
       >
         <source
-          src="https://firebasestorage.googleapis.com/v0/b/blv-vue3-tp.appspot.com/o/assets%2Fearth.mp4?alt=media&token=efc1e30d-fc4e-4393-9fd8-3b5f3e7ad0ca"
-        >
+          :src="require('@/assets/video/earth.mp4')">
         <source
-          src="https://firebasestorage.googleapis.com/v0/b/blv-vue3-tp.appspot.com/o/assets%2Fearth.webm?alt=media&token=02e742a3-55d3-496e-bda9-c22cf622acfe"
+          :src="require('@/assets/video/earth.webm')"
           type="video/webm"
         >
       </video>

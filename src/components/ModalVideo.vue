@@ -2,7 +2,9 @@
   <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
-        <div class="modal-header">
+        <div
+          class="modal-header"
+        >
           <slot name="header" ></slot>
           <div
             type="button"
@@ -14,6 +16,7 @@
               viewBox="0 0 352 512"
             >
               <path
+                style="color: mediumvioletred"
                 fill="currentColor"
                 d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
               ></path>
@@ -24,9 +27,9 @@
             <div class="modal-body">
               <slot name="body"></slot>
             </div>
-          <div class="modal-footer">
-            <slot name="footer"></slot>
-          </div>
+<!--          <div class="modal-footer">-->
+<!--            <slot name="footer"></slot>-->
+<!--          </div>-->
 
         </div>
       </div>
@@ -43,10 +46,14 @@ export default {
 
 <style>
   .modal-header {
-    padding: 20px 20px 10px;
     display: flex;
-    align-items: flex-start;
+    flex-shrink: 0;
+    align-items: center;
     justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 0px solid rgb(222 226 230);
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
   }
   .modal-mask {
     position: fixed;
@@ -66,7 +73,7 @@ export default {
 
   .modal-container {
     height: 640px;
-    width: 80%;
+    width: 90%;
     margin: 0px auto;
     background-image: url('../assets/img/loading.svg');
     background-repeat: no-repeat, repeat;
@@ -95,7 +102,8 @@ export default {
 
   @media (max-width: 767px) {
     .modal-container {
-      height: 50%
+      height: 50%;
+      width: 95%;
     }
     .modal-header h4 {
       font-size: 18px;

@@ -133,7 +133,7 @@
         @click="showModal = false"
       >
         <template #header>
-          <h4>{{videoModalTitle}}</h4>
+          <h4 style="display: inline-block;">{{videoModalTitle}}</h4>
         </template>
 
         <template #body>
@@ -253,7 +253,6 @@ export default defineComponent({
       videoModalTitle,
       openModal,
       videoModal,
-      // TextBible,
       countVideo
     }
   }
@@ -261,6 +260,33 @@ export default defineComponent({
 </script>
 
 <style scoped>
+  iframe {
+    width: 100%;
+    height: 640px;
+  }
+  h1 {
+    font-size: 30px;
+    color: #fff;
+    text-shadow: 0 0 5px black;
+  }
+  .container {
+    width: 90%;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* Jumbotron */
+  .jumbotron {
+    background-image: url(../assets/img/jumbotron.jpg);
+    background-size: cover;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    min-height: 250px;
+    text-align: center;
+    clear: both;
+  }
   .btn_mobile {
     text-align: center;
     padding-top: 20px;
@@ -650,5 +676,63 @@ export default defineComponent({
     .btn_mobile {
       display: block
     }
+  }
+  /* Media Queries */
+  @media (max-width: 767px) {
+    .overlay_min {
+      padding-top: 10%;
+    }
+    h1 {
+      font-size: 30px;
+    }
+    iframe {
+      width: 100%;
+      height: 240px;
+    }
+    td img {
+      width: 96px;
+    }
+    td h3 {
+      font-size: 16px;
+    }
+    .fullscreen-bg {
+      background: url('../assets/images/jumbotron.png') center center / cover no-repeat;
+      padding-top: 100%;
+    }
+    .fullscreen-bg__video {
+      display: none;
+    }
+    .overlay h1 {
+      text-align:center;
+      color:#fff;
+      font-size: 20px;
+      margin:5% 5%;
+      text-shadow: 0 0 10px black;
+    }
+  }
+  @media (max-width: 575px) {
+    .overlay_min {
+      padding-top: 30%;
+    }
+    h1 {
+      font-size: 25px;
+    }
+    iframe {
+      margin-top: 20%;
+      width: 100%;
+      height: 240px;
+    }
+    .services .service {
+      width: 100%;
+      float: none;
+    }
+
+    .blog .post {
+      max-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+
   }
 </style>
