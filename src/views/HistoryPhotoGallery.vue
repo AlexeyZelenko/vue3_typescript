@@ -1,17 +1,17 @@
 <template>
   <div class="flex flex-wrap justify-center bg-gray-900">
     <div class="mx-4  max-w-4xl justify-center">
-      <div>
+      <div class="justify-start sm:justify-center md:justify-end lg:justify-between xl:justify-around">
           <input
             type="search"
             v-model="searchInput"
             v-on:keyup.enter="fetchGame(searchInput)"
-            class="flex-1 text-white px-4 py-2 bg-gray-800 text-gray-300 rounded-sm"
+            class="flex-1 text-white px-4 py-2 m-2 bg-gray-800 text-gray-300 rounded-sm"
             placeholder="Введіть рік..."
           />
           <button
             @click="fetchGame(searchInput)"
-            class="py-2 px-5 uppercase font-bold bg-green-400 rounded-sm ml-2"
+            class="py-2 px-5 uppercase font-bold bg-green-400 hover:bg-green-500 rounded-sm ml-2"
           >
             Пошук
           </button>
@@ -90,3 +90,15 @@ export default defineComponent({
   }
 })
 </script>
+
+<style>
+  .btn {
+    @apply font-bold py-2 px-4 rounded;
+  }
+  .btn-blue {
+    @apply bg-blue-500 text-white;
+  }
+  .btn-blue:hover {
+    @apply bg-blue-600;
+  }
+</style>

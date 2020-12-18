@@ -19,15 +19,14 @@
                 :to="{name: 'edit', params: { id: photo.key }}"
               >
                 <button
-                  class="btn btn-primary"
+                  class="button_edit"
                 >
                   Редагувати
                 </button>
               </router-link>
               <button
                 @click.prevent="deletePhoto(photo)"
-                style="margin-top: 5px"
-                class="btn btn-danger"
+                class="button_delete"
               >
                 Видалити
               </button>
@@ -102,7 +101,19 @@ export default {
 </script>
 
 <style>
-  .btn-primary {
-    margin-right: 12px;
+  @layer components {
+    .button_edit {
+      @apply bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2;
+    }
+    .button_edit:hover {
+      @apply bg-blue-600;
+    }
+
+    .button_delete {
+      @apply bg-red-600 text-white font-bold py-2 px-4 rounded mx-2;
+    }
+    .button_delete:hover {
+      @apply bg-red-500;
+    }
   }
 </style>
