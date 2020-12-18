@@ -1,20 +1,7 @@
 <template>
-  <div
-    class="bg-gray-900 relative px-4 py-1 sm:p-5"
-  >
-    <div
-      class="flex flex-wrap justify-center sm:m-5"
-    >
-      <div
-        class="p-1 max-w-4xl"
-      >
-        <h1
-          class="font-bold text-4xl text-white flex-1 mb-4"
-        >
-          Історія в фото...
-        </h1>
-
-        <div class="flex mb-4">
+  <div class="flex flex-wrap justify-center bg-gray-900">
+    <div class="mx-4  max-w-4xl justify-center">
+      <div class="flex mt-2">
           <input
             type="search"
             v-model="searchInput"
@@ -29,18 +16,23 @@
             Пошук
           </button>
         </div>
-
-        <template v-if="categories">
-          <HistoryCategoriesPhotoList
-            :categories="categories"
-          />
-        </template>
-
-        <template v-else-if="!categories && !error">
-          <PhotoListSkeleton />
-        </template>
-
-      </div>
+      <h1
+        style="margin-top: 10px"
+        class="font-bold text-5xl text-white-50 flex-1 mb-4 justify-center"
+      >
+        Історія в фото...
+      </h1>
+      <template
+        v-if="categories"
+      >
+        <HistoryCategoriesPhotoList
+          class="pr-4 justify-center sm:pr-2"
+          :categories="categories"
+        />
+      </template>
+      <template v-else-if="!categories && !error">
+        <PhotoListSkeleton />
+      </template>
     </div>
   </div>
 </template>
