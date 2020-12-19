@@ -25,6 +25,7 @@
     "vue": "^3.0.4",
     "vue-aos": "^1.1.0",
     "vue-material-design-icons": "^4.11.0",
+    "vue-plyr": "^7.0.0",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^4.0.1",
     "vue-sweetalert2": "^4.1.1",

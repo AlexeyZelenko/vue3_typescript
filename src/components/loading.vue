@@ -36,9 +36,6 @@ export default {
     right: 0;
     border: 0;
   }
-</style>
-
-<style scoped>
   .loading-page {
     position: fixed;
     top: 0;

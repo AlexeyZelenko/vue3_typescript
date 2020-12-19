@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="home"
-  >
-    <HelloWorld/>
-  </div>
+  <HelloWorld/>
 </template>
 
 <script lang="ts">
@@ -17,9 +13,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style>
-  .home {
-    width: 100%;
-  }
-</style>

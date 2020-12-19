@@ -65,6 +65,7 @@
     </span>
     </div>
   </div>
+
   <!--    Боковое меню-->
   <div
     id="mySidenavVideo"
@@ -145,7 +146,7 @@
         >{{item.snippet.title}}</p>
       </div>
 
-      <!-- The Modal -->
+<!--       The Modal-->
       <div
         v-if="showModal"
         id="myModal"
@@ -173,8 +174,7 @@
               autoplay;
               clipboard-write;
               encrypted-media;
-              gyroscope;
-              picture-in-picture"
+              gyroscope"
               allowfullscreen
             ></iframe>
           </div>
@@ -184,6 +184,8 @@
 
     </template>
   </div>
+
+<!--  Кнопка добавления видео-->
   <div
     @click="countVideo"
     type="button"
@@ -228,7 +230,7 @@ export default defineComponent({
   setup () {
     const idList = ref('UUSb71yKJmS0eHyhRRl00ioQ')
     const showModal = ref(false)
-    const videoModal = ref('')
+    const videoModal = ref('sIT4EkMUJ88')
     const videoModalTitle = ref('')
     const ListVideoData = computed(() => store.state.ListVideoData)
 

@@ -332,6 +332,11 @@ export default defineComponent({
     margin-left: auto;
     margin-right: auto;
   }
+  .container h1 {
+    font-size: 40px;
+    color: #fff;
+    text-shadow: 0 0 5px black;
+  }
 
   .brand {
     width: 100%;
@@ -370,6 +375,11 @@ export default defineComponent({
   header .brand {
     float: left;
     color: #59abe3;
+  }
+  header .h1 {
+    font-size: 30px;
+    color: #fff;
+    text-shadow: 0 0 5px black;
   }
 
   /* Jumbotron */
