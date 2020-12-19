@@ -52,7 +52,7 @@
 <!--    Боковое меню-->
     <div
       id="mySidenav"
-      class="sidenav"
+      class="sidenav2"
     >
       <a
         href="javascript:void(0)"
@@ -160,7 +160,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-  .sidenav {
+  .sidenav2 {
     height: 100%;
     width: 0;
     position: fixed;
@@ -173,7 +173,7 @@ export default defineComponent({
     padding-top: 60px;
   }
 
-  .sidenav a {
+  .sidenav2 a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 18px;

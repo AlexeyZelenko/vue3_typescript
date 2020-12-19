@@ -71,7 +71,10 @@ export default {
         this.text.title = ''
         this.text.verse = ''
       } catch (error) {
-        console.log(error)
+        this.$swal({
+          title: 'Помилка завантаження...',
+          text: error
+        })
       }
     }
   }

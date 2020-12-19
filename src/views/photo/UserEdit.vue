@@ -169,16 +169,17 @@ export default defineComponent({
     const dbRef = db.collection('photos').doc(this.$route.params.id)
     dbRef.get().then((doc) => {
       this.photo = doc.data()
-      console.log(this.photo)
     }).catch((error) => {
-      console.log(error)
+      this.$swal({
+        title: 'Помилка...',
+        text: error
+      })
     })
   },
   methods: {
     previewFiles (event) {
       // process your files, read as DataUrl or upload...
       this.File = event.target.files
-      // console.log(event.target.files)
 
       // if you need to re-use field or drop the same files multiple times
       // this.$refs.form.reset()
@@ -299,6 +300,7 @@ export default defineComponent({
         this.photo.name = ''
         this.photo.description = ''
         this.photo.arrayImages = []
+        this.File = []
       } catch (error) {
         console.log(error)
       }
