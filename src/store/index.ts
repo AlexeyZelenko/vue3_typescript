@@ -63,7 +63,6 @@ export default createStore({
       state.adminEntrance = adminEntrance
     },
     AddVideoOnPage: (state, payload) => {
-      console.log(payload.count)
       state.videOnPage = payload.count + state.videOnPage
     }
   },
