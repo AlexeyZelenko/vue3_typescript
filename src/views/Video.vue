@@ -165,17 +165,19 @@
 <!--          >-->
 <!--            {{videoModalTitle}}-->
 <!--          </span>-->
-          <iframe
-            :src="`https://www.youtube.com/embed/${videoModal}`"
-            frameborder="0"
-            allow="accelerometer;
+          <div class="modal-container">
+            <iframe
+              :src="`https://www.youtube.com/embed/${videoModal}`"
+              frameborder="0"
+              allow="accelerometer;
               autoplay;
               clipboard-write;
               encrypted-media;
               gyroscope;
               picture-in-picture"
-            allowfullscreen
-          ></iframe>
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
 
       </div>
@@ -197,13 +199,9 @@
 <script lang="ts">
 import { defineComponent, computed, ref, onMounted } from 'vue'
 import store from '@/store'
-// const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vue'))
 
 export default defineComponent({
   name: 'Video',
-  // components: {
-  //   ModalVideo
-  // },
   data () {
     return {
       TextBible: {}
@@ -237,6 +235,7 @@ export default defineComponent({
     const openModal = (item) => {
       showModal.value = true
       videoModal.value = item.snippet.resourceId.videoId
+      console.log(videoModal.value)
       videoModalTitle.value = item.snippet.title
     }
 
@@ -284,6 +283,13 @@ export default defineComponent({
     overflow: auto;
     background-color: rgb(0,0,0); /* Fallback color */
   }
+  .modal-container {
+    margin: 0 auto;
+    background-image: url('../assets/img/loading.svg');
+    width: 100%;
+    background-repeat: no-repeat, repeat;
+    background-position: center center;
+  }
 
   /* Modal Content/Box */
   .modal-content {
@@ -291,7 +297,7 @@ export default defineComponent({
     margin: 0 auto; /* 15% from the top and centered */
     padding: 10px;
     /*border: 1px solid #888;*/
-    width: 90%; /* Could be more or less, depending on screen size */
+    width: 100%; /* Could be more or less, depending on screen size */
   }
 
   /* The Close Button */
@@ -310,15 +316,11 @@ export default defineComponent({
     cursor: pointer;
   }
   ---------------------
-  /*iframe {*/
-  /*  width: 100%;*/
-  /*  height: 640px;*/
+  /*h1 {*/
+  /*  font-size: 30px;*/
+  /*  color: #fff;*/
+  /*  text-shadow: 0 0 5px black;*/
   /*}*/
-  h1 {
-    font-size: 30px;
-    color: #fff;
-    text-shadow: 0 0 5px black;
-  }
   .container {
     width: 90%;
     max-width: 960px;
@@ -735,10 +737,6 @@ export default defineComponent({
     h1 {
       font-size: 30px;
     }
-    /*iframe {*/
-    /*  width: 100%;*/
-    /*  height: 240px;*/
-    /*}*/
     td img {
       width: 96px;
     }
