@@ -5,6 +5,7 @@
         <table class="table table-striped">
           <thead>
           <tr>
+            <th>Фото</th>
             <th>Назва категорії</th>
             <th>Рік</th>
             <th>Опис категорії</th>
@@ -13,6 +14,12 @@
           </thead>
           <tbody>
           <tr v-for="photo in Photos" :key="photo.key">
+            <td>
+              <img
+                :src=photo.arrayImages[0]
+                style="max-height: 50px; max-width: 50px"
+              />
+            </td>
             <td>{{ photo.name }}</td>
             <td>{{ photo.year }}</td>
             <td>{{ photo.description }}</td>
@@ -44,14 +51,26 @@
 </template>
 
 <script lang="ts">
+// import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { ref } from 'vue'
 import { db } from '@/main'
 import 'firebase/storage'
 import firebase from 'firebase/app'
+// import useIntersectionObserver from '@/composables/useIntersectionObserver'
 
 export default {
   setup () {
     const Photos = ref([])
+
+    // const el = ref(null)
+    // const { observe, unobserve, isShown } = useIntersectionObserver()
+    // onMounted(() => {
+    //   observe(el.value)
+    // })
+    //
+    // onBeforeUnmount(() => {
+    //   unobserve(el.value)
+    // })
 
     db.collection('history').onSnapshot((snapshotChange) => {
       Photos.value = []
@@ -98,6 +117,7 @@ export default {
       }
     }
     return {
+      // isShown,
       Photos,
       deletePhoto
     }
