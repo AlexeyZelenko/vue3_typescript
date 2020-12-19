@@ -1,7 +1,7 @@
 <template>
   <div
     ref="el"
-    class="bg-gray-800 radius-sm shadow-md rounded-md h-full w-full mx-1 inline-block"
+    class="bg-gray-800 radius-sm shadow-md rounded-md h-full mx-md-1"
   >
     <!--    Картинка-->
     <a
@@ -33,7 +33,7 @@
         {{ categoryName }}
       </h3>
       <h6
-        class="text-sm mt-md-2"
+        class="text-sm mt-md-2 h-40"
         style="color: #579f87"
       >
         {{ categoryDescription }}
