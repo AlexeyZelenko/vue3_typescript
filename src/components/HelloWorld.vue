@@ -193,6 +193,7 @@
 <script>
 import { defineAsyncComponent, defineComponent, computed, onMounted, ref } from 'vue'
 import store from '@/store'
+import useSWRFetch from '@/composables/useSWRFetch'
 const Timer = defineAsyncComponent(() => import('@/components/Timer.vue'))
 const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vue'))
 const Ministries = defineAsyncComponent(() => import('@/components/Ministries.vue'))
@@ -206,6 +207,14 @@ export default defineComponent({
     TextBible: {}
   }),
   setup () {
+    const { data: VideoDevelopers, error } = useSWRFetch(
+      'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSb71yKJmS0eHyhRRl00ioQ&key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU&part=snippet&&maxResults=1'
+    )
+    const LastVideoData = computed(() => {
+      const videoInfo = VideoDevelopers.value
+      return videoInfo.items[0].snippet
+    })
+
     const titleVideo = computed(() => LastVideoData.value.title)
     const codVideo = computed(() => LastVideoData.value.resourceId.videoId)
     const liveTitleVideo = computed(() => LiveVideoData.value.snippet.title)
@@ -216,7 +225,7 @@ export default defineComponent({
     const showModalOnline = ref(false)
 
     const icons = computed(() => store.state.icons)
-    const LastVideoData = computed(() => store.state.LastVideoData)
+    // const LastVideoData = computed(() => store.state.LastVideoData)
 
     const getCodeVideo = () => {
       store.dispatch('getLastVideoData')
@@ -229,6 +238,8 @@ export default defineComponent({
     onMounted(getLiveVideoData)
 
     return {
+      VideoDevelopers,
+      error,
       icons,
       LastVideoData,
       showModal,

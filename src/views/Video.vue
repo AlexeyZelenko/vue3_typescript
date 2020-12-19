@@ -237,7 +237,6 @@ export default defineComponent({
     const openModal = (item) => {
       showModal.value = true
       videoModal.value = item.snippet.resourceId.videoId
-      console.log(videoModal.value)
       videoModalTitle.value = item.snippet.title
     }
 
