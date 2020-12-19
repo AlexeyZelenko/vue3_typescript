@@ -128,29 +128,6 @@
       :key="item.id"
       class="youtube-list"
     >
-      <ModalVideo
-        v-if="showModal"
-        @click="showModal = false"
-      >
-        <template #header>
-          <h4 style="display: inline-block;">{{videoModalTitle}}</h4>
-        </template>
-
-        <template #body>
-          <iframe
-            :src="`https://www.youtube.com/embed/${videoModal}`"
-            frameborder="0"
-            allow="accelerometer;
-              autoplay;
-              clipboard-write;
-              encrypted-media;
-              gyroscope;
-              picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </template>
-
-      </ModalVideo>
 
 <!--      Карточка видео-->
       <div
@@ -168,6 +145,41 @@
         >{{item.snippet.title}}</p>
       </div>
 
+      <!-- The Modal -->
+      <div
+        v-if="showModal"
+        id="myModal"
+        class="modal"
+      >
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span
+            @click="showModal = false"
+            class="close"
+          >
+            &times;
+          </span>
+<!--          <span-->
+<!--            style="display: inline-block; font-size: 18px; color: whitesmoke"-->
+<!--          >-->
+<!--            {{videoModalTitle}}-->
+<!--          </span>-->
+          <iframe
+            :src="`https://www.youtube.com/embed/${videoModal}`"
+            frameborder="0"
+            allow="accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+      </div>
+
     </template>
   </div>
   <div
@@ -183,15 +195,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, onMounted, defineAsyncComponent } from 'vue'
+import { defineComponent, computed, ref, onMounted } from 'vue'
 import store from '@/store'
-const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vue'))
+// const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vue'))
 
 export default defineComponent({
   name: 'Video',
-  components: {
-    ModalVideo
-  },
+  // components: {
+  //   ModalVideo
+  // },
   data () {
     return {
       TextBible: {}
@@ -260,10 +272,48 @@ export default defineComponent({
 </script>
 
 <style scoped>
-  iframe {
-    width: 100%;
-    height: 640px;
+  /* The Modal (background) */
+  .modal {
+    display: block; /* Hidden by default */
+    position: fixed;
+    z-index: 9999; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto;
+    background-color: rgb(0,0,0); /* Fallback color */
   }
+
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: rgb(0,0,0);
+    margin: 0 auto; /* 15% from the top and centered */
+    padding: 10px;
+    /*border: 1px solid #888;*/
+    width: 90%; /* Could be more or less, depending on screen size */
+  }
+
+  /* The Close Button */
+  .close {
+    height: 60px;
+    color: #aaa;
+    float: right;
+    font-size: 38px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #214c48;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  ---------------------
+  /*iframe {*/
+  /*  width: 100%;*/
+  /*  height: 640px;*/
+  /*}*/
   h1 {
     font-size: 30px;
     color: #fff;
@@ -685,10 +735,10 @@ export default defineComponent({
     h1 {
       font-size: 30px;
     }
-    iframe {
-      width: 100%;
-      height: 240px;
-    }
+    /*iframe {*/
+    /*  width: 100%;*/
+    /*  height: 240px;*/
+    /*}*/
     td img {
       width: 96px;
     }
@@ -717,11 +767,11 @@ export default defineComponent({
     h1 {
       font-size: 25px;
     }
-    iframe {
-      margin-top: 20%;
-      width: 100%;
-      height: 240px;
-    }
+    /*iframe {*/
+    /*  margin-top: 20%;*/
+    /*  width: 100%;*/
+    /*  height: 240px;*/
+    /*}*/
     .services .service {
       width: 100%;
       float: none;

@@ -253,7 +253,7 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style>
   table {  border-collapse: collapse; }
   td {
     height: 100px;

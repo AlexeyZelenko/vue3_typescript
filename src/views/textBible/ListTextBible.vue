@@ -21,9 +21,11 @@
               <button
                 @click.prevent="deleteText(photo.id)"
                 style="margin-top: 5px"
-                class="btn btn-danger"
               >
-                Видалити
+                <i
+                  style="color: #ba2626"
+                  class="fas fa-trash-alt fa-2x"
+                ></i>
               </button>
             </td>
           </tr>
@@ -84,9 +86,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  .btn-primary {
-    margin-right: 12px;
-  }
-</style>

@@ -15,22 +15,22 @@ const routes = [
   {
     path: '/history',
     name: 'History',
-    component: () => import('@/views/HistoryPhotoGallery.vue')
+    component: () => import('@/views/history/HistoryPhotoGallery.vue')
   },
   {
     path: '/add_history',
     name: 'AddHistoryPhoto',
-    component: () => import('@/views/AddHistoryPhoto.vue')
+    component: () => import('@/views/history/AddHistoryPhoto.vue')
   },
   {
     path: '/list_history',
     name: 'listHistory',
-    component: () => import('@/views/HistoryPhotoList.vue')
+    component: () => import('@/views/history/HistoryPhotoList.vue')
   },
   {
     path: '/edit_history/:id',
     name: 'edit_history',
-    component: () => import('@/views/HistoryEditPhoto.vue')
+    component: () => import('@/views/history/HistoryEditPhoto.vue')
   },
   {
     path: '/video',
@@ -45,27 +45,27 @@ const routes = [
   {
     path: '/add_user',
     name: 'AddUser',
-    component: () => import('@/views/AddUser.vue')
+    component: () => import('@/views/photo/AddUser.vue')
   },
   {
     path: '/list',
     name: 'list',
-    component: () => import('@/views/UserList.vue')
+    component: () => import('@/views/photo/UserList.vue')
   },
   {
     path: '/edit/:id',
     name: 'edit',
-    component: () => import('@/views/UserEdit.vue')
+    component: () => import('@/views/photo/UserEdit.vue')
   },
   {
     path: '/categories/:id',
     name: 'categories',
-    component: () => import('@/views/CategoriesPhotoProfile.vue')
+    component: () => import('@/views/photo/CategoriesPhotoProfile.vue')
   },
   {
     path: '/photo_gallery',
     name: 'PhotoGallery',
-    component: () => import('@/views/PhotoGallery.vue')
+    component: () => import('@/views/photo/PhotoGallery.vue')
   },
   {
     path: '/:catchAll(.*)',
@@ -73,11 +73,11 @@ const routes = [
   },
   {
     path: '/add_text_bible',
-    component: () => import('@/views/AddTextBible.vue')
+    component: () => import('@/views/textBible/AddTextBible.vue')
   },
   {
     path: '/list_text_bible',
-    component: () => import('@/views/ListTextBible.vue')
+    component: () => import('@/views/textBible/ListTextBible.vue')
   }
 ]
 

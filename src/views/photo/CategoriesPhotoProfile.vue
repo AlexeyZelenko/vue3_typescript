@@ -44,7 +44,7 @@
 import PhotoList from '@/components/photos/PhotoList.vue'
 import PhotoListSkeleton from '@/components/photos/PhotoListSkeleton.vue'
 import { defineComponent } from 'vue'
-import { db } from '@/main.ts'
+import { db } from '@/main'
 
 export default defineComponent({
   name: 'GameProfile',

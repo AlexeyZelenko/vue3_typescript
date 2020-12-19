@@ -19,16 +19,20 @@
             <td>
               <router-link
                 :to="{name: 'edit_history', params: { id: photo.key }}"
-                class="btn btn-primary"
               >
-                Редагувати
+                <i
+                  style="color: #2a6aaa; margin-right: 10px"
+                  class="fas fa-edit fa-2x"
+                ></i>
               </router-link>
               <button
                 @click.prevent="deletePhoto(photo)"
-                style="margin-top: 5px"
-                class="btn btn-danger"
+                style="margin: 10px"
               >
-                Видалити
+                <i
+                  style="color: #ba2626"
+                  class="fas fa-trash-alt fa-2x"
+                ></i>
               </button>
             </td>
           </tr>
@@ -41,7 +45,7 @@
 
 <script lang="ts">
 import { ref } from 'vue'
-import { db } from '@/main.ts'
+import { db } from '@/main'
 import 'firebase/storage'
 import firebase from 'firebase/app'
 

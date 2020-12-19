@@ -11,6 +11,12 @@
         <div class="form-group">
           <label>Назва категорії</label>
           <p>{{photo.name}}</p>
+<!--          <input-->
+<!--            type="text"-->
+<!--            class="form-control"-->
+<!--            v-model="photo.name"-->
+<!--            required-->
+<!--          >-->
         </div>
 
         <div
@@ -22,19 +28,6 @@
             type="text"
             class="form-control"
             v-model="photo.description"
-            required
-          >
-        </div>
-<!--        Рік-->
-        <div
-          class="form-group"
-          style="margin-bottom: 10px"
-        >
-          <label>Редагувати Рік</label>
-          <input
-            type="text"
-            class="form-control"
-            v-model="photo.year"
             required
           >
         </div>
@@ -104,7 +97,7 @@
           </a>
         </div>
 
-        <!--        Фото-->
+<!--        Фото-->
         <label>Редагувати фото:</label><br>
         <ul
           v-if="photo.arrayImages"
@@ -156,7 +149,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { db } from '@/main.ts'
+import { db } from '@/main'
 import PhotoCard from '@/components/photos/PhotoCard.vue'
 import firebase from 'firebase'
 
@@ -173,9 +166,10 @@ export default defineComponent({
     }
   },
   created () {
-    const dbRef = db.collection('history').doc(this.$route.params.id)
+    const dbRef = db.collection('photos').doc(this.$route.params.id)
     dbRef.get().then((doc) => {
       this.photo = doc.data()
+      console.log(this.photo)
     }).catch((error) => {
       console.log(error)
     })
@@ -280,11 +274,10 @@ export default defineComponent({
       const ArrayNameImages = [...NameImages, ...NameImagesOld]
 
       event.preventDefault()
-      db.collection('history').doc(this.$route.params.id)
+      db.collection('photos').doc(this.$route.params.id)
         .update({
           name: this.photo.name,
           description: this.photo.description,
-          year: this.photo.year,
           arrayImages: ArrayFile,
           NameImages: ArrayNameImages
         })
@@ -295,7 +288,7 @@ export default defineComponent({
           console.log(error)
         })
 
-      const dbRef = await db.collection('history').doc(this.$route.params.id)
+      const dbRef = await db.collection('photos').doc(this.$route.params.id)
       dbRef.get().then((doc) => {
         this.photo = doc.data()
       }).catch((error) => {
@@ -304,7 +297,6 @@ export default defineComponent({
       try {
         this.$swal('Категорію фото успішно оновлено!!!')
         this.photo.name = ''
-        this.photo.year = ''
         this.photo.description = ''
         this.photo.arrayImages = []
       } catch (error) {

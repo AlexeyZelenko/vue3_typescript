@@ -27,7 +27,7 @@ import { defineComponent, ref } from 'vue'
 
 import CategoriesPhotoList from '@/components/photos/CategoriesPhotoList.vue'
 import PhotoListSkeleton from '@/components/photos/PhotoListSkeleton.vue'
-import { db } from '@/main.ts'
+import { db } from '@/main'
 
 export default defineComponent({
   name: 'PhotoGallery',

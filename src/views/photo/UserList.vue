@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import { ref } from 'vue'
-import { db } from '@/main.ts'
+import { db } from '@/main'
 import 'firebase/storage'
 import firebase from 'firebase/app'
 

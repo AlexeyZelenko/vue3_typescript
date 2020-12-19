@@ -51,7 +51,7 @@ import { defineComponent, ref } from 'vue'
 
 import HistoryCategoriesPhotoList from '@/components/History/HistoryCategoriesPhotoList.vue'
 import PhotoListSkeleton from '@/components/photos/PhotoListSkeleton.vue'
-import { db } from '@/main.ts'
+import { db } from '@/../../main'
 
 export default defineComponent({
   name: 'PhotoGallery',
