@@ -78,6 +78,10 @@ const routes = [
   {
     path: '/list_text_bible',
     component: () => import('@/views/textBible/ListTextBible.vue')
+  },
+  {
+    path: '/google_disc_2013',
+    component: () => import('@/views/GoogleDrive/2013.vue')
   }
 ]
 
