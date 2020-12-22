@@ -42,6 +42,12 @@
         >
           Фото галерея
         </router-link>
+        <router-link
+          to="/google_list"
+          class="nav-link"
+        >
+          Архів
+        </router-link>
       </div>
 
       <!-- Меню -->
@@ -80,7 +86,7 @@
           <li class="nav-item">
             <router-link to="/history" class="nav-link">Історія</router-link>
           </li><li class="nav-item">
-            <router-link to="/google_disc_2013" class="nav-link">2013</router-link>
+            <router-link to="/google_list" class="nav-link">Архів</router-link>
           </li>
         </ul>
           <!--ВХОД ЧЕРЕЗ ГУГЛ АККАУНТ-->

@@ -149,8 +149,8 @@ export default {
         })
       try {
         this.$swal('Успішно створенно!!!')
-        // this.photo.name = ''
-        // this.photo.description = ''
+        this.photo.name = ''
+        this.photo.description = ''
         this.photo.arrayImages = []
         this.File = []
       } catch (error) {

@@ -81,7 +81,11 @@ const routes = [
   },
   {
     path: '/google_disc_2013',
-    component: () => import('@/views/GoogleDrive/2013.vue')
+    component: () => import('@/views/GoogleDrive/Archive.vue')
+  },
+  {
+    path: '/google_list',
+    component: () => import('@/views/GoogleDrive/Listarchive.vue')
   }
 ]
 
