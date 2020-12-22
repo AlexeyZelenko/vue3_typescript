@@ -122,7 +122,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-  /* The Overlay (background) */
   .overlay {
     /* Height & width depends on how you want to reveal the overlay (see JS below) */
     height: 100%;
