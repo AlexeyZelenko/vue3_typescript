@@ -35,7 +35,10 @@
     Меню
   </button>
   <div class="card text-center">
-    <div class="card-header" style="background-color: #0a53be; color: white">
+    <div
+      class="card-header"
+      style="background-color: #0a53be; color: white"
+    >
       {{nameFolder}}
     </div>
     <div class="card-body">
@@ -116,7 +119,6 @@ export default defineComponent({
     const response = await fetch(`https://www.googleapis.com/drive/v3/files/${this.idFolder}?key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU`)
     const data = await response.json()
     this.nameFolder = data.name
-    console.log(data.name)
   }
 })
 </script>
