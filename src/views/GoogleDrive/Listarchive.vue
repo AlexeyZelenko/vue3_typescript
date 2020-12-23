@@ -1,15 +1,18 @@
 <template>
-  <div class="justify-start sm:justify-center md:justify-end lg:justify-between xl:justify-around">
+  <div
+    class="justify-start sm:justify-center md:justify-end lg:justify-between xl:justify-around"
+    style="max-width: 600px; text-align: center"
+  >
     <input
       type="search"
       v-model="searchInput"
       v-on:keyup.enter="fetchGame(searchInput)"
-      class="flex-1 text-white px-4 py-2 m-2 bg-gray-800 text-gray-300 rounded-sm"
+      class="flex-1 text-white px-4 py-2 m-2 bg-gray-800 text-gray-300 rounded-sm w-50"
       placeholder="Введіть рік..."
     />
     <button
       @click="fetchGame(searchInput)"
-      class="py-2 px-5 uppercase font-bold bg-green-400 hover:bg-green-500 rounded-sm ml-2"
+      class="py-2 px-5 uppercase font-bold bg-green-400 hover:bg-green-500 rounded-sm ml-2 w-40"
     >
       Пошук
     </button>
@@ -81,15 +84,10 @@ export default {
   data () {
     return {
       NavWindow: false,
-      text: {},
       nameFolder: ''
     }
   },
   methods: {
-    myFunction () {
-      this.dropdownWindow = true
-      document.getElementById('myDropdown').classList.toggle('show')
-    },
     openNav () {
       this.NavWindow = true
     },
@@ -104,6 +102,10 @@ export default {
     }
   },
   async mounted () {
+    this.$swal({
+      title: '1. Введіть рік.',
+      text: '2. Виберіть подію'
+    })
     const response = await fetch(`https://www.googleapis.com/drive/v3/files/${this.idFolder}?key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU`)
     const data = await response.json()
     this.nameFolder = data.name
