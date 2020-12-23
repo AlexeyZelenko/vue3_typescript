@@ -97,8 +97,12 @@ export default defineComponent({
         }
       ],
       text: {},
-      nameFolder: '',
-      idFolder: '1dXeaG6BokMx5bvSAB5xp-xQsnfj554-D'
+      nameFolder: ''
+    }
+  },
+  computed: {
+    idFolder () {
+      return this.arrayList[0].link
     }
   },
   methods: {

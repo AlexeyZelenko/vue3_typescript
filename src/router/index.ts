@@ -80,12 +80,16 @@ const routes = [
     component: () => import('@/views/textBible/ListTextBible.vue')
   },
   {
-    path: '/google_disc_2013',
-    component: () => import('@/views/GoogleDrive/Archive.vue')
-  },
-  {
     path: '/google_list',
     component: () => import('@/views/GoogleDrive/Listarchive.vue')
+  },
+  {
+    path: '/google_disc_2013',
+    component: () => import('@/views/GoogleDrive/Archive2013.vue')
+  },
+  {
+    path: '/google_disc_2014',
+    component: () => import('@/views/GoogleDrive/Archive2014.vue')
   }
 ]
 
