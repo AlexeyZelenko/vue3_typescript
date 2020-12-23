@@ -83,8 +83,7 @@ export default {
   name: 'Listarchive',
   data () {
     return {
-      NavWindow: false,
-      nameFolder: ''
+      NavWindow: false
     }
   },
   methods: {
@@ -98,7 +97,7 @@ export default {
       this.idFolder = value
       const response = await fetch(`https://www.googleapis.com/drive/v3/files/${this.idFolder}?key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU`)
       const data = await response.json()
-      this.nameFolder = data.name
+      this.nameFolder = await data.name
     }
   },
   async mounted () {
@@ -108,9 +107,10 @@ export default {
     })
     const response = await fetch(`https://www.googleapis.com/drive/v3/files/${this.idFolder}?key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU`)
     const data = await response.json()
-    this.nameFolder = data.name
+    this.nameFolder = await data.name
   },
   setup () {
+    const nameFolder = ref('')
     const searchInput = ref('')
     const sortYear = ref(2013)
     const categories = ref([])
@@ -127,10 +127,12 @@ export default {
             year: doc.data().year
           })
           idFolder.value = categories.value[0].link
+          nameFolder.value = categories.value[0].name
         })
       })
     }
     return {
+      nameFolder,
       idFolder,
       categories,
       sortYear,
