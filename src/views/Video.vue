@@ -168,7 +168,7 @@
 <!--          </span>-->
           <div class="modal-container">
             <iframe
-              :src="`https://www.youtube.com/embed/${videoModal}`"
+              :src="`https://www.youtube.com/embed/${videoModal}?rel=0&fs=1`"
               frameborder="0"
               allow="accelerometer;
               autoplay;
