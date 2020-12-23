@@ -215,6 +215,11 @@ export default defineComponent({
     },
     closeNav () {
       document.getElementById('mySidenavVideo').style.width = '0'
+    },
+    async openModal (item) {
+      this.showModal = true
+      this.videoModal = await item.snippet.resourceId.videoId
+      this.videoModalTitle = await item.snippet.title
     }
   },
   async mounted () {
@@ -233,12 +238,6 @@ export default defineComponent({
     const videoModal = ref('sIT4EkMUJ88')
     const videoModalTitle = ref('')
     const ListVideoData = computed(() => store.state.ListVideoData)
-
-    const openModal = (item) => {
-      showModal.value = true
-      videoModal.value = item.snippet.resourceId.videoId
-      videoModalTitle.value = item.snippet.title
-    }
 
     const listVideo = (value: string) => {
       idList.value = value
@@ -263,7 +262,6 @@ export default defineComponent({
       listVideo,
       showModal,
       videoModalTitle,
-      openModal,
       videoModal,
       countVideo
     }
