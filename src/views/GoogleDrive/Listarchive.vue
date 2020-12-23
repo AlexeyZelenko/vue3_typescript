@@ -30,7 +30,7 @@
       class="card-header"
       style="background-color: #0a53be; color: white"
     >
-      {{sortYear}} - {{nameFolder}}
+      {{nameFolder}}
     </div>
     <div class="card-body">
       <h6 class="card-title">По кліку фото відкриється у новому вікні</h6>
