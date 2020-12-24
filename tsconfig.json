@@ -35,5 +35,8 @@
   ],
   "exclude": [
     "node_modules"
+  ],
+  "types": [
+    "vue-sweetalert2"
   ]
 }

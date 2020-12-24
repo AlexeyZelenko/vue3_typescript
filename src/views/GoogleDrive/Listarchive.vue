@@ -1,5 +1,44 @@
 <template>
   <div
+    v-if="showModal"
+    class="modal"
+  >
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span
+        @click="showModal = false"
+        class="close"
+      >
+        &times;
+      </span>
+      <div
+        v-if="alertShow"
+        class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+        <div class="flex">
+          <div class="py-1">
+            <svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/>
+            </svg>
+          </div>
+          <div>
+            <p
+              class="font-bold"
+            >
+              {{alertTitle}}
+            </p>
+            <p
+              class="text-sm"
+            >
+              {{alertText}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div
     class="justify-start sm:justify-center md:justify-end lg:justify-between xl:justify-around"
     style="max-width: 600px; text-align: center"
   >
@@ -110,6 +149,22 @@ export default {
     this.nameFolder = await data.name
   },
   setup () {
+    const showModal = ref(false)
+    const alertShow = ref(false)
+    const alertText = ref('')
+    const alertTitle = ref('')
+    const alertMessage = (ctx) => {
+      showModal.value = true
+      alertShow.value = true
+      alertText.value = ctx.text
+      alertTitle.value = ctx.title
+      setTimeout(alertMessageClosed, 10000)
+    }
+    const alertMessageClosed = () => {
+      showModal.value = false
+      alertShow.value = false
+    }
+
     const nameFolder = ref('')
     const searchInput = ref('')
     const sortYear = ref(2013)
@@ -129,14 +184,26 @@ export default {
           idFolder.value = categories.value[0].link
           nameFolder.value = categories.value[0].name
         })
+        if (!categories.value.length) {
+          const ctx = {
+            title: 'Нічого не знайденно... Введіть інший рік.',
+            text: '2013, 2014, 2019, 2020'
+          }
+          alertMessage(ctx)
+        } else {
+          const ctx = {
+            title: 'Виберіть подію...'
+          }
+          alertMessage(ctx)
+        }
       })
-      if (categories.value.length === 0) {
-        alert(`Нічого не знайденно...
-       Введіть інший рік.
-       2013, 2014, 2019, 2020`)
-      }
     }
     return {
+      showModal,
+      alertTitle,
+      alertText,
+      alertShow,
+      alertMessage,
       nameFolder,
       idFolder,
       categories,
@@ -149,6 +216,43 @@ export default {
 </script>
 
 <style scoped>
+  /* The Modal (background) */
+  .modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 5px;
+    border: 1px solid #888;
+    width: 400px; /* Could be more or less, depending on screen size */
+  }
+
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  ------------------
   .overlay {
     /* Height & width depends on how you want to reveal the overlay (see JS below) */
     height: 100%;
