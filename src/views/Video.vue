@@ -16,20 +16,20 @@
   <div class="div1">
     <nav>
       <section class="button_tab"
-        @click="listVideo('UUSb71yKJmS0eHyhRRl00ioQ')"
+        @click="listVideo('PLlURDWJlf7fT9p77c-wQOzVIG_GLs32Pq')"
       >
-        ВСІ
+        СЛУЖІННЯ
+      </section>
+      <section class="button_tab"
+               @click="listVideo('PLlURDWJlf7fQyA3kIfQ9Pa3Dtd_tM97-z')"
+      >
+        ПІСНІ
       </section>
       <section
         class="button_tab"
         @click="listVideo('PLlURDWJlf7fS8-Z9hz4ShqtXdjg2tIGil')"
       >
         ПРОПОВІДІ
-      </section>
-      <section class="button_tab"
-        @click="listVideo('PLlURDWJlf7fQyA3kIfQ9Pa3Dtd_tM97-z')"
-      >
-        ПІСНІ
       </section>
       <section class="button_tab"
                @click="listVideo('PLlURDWJlf7fTuF3VfkKrsesTtfQtuNwo9')"
