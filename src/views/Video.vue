@@ -9,6 +9,10 @@
       </div>
     </div>
   </div>
+  <iframe
+    :src="`https://www.youtube.com/embed/${videoModal}?autoplay=1&rel=0&origin=http://bv.ck.ua`"
+    frameborder="0"
+  ></iframe>
   <div class="div1">
     <nav>
       <section class="button_tab"
@@ -121,7 +125,6 @@
       БІБЛІЯ
     </a>
   </div>
-
 <!--  Лист видео-->
   <div class="youtube-container">
     <template
@@ -148,8 +151,7 @@
 
 <!--       The Modal-->
       <div
-        v-if="showModal"
-        id="myModal"
+        v-show="showModal"
         class="modal"
       >
 
@@ -167,18 +169,11 @@
 <!--            {{videoModalTitle}}-->
 <!--          </span>-->
           <div class="modal-container">
-            <iframe
-              :src="`https://www.youtube.com/embed/${videoModal}?rel=0&fs=1`"
-              frameborder="0"
-              enablejsapi='1'
-              controls='2'
-              modestbranding='1'
-              allow="accelerometer;
-              clipboard-write;
-              encrypted-media;
-              gyroscope"
-              allowfullscreen
-            ></iframe>
+<!--            <iframe-->
+<!--              :src="`https://www.youtube.com/embed/${videoModal}`"-->
+<!--              frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"-->
+<!--              allowfullscreen-->
+<!--            ></iframe>-->
           </div>
         </div>
 
@@ -220,8 +215,10 @@ export default defineComponent({
     },
     async openModal (item) {
       this.videoModal = await item.snippet.resourceId.videoId
+      console.log(this.videoModal)
       this.videoModalTitle = await item.snippet.title
-      this.showModal = true
+      window.scrollTo({ top: 300, behavior: 'smooth' })
+      // this.showModal = true
     }
   },
   async mounted () {
@@ -281,7 +278,7 @@ export default defineComponent({
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto;
+    overflow: hidden;
     background-color: rgb(0,0,0); /* Fallback color */
   }
   .modal-container {
@@ -719,6 +716,9 @@ export default defineComponent({
   }
 
   @media (max-width: 670px) {
+    iframe {
+      margin-top: 5px;
+    }
     .youtube-list .change-youtube {
       width: 100%;
       float: none;
@@ -732,6 +732,9 @@ export default defineComponent({
   }
   /* Media Queries */
   @media (max-width: 767px) {
+    iframe {
+      margin-top: 5px;
+    }
     .overlay_min {
       padding-top: 10%;
     }
@@ -760,6 +763,9 @@ export default defineComponent({
     }
   }
   @media (max-width: 575px) {
+    iframe {
+      margin-top: 5px;
+    }
     .overlay_min {
       padding-top: 30%;
     }
