@@ -170,13 +170,16 @@
             <iframe
               :src="`https://www.youtube.com/embed/${videoModal}?rel=0&fs=1`"
               frameborder="0"
+              enablejsapi='1'
+              controls='2'
+              modestbranding='1'
               allow="accelerometer;
-              autoplay;
               clipboard-write;
               encrypted-media;
               gyroscope"
               allowfullscreen
             ></iframe>
+
           </div>
         </div>
 
@@ -217,9 +220,9 @@ export default defineComponent({
       document.getElementById('mySidenavVideo').style.width = '0'
     },
     async openModal (item) {
-      this.showModal = true
       this.videoModal = await item.snippet.resourceId.videoId
       this.videoModalTitle = await item.snippet.title
+      this.showModal = true
     }
   },
   async mounted () {
