@@ -71,7 +71,6 @@
         {{item.name}}
       </a>
     </div>
-
   </div>
 </template>
 
@@ -102,7 +101,8 @@ export default {
   },
   async mounted () {
     this.$swal({
-      title: '1. Введіть рік.',
+      title: `1. Введіть рік.
+       Натисніть "Пошук"`,
       text: '2. Виберіть подію'
     })
     const response = await fetch(`https://www.googleapis.com/drive/v3/files/${this.idFolder}?key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU`)
@@ -130,6 +130,11 @@ export default {
           nameFolder.value = categories.value[0].name
         })
       })
+      if (categories.value.length === 0) {
+        alert(`Нічого не знайденно...
+       Введіть інший рік.
+       2013, 2014, 2019, 2020`)
+      }
     }
     return {
       nameFolder,

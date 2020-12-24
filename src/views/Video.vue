@@ -179,7 +179,6 @@
               gyroscope"
               allowfullscreen
             ></iframe>
-
           </div>
         </div>
 
