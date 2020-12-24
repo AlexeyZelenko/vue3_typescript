@@ -50,9 +50,9 @@ export default createStore({
     USER_ID_ENTRANCE: (state, userID) => {
       state.userId = userID
     },
-    SET_VIDEO (state, LastVideoData) {
-      state.LastVideoData = LastVideoData
-    },
+    // SET_VIDEO (state, LastVideoData) {
+    //   state.LastVideoData = LastVideoData
+    // },
     SET_ONLINE_VIDEO (state, LiveVideoData) {
       state.LiveVideoData = LiveVideoData
     },
@@ -118,12 +118,12 @@ export default createStore({
       }
       commit('USER_ENTRANCE', userEntrance)
     },
-    async getLastVideoData ({ commit }) {
-      const response = await fetch('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSb71yKJmS0eHyhRRl00ioQ&key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU&part=snippet&&maxResults=1')
-      const data = await response.json()
-      const LastVideoData = data.items[0].snippet
-      commit('SET_VIDEO', LastVideoData)
-    },
+    // async getLastVideoData ({ commit }) {
+    //   const response = await fetch('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=PLlURDWJlf7fT9p77c-wQOzVIG_GLs32Pq=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU&part=snippet&&maxResults=1')
+    //   const data = await response.json()
+    //   const LastVideoData = data.items[0].snippet
+    //   commit('SET_VIDEO', LastVideoData)
+    // },
     async getLiveVideoData ({ commit }) {
       const response = await fetch('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCSb71yKJmS0eHyhRRl00ioQ&eventType=live&type=video&key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU')
       const data = await response.json()

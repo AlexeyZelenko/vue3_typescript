@@ -208,7 +208,7 @@ export default defineComponent({
   }),
   setup () {
     const { data: VideoDevelopers, error } = useSWRFetch(
-      'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSb71yKJmS0eHyhRRl00ioQ&key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU&part=snippet&&maxResults=1'
+      'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=PLlURDWJlf7fT9p77c-wQOzVIG_GLs32Pq&key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU&part=snippet&&maxResults=1'
     )
     const LastVideoData = computed(() => {
       const videoInfo = VideoDevelopers.value
