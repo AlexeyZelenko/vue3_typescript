@@ -4,7 +4,6 @@ import Icon from '@/models/IconModel'
 import Video from '@/models/Video'
 import { db } from '@/main.ts'
 import firebase from 'firebase/app'
-import VueSweetalert2 from 'vue-sweetalert2'
 
 export default createStore({
   state: {
