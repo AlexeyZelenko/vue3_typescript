@@ -107,6 +107,13 @@
       >
         Список віршів Біблії
       </router-link>
+      <router-link
+        class="dropdown-item"
+        to="/add_folder_google_disc"
+        exact
+      >
+        Додати папку в Архів
+      </router-link>
       <a
         class="dropdown-item"
         href="https://squoosh.app/index.html"

@@ -4,6 +4,7 @@ import Icon from '@/models/IconModel'
 import Video from '@/models/Video'
 import { db } from '@/main.ts'
 import firebase from 'firebase/app'
+import VueSweetalert2 from 'vue-sweetalert2'
 
 export default createStore({
   state: {
@@ -67,6 +68,20 @@ export default createStore({
     }
   },
   actions: {
+    async createFolderGoogleDisc ({ commit }, payload) {
+      const newFolder = payload
+      await db.collection('archive')
+        .add({
+          name: newFolder.name,
+          year: newFolder.year,
+          link: newFolder.link
+        })
+      try {
+        console.log('Категорію успішно створенно!!!')
+      } catch (error) {
+        console.log(error)
+      }
+    },
     async createTextBible ({ commit }, payload) {
       const newText = payload
       const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json', {

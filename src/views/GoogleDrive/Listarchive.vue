@@ -1,9 +1,8 @@
 <template>
+  <!-- Message -->
   <div
     v-if="showModal"
   >
-
-    <!-- Modal content -->
     <div>
       <span
         @click="showModal = false"
@@ -37,6 +36,8 @@
     </div>
 
   </div>
+
+<!--  Поиск-->
   <div
     class="justify-start sm:justify-center md:justify-end lg:justify-between xl:justify-around"
     style="max-width: 600px; text-align: center"
@@ -55,7 +56,10 @@
       Пошук
     </button>
   </div>
+
+<!--  Выбор события-->
   <button
+    v-if="idFolder"
     @click="openNav"
     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-8 w-100"
   >
@@ -63,14 +67,26 @@
   </button>
 
   <!--  Отображение события-->
-  <div class="card text-center">
+  <div
+    class="card text-center"
+  >
     <div
+      v-if="idFolder"
       class="card-header"
       style="background-color: #0a53be; color: white"
     >
       {{nameFolder}}
     </div>
-    <div class="card-body">
+    <div v-if="!idFolder">
+      <img
+        src="https://drive.google.com/uc?export=view&id=1BEj10Ll6vqzm8XSvFA1yKNt6QaD5NKlb"
+        style="width: 100%"
+      >
+    </div>
+    <div
+      v-if="idFolder"
+      class="card-body"
+    >
       <h6 class="card-title">По кліку фото відкриється у новому вікні</h6>
       <iframe
         style = "height: 1000px; overflow: hidden; margin: 0 auto"
@@ -140,7 +156,8 @@ export default {
   async mounted () {
     this.$swal({
       title: `1. Введіть рік.
-       Натисніть "Пошук"`,
+       Натисніть "Пошук"
+       !!!Події з невідомим роком: 0000`,
       text: '2. Виберіть подію'
     })
     const response = await fetch(`https://www.googleapis.com/drive/v3/files/${this.idFolder}?key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU`)
@@ -168,7 +185,7 @@ export default {
     const searchInput = ref('')
     const sortYear = ref(2013)
     const categories = ref([])
-    const idFolder = ref('1dXeaG6BokMx5bvSAB5xp-xQsnfj554-D')
+    const idFolder = ref(null)
     const fetchGame = (searchInput) => {
       sortYear.value = searchInput
       db.collection('archive').where('year', '==', `${sortYear.value}`).onSnapshot((snapshotChange) => {
@@ -186,7 +203,7 @@ export default {
         if (!categories.value.length) {
           const ctx = {
             title: 'Нічого не знайденно... Введіть інший рік.',
-            text: '2013, 2014, 2019, 2020, 2004'
+            text: 'Наразі - 2013, 2014, 2019, 2020, 2004. Події з невідомим роком - введіть 0000'
           }
           alertMessage(ctx)
         } else {
