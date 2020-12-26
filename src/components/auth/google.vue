@@ -27,26 +27,20 @@
       />
     </li>
     <li>
-      <button
+      <i
+        style="color: grey; cursor: pointer"
         v-if="!adminEntrance"
-        type="button"
-        class="btn btn-outline-light btn-rounded mr-auto"
-        data-ripple-color="dark"
         @click="signInWithGoogle"
-      >
-        <i class="fas fa-user-circle"></i> Війти через Google
-      </button>
+        class="fas fa-user-circle fa-2x"
+      ></i>
     </li>
     <li>
-      <button
-        @click="logout"
+      <i
+        style="color: grey; cursor: pointer"
         v-if="adminEntrance"
-        type="button"
-        class="btn btn-outline-primary btn-rounded mr-auto"
-        data-ripple-color="dark"
-      >
-        Вийти
-      </button>
+        @click="logout"
+        class="fas fa-sign-out-alt fa-2x"
+      ></i>
     </li>
 
 <!--    Боковое меню-->
