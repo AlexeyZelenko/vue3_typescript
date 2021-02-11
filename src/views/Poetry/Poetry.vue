@@ -15,8 +15,15 @@
     >
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title" v-text="item.title"></h5>
-          <p class="card-text">{{item.verse}}</p>
+          <h5
+            class="card-title"
+            v-html="item.title"
+          ></h5>
+          <p
+            class="card-text"
+            v-html="item.verse"
+          >
+          </p>
         </div>
       </div>
     </div>

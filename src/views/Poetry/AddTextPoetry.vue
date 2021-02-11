@@ -8,26 +8,26 @@
       <form
         @submit.prevent="createText"
       >
-        <div
-          class="form-group"
-        >
-          <label>Автор</label>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Хто написав вірш</span>
           <input
             type="text"
             class="form-control"
+            placeholder="Автор"
+            aria-label="Автор"
+            aria-describedby="basic-addon1"
             v-model="text.title"
-            required
           >
         </div>
 
-        <div class="form-group">
-          <label>Вірш</label>
-          <input
-            type="text"
+        <div class="input-group">
+          <span class="input-group-text">Вірш</span>
+          <textarea
             class="form-control"
+            aria-label="With textarea"
             v-model="text.verse"
-            required
-          >
+          ></textarea>
         </div>
 
         <div
