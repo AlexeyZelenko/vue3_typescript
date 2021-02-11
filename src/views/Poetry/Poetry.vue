@@ -15,15 +15,15 @@
     >
       <div class="card">
         <div class="card-body">
-          <h5
-            class="card-title"
-            v-html="item.title"
-          ></h5>
           <p
             class="card-text"
+            v-html="item.title"
+          ></p>
+          <h5
+            class="card-title text-muted lead"
             v-html="item.verse"
           >
-          </p>
+          </h5>
         </div>
       </div>
     </div>
