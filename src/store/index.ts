@@ -92,6 +92,17 @@ export default createStore({
       })
       const data = await response.json()
     },
+    async createTextPoetry ({ commit }, payload) {
+      const newText = payload
+      const response = await fetch('https://blv-vue3-tp.firebaseio.com/poetry.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newText)
+      })
+      const data = await response.json()
+    },
     async logout ({ commit }) {
       await firebase.auth().signOut()
         .then(() => {
@@ -133,7 +144,7 @@ export default createStore({
       commit('USER_ENTRANCE', userEntrance)
     },
     async getLastVideoData ({ commit }) {
-      const response = await fetch('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=PLlURDWJlf7fT9p77c-wQOzVIG_GLs32Pq=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU&part=snippet&&maxResults=1')
+      const response = await fetch('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UCSb71yKJmS0eHyhRRl00ioQ=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU&part=snippet&&maxResults=1')
       const data = await response.json()
       const LastVideoData = data.items[0].snippet
       commit('SET_VIDEO', LastVideoData)

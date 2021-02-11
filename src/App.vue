@@ -48,6 +48,12 @@
         >
           Архів
         </router-link>
+        <router-link
+          to="/poetry"
+          class="nav-link"
+        >
+          Поезія
+        </router-link>
       </div>
 
       <!-- Меню -->
@@ -85,8 +91,11 @@
           </li>
           <li class="nav-item">
             <router-link to="/history" class="nav-link">Історія</router-link>
-          </li><li class="nav-item">
+          </li>
+          <li class="nav-item">
             <router-link to="/google_list" class="nav-link">Архів</router-link>
+          </li><li class="nav-item">
+            <router-link to="/poetry" class="nav-link">Поезія</router-link>
           </li>
         </ul>
           <!--ВХОД ЧЕРЕЗ ГУГЛ АККАУНТ-->

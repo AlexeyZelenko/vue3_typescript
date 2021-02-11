@@ -234,7 +234,7 @@ export default defineComponent({
   setup () {
     const idList = ref('UUSb71yKJmS0eHyhRRl00ioQ')
     const showModal = ref(false)
-    const videoModal = ref('sIT4EkMUJ88')
+    const videoModal = ref('LnNHe8LepDM')
     const videoModalTitle = ref('')
     const ListVideoData = computed(() => store.state.ListVideoData)
 
@@ -314,11 +314,6 @@ export default defineComponent({
     cursor: pointer;
   }
   ---------------------
-  /*h1 {*/
-  /*  font-size: 30px;*/
-  /*  color: #fff;*/
-  /*  text-shadow: 0 0 5px black;*/
-  /*}*/
   .container {
     width: 90%;
     max-width: 960px;

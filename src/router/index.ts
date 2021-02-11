@@ -72,6 +72,14 @@ const routes = [
     component: () => import('@/components/NotFound.vue')
   },
   {
+    path: '/add_text_poetry',
+    component: () => import('@/views/Poetry/AddTextPoetry.vue')
+  },
+  {
+    path: '/list_text_poetry',
+    component: () => import('@/views/Poetry/ListTextPoetry.vue')
+  },
+  {
     path: '/add_text_bible',
     component: () => import('@/views/textBible/AddTextBible.vue')
   },
@@ -86,6 +94,10 @@ const routes = [
   {
     path: '/add_folder_google_disc',
     component: () => import('@/views/GoogleDrive/AddFolderGoogleDisc.vue')
+  },
+  {
+    path: '/poetry',
+    component: () => import('@/views/Poetry/Poetry.vue')
   }
 ]
 

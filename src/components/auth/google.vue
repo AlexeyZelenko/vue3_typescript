@@ -103,6 +103,20 @@
       </router-link>
       <router-link
         class="dropdown-item"
+        to="/add_text_poetry"
+        exact
+      >
+        Додати вірш
+      </router-link>
+      <router-link
+        class="dropdown-item"
+        to="/list_text_poetry"
+        exact
+      >
+        Список віршів
+      </router-link>
+      <router-link
+        class="dropdown-item"
         to="/add_folder_google_disc"
         exact
       >

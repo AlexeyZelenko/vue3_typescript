@@ -15,6 +15,7 @@ import 'sweetalert2/dist/sweetalert2.min.css'
 import './index.css'
 import VuePlyr from 'vue-plyr'
 import 'vue-plyr/dist/vue-plyr.css'
+import VueVirtualScroller from 'vue3-virtual-scroller'
 
 export const db = firebase.initializeApp({
   apiKey: 'AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU',
@@ -40,6 +41,7 @@ app.use(mdb)
 app.use(store)
 app.use(router)
 app.use(VueSweetalert2, options)
+app.use(VueVirtualScroller)
 app.use(VuePlyr, {
   plyr: {}
 })

@@ -51,26 +51,14 @@
 </template>
 
 <script lang="ts">
-// import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { ref } from 'vue'
 import { db } from '@/main'
 import 'firebase/storage'
 import firebase from 'firebase/app'
-// import useIntersectionObserver from '@/composables/useIntersectionObserver'
 
 export default {
   setup () {
     const Photos = ref([])
-
-    // const el = ref(null)
-    // const { observe, unobserve, isShown } = useIntersectionObserver()
-    // onMounted(() => {
-    //   observe(el.value)
-    // })
-    //
-    // onBeforeUnmount(() => {
-    //   unobserve(el.value)
-    // })
 
     db.collection('history').onSnapshot((snapshotChange) => {
       Photos.value = []
