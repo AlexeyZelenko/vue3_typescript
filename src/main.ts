@@ -16,6 +16,7 @@ import './index.css'
 import VuePlyr from 'vue-plyr'
 import 'vue-plyr/dist/vue-plyr.css'
 import VueVirtualScroller from 'vue3-virtual-scroller'
+import 'vue3-virtual-scroller/dist/vue3-virtual-scroller.css'
 
 export const db = firebase.initializeApp({
   apiKey: 'AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU',
