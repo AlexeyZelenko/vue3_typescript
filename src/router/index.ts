@@ -98,6 +98,11 @@ const routes = [
   {
     path: '/poetry',
     component: () => import('@/views/Poetry/Poetry.vue')
+  },
+  {
+    path: '/cell',
+    name: 'Cell',
+    component: () => import('@/views/Cell.vue')
   }
 ]
 
