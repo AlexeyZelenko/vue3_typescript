@@ -103,6 +103,28 @@ export default createStore({
       })
       const data = await response.json()
     },
+    async createNewBook ({ commit }, payload) {
+      const newText = payload
+      const response = await fetch('https://blv-vue3-tp.firebaseio.com/books.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newText)
+      })
+      const data = await response.json()
+    },
+    async createNewBusiness ({ commit }, payload) {
+      const newText = payload
+      const response = await fetch('https://blv-vue3-tp.firebaseio.com/business.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newText)
+      })
+      const data = await response.json()
+    },
     async logout ({ commit }) {
       await firebase.auth().signOut()
         .then(() => {

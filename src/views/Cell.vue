@@ -20,7 +20,7 @@ export default defineComponent({
       mapboxgl.accessToken = 'pk.eyJ1Ijoib2xla3NpaXplbGVua28iLCJhIjoiY2tsY2V2ZGs4MWYzYTJubGIydmllN3VlbiJ9._KclbdScDG_aRllQhtw5kA'
       const map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/oleksiizelenko/ckldg6ksa4s3417rz4kydgo4m'
+        style: 'mapbox://styles/oleksiizelenko/cklhpuccl0jri17k3pg33txts'
       })
       map.on('load', () => {
         // Здесь мы хотим загрузить слой

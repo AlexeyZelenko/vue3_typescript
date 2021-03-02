@@ -54,6 +54,18 @@
         >
           Поезія
         </router-link>
+        <router-link
+          to="/books"
+          class="nav-link"
+        >
+          Книги
+        </router-link>
+        <router-link
+          to="/business"
+          class="nav-link"
+        >
+          Бізнес
+        </router-link>
       </div>
 
       <!-- Меню -->
@@ -100,7 +112,13 @@
           </li>
           <li class="nav-item">
           <router-link to="/cell" class="nav-link">Ячейки</router-link>
-        </li>
+          </li>
+          <li class="nav-item">
+            <router-link to="/books" class="nav-link">Книги</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/business" class="nav-link">Бізнес</router-link>
+          </li>
         </ul>
           <!--ВХОД ЧЕРЕЗ ГУГЛ АККАУНТ-->
         <google></google>

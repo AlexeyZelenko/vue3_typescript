@@ -103,6 +103,24 @@ const routes = [
     path: '/cell',
     name: 'Cell',
     component: () => import('@/views/Cell.vue')
+  },
+  {
+    path: '/books',
+    name: 'Books',
+    component: () => import('@/views/Books/Books.vue')
+  },
+  {
+    path: '/add_new_book',
+    component: () => import('@/views/Books/AddNewBooks.vue')
+  },
+  {
+    path: '/business',
+    name: 'ListBusiness',
+    component: () => import('@/views/business/ListBusiness.vue')
+  },
+  {
+    path: '/add_new_business',
+    component: () => import('@/views/business/AddNewBusiness.vue')
   }
 ]
 
