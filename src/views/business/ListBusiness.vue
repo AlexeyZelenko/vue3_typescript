@@ -24,7 +24,11 @@
                 v-if="business.link"
                 :href=business.link
               >
-                <button type="button" class="btn btn-info">Сайт</button>
+                <button
+                  class="btnHref"
+                >
+                  Сайт
+                </button>
               </a>
             </td>
           </tr>
@@ -86,3 +90,19 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.btnHref {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: #01ba01;
+  color: white;
+  border: 0;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+.btnHref:hover {
+  background: green;
+}
+</style>
