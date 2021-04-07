@@ -9,6 +9,7 @@ import 'firebase/firestore'
 import 'firebase/database'
 import 'firebase/auth'
 import 'firebase/storage'
+import 'firebase/analytics'
 import mdb from 'mdb-ui-kit'
 import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
@@ -29,6 +30,7 @@ export const db = firebase.initializeApp({
   measurementId: 'G-LQYFPZCSD5'
 }).firestore()
 
+export const analytics = firebase.analytics()
 export const storage = firebase.storage()
 
 // Настройки Sweetalert2
