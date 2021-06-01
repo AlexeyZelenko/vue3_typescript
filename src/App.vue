@@ -66,6 +66,12 @@
         >
           Бізнес
         </router-link>
+        <router-link
+          to="/contacts"
+          class="nav-link"
+        >
+          Контакти
+        </router-link>
       </div>
 
       <!-- Меню -->
@@ -118,6 +124,9 @@
           </li>
           <li class="nav-item">
             <router-link to="/business" class="nav-link">Бізнес</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/contacts" class="nav-link">Контакти</router-link>
           </li>
         </ul>
           <!--ВХОД ЧЕРЕЗ ГУГЛ АККАУНТ-->
