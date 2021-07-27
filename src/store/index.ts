@@ -144,7 +144,7 @@ export default createStore({
         const uid = await dispatch('getUid')
 
         // Проверка администратора
-        if (['J4IfR9V40cdfNDKumeiyqvzhyzK2']
+        if (['J4IfR9V40cdfNDKumeiyqvzhyzK2', '8KRYS9dR8seAKFjykBx4HP15nPq2']
           .some(elem => elem === uid)) {
           console.log('Администратор вошел!')
           // router.push('/admin')
@@ -160,7 +160,7 @@ export default createStore({
       const userEntrance = !!firebase.auth().currentUser
       const USER_ID = await dispatch('getUid')
       if (userEntrance) {
-        const adminEntrance = await ['J4IfR9V40cdfNDKumeiyqvzhyzK2'].includes(USER_ID)
+        const adminEntrance = await ['J4IfR9V40cdfNDKumeiyqvzhyzK2', '8KRYS9dR8seAKFjykBx4HP15nPq2'].includes(USER_ID)
         commit('ADMIN_ENTRANCE', adminEntrance)
       }
       commit('USER_ENTRANCE', userEntrance)
