@@ -166,7 +166,7 @@
         >
         </iframe>
         <div>
-          <div class="brand">{{ new Date().getFullYear() }} — Блага вість</div>
+          <div class="brand">{{ new Date().getFullYear() }} — Блага вість Черкаси</div>
               <nav>
                 <ul class="menu">
                   <template
