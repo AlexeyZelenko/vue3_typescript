@@ -78,10 +78,10 @@
       {{nameFolder}}
     </div>
     <div v-if="!idFolder">
-      <img
-        src="https://drive.google.com/uc?export=view&id=1BEj10Ll6vqzm8XSvFA1yKNt6QaD5NKlb"
-        style="width: 100%"
-      >
+<!--      <img-->
+<!--        src="https://drive.google.com/uc?export=view&id=1BEj10Ll6vqzm8XSvFA1yKNt6QaD5NKlb"-->
+<!--        style="width: 100%"-->
+<!--      >-->
     </div>
     <div
       v-if="idFolder"
@@ -203,7 +203,7 @@ export default {
         if (!categories.value.length) {
           const ctx = {
             title: 'Нічого не знайденно... Введіть інший рік.',
-            text: 'Наразі - 2013, 2014, 2019, 2020, 2004. Події з невідомим роком - введіть 0000'
+            text: 'Наразі - 2004, 2013, 2014, 2019, 2020, 2021, 2022. Події з невідомим роком - введіть 0000'
           }
           alertMessage(ctx)
         } else {

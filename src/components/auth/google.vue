@@ -143,6 +143,19 @@
       >
         Сжати фото
       </a>
+      <router-link
+        class="dropdown-item"
+        to="/add_good"
+        exact
+      >Додати подію
+      </router-link>
+      <router-link
+        class="dropdown-item"
+        to="/list_goods"
+        exact
+      >
+        Список подій
+      </router-link>
     </div>
   </ul>
 </template>

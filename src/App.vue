@@ -1,7 +1,7 @@
 <template>
   <nav
     class="navbar navbar-expand-lg navbar-dark"
-    style="background-color: #212;"
+    style="background-color: #26170b"
   >
     <!-- Container wrapper -->
     <div class="container-fluid">
@@ -60,11 +60,17 @@
         >
           Книги
         </router-link>
+<!--        <router-link-->
+<!--          to="/business"-->
+<!--          class="nav-link"-->
+<!--        >-->
+<!--          Бізнес-->
+<!--        </router-link>-->
         <router-link
-          to="/business"
+          to="/power_kindness"
           class="nav-link"
         >
-          Бізнес
+          Волонтерська діяльність церкви
         </router-link>
         <router-link
           to="/contacts"
@@ -124,6 +130,9 @@
           </li>
           <li class="nav-item">
             <router-link to="/business" class="nav-link">Бізнес</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/power_kindness" class="nav-link">Волонтерська діяльність церкви</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/contacts" class="nav-link">Контакти</router-link>

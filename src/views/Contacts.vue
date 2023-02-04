@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-gray-900 relative pr-4 py-1 object-contain justify-center"
+    class="relative pr-4 py-1 object-contain justify-center"
   >
     <div
       class="flex flex-wrap object-contain justify-center w-full"
@@ -19,12 +19,13 @@
           class="row row-cols-1 row-cols-md-3 g-4"
         >
           <div
-            class="col"
+            class="col mx-2"
             v-for="category in categories"
             :key="category.id"
           >
             <div
               ref="el"
+              style="border: 2px solid grey"
               class="bg-gray-800 radius-sm shadow-md rounded-md h-full mx-md-1"
             >
               <!--    Картинка-->
@@ -32,7 +33,7 @@
                 class="object-contain h-50 w-full"
               >
                 <img
-                  :src="isShown ? category.images : null"
+                  :src="require(`@/assets/img/email2.jpg`)"
                   :alt="`${category.name} обложка`"
                   class=" h-full w-full object-cover rounded-t-md"
                 />
@@ -41,7 +42,7 @@
               <!--Карточка-->
               <div class="p-5">
                 <p
-                  class="text-2xl text-white-50 font-sansbold border-solid border-4 border-blue-600 w-100 mt-2 text-center"
+                  class="text-xl text-white-50 font-sansbold border-solid border-4 border-blue-600 w-100 mt-2 text-center"
                 >
                   {{ category.name }}
                 </p>
@@ -51,10 +52,9 @@
                   {{ category.telephone }}
                 </h3>
                 <h6
-                  class="text-sm mt-md-2 h-40"
+                  class="text-xl mt-md-2 h-40"
                   style="color: #579f87"
                 >
-<!--                  {{ category.description }}-->
                   <span v-html="category.description"></span>
                 </h6>
               </div>
@@ -75,19 +75,31 @@ export default {
   name: 'Contacts',
   data: () => ({
     categories: [
+      // {
+      //   id: 1,
+      //   name: 'Вікторія',
+      //   telephone: '+380635771563',
+      //   description: 'Помічниця пастора',
+      //   images: 'https://drive.google.com/uc?export=view&id=1ZOxl5Lr0ZKJcycqSkrrlWMJsUvIsWGRt'
+      // }
+      // {
+      //   id: 2,
+      //   name: 'Олександр',
+      //   telephone: '+380734850426',
+      //   description: 'адміністратор церкви',
+      //   images: 'https://drive.google.com/uc?export=view&id=1CLUg5PIEDS91Y0RZywyEmR2_jmObrUca'
+      // }
       {
-        id: 1,
-        name: 'Вікторія',
-        telephone: '+380635771563',
-        description: 'Помічниця пастора',
-        images: 'https://drive.google.com/uc?export=view&id=1ZOxl5Lr0ZKJcycqSkrrlWMJsUvIsWGRt'
+        id: 3,
+        name: 'partner@bv.ck.ua',
+        description: 'з усіх питань',
+        images: '@/assets/img/email1.jpg'
       },
       {
-        id: 2,
-        name: 'Олександр',
-        telephone: '+380734850426',
-        description: 'адміністратор церкви',
-        images: 'https://drive.google.com/uc?export=view&id=1CLUg5PIEDS91Y0RZywyEmR2_jmObrUca'
+        id: 4,
+        name: 'info@bv.ck.ua',
+        description: 'з питань партнерства',
+        images: '@/assets/img/email2.jpg'
       }
     ]
   }),

@@ -113,11 +113,11 @@ const routes = [
     path: '/add_new_book',
     component: () => import('@/views/Books/AddNewBooks.vue')
   },
-  {
-    path: '/business',
-    name: 'ListBusiness',
-    component: () => import('@/views/business/ListBusiness.vue')
-  },
+  // {
+  //   path: '/business',
+  //   name: 'ListBusiness',
+  //   component: () => import('@/views/business/ListBusiness.vue')
+  // },
   {
     path: '/add_new_business',
     component: () => import('@/views/business/AddNewBusiness.vue')
@@ -125,6 +125,31 @@ const routes = [
   {
     path: '/contacts',
     component: () => import('@/views/Contacts.vue')
+  },
+  {
+    path: '/power_kindness',
+    name: 'PowerOfKindness',
+    component: () => import('@/views/PowerOfKindness/index.vue')
+  },
+  {
+    path: '/add_good',
+    name: 'AddGood',
+    component: () => import('@/views/PowerOfKindness/AddUser.vue')
+  },
+  {
+    path: '/list_goods',
+    name: 'listGoods',
+    component: () => import('@/views/PowerOfKindness/UserList.vue')
+  },
+  {
+    path: '/edit_good/:id',
+    name: 'editGoods',
+    component: () => import('@/views/PowerOfKindness/UserEdit.vue')
+  },
+  {
+    path: '/categories_goods/:id',
+    name: 'categoriesGoods',
+    component: () => import('@/views/PowerOfKindness/CategoriesPhotoProfile.vue')
   }
 ]
 
