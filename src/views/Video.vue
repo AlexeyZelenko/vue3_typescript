@@ -9,10 +9,12 @@
       </div>
     </div>
   </div>
-  <iframe
-    :src="`https://www.youtube.com/embed/${videoModal}?autoplay=1&rel=0&origin=http://bv.ck.ua`"
-    frameborder="0"
-  ></iframe>
+  <div v-if="videoModal">
+    <iframe
+      :src="`https://www.youtube.com/embed/${videoModal}?autoplay=1&rel=0&origin=http://bv.ck.ua`"
+      frameborder="0"
+    ></iframe>
+  </div>
   <div class="div1">
     <nav>
       <section class="button_tab"
@@ -21,7 +23,7 @@
         СЛУЖІННЯ
       </section>
       <section class="button_tab"
-               @click="listVideo('PLlURDWJlf7fQyA3kIfQ9Pa3Dtd_tM97-z')"
+               @click="listVideo('PLlURDWJlf7fQA1Pp2nyFBy9PTqJTpB5XL')"
       >
         ПІСНІ
       </section>
@@ -36,29 +38,13 @@
       >
         ЖИТТЯ
       </section>
-      <section class="button_tab"
-               @click="listVideo('PL710D2E34967FEFA9')"
-      >
-        РІЗНЕ
-      </section>
-      <section class="button_tab"
-               @click="listVideo('PLlURDWJlf7fS9RdrfemM6deAzy1zLyhug')"
-      >
-        ДІТИ
-      </section>
-      <section class="button_tab"
-               @click="listVideo('PLlURDWJlf7fRBQIzxcvFHMMBQqNuKIl46')"
-      >
-        БІБЛІЯ
-      </section>
       <div class="div2"></div>
     </nav>
     <!-- Кнопка для мобильника -->
     <div
       class="btn_mobile"
     >
-      <span
-        style="font-size:24px; cursor:pointer; color: #847e7e"
+      <p
         @click="openNav"
       >
         <i
@@ -66,7 +52,7 @@
         ></i>
         МЕНЮ ВІДЕО
         <i class="fas fa-video"></i>
-    </span>
+    </p>
     </div>
   </div>
 
@@ -89,7 +75,7 @@
       ВСІ
     </a>
     <a
-      @click="listVideo('PLlURDWJlf7fQyA3kIfQ9Pa3Dtd_tM97-z')"
+      @click="listVideo('PLlURDWJlf7fQA1Pp2nyFBy9PTqJTpB5XL')"
       class="nav-link"
     >
       ПІСНІ
@@ -106,27 +92,9 @@
     >
       ЖИТТЯ
     </a>
-    <a
-      @click="listVideo('PL710D2E34967FEFA9')"
-      class="nav-link"
-    >
-      РІЗНЕ
-    </a>
-    <a
-      @click="listVideo('PLlURDWJlf7fS9RdrfemM6deAzy1zLyhug')"
-      class="nav-link"
-    >
-      ДІТИ
-    </a>
-    <a
-      @click="listVideo('PLlURDWJlf7fRBQIzxcvFHMMBQqNuKIl46')"
-      class="nav-link"
-    >
-      БІБЛІЯ
-    </a>
   </div>
 <!--  Лист видео-->
-  <div class="youtube-container">
+  <div v-if="ListVideoData.length > 0" class="youtube-container">
     <template
       v-for="item in ListVideoData"
       :key="item.id"
@@ -135,18 +103,20 @@
 
 <!--      Карточка видео-->
       <div
+        v-if="item.snippet?.title !== 'Private video'"
         class="change-youtube"
         :class="item.class"
-        :data-youtube="item.snippet.resourceId.videoId"
-        @click="openModal(item)"
+        :data-youtube="item.snippet?.resourceId?.videoId"
+        @click="clikItemVideo(item)"
       >
         <img
+          v-if="item.snippet?.thumbnails?.medium?.url"
           style="width: 100%"
           :src="item.snippet.thumbnails.medium.url"
+          alt="Video Thumbnail"
         />
         <p
-          style="max-width: 200px"
-        >{{item.snippet.title}}</p>
+        >{{ item.snippet?.title || 'Title not available' }}</p>
       </div>
 
 <!--       The Modal-->
@@ -163,18 +133,6 @@
           >
             &times;
           </span>
-<!--          <span-->
-<!--            style="display: inline-block; font-size: 18px; color: whitesmoke"-->
-<!--          >-->
-<!--            {{videoModalTitle}}-->
-<!--          </span>-->
-          <div class="modal-container">
-<!--            <iframe-->
-<!--              :src="`https://www.youtube.com/embed/${videoModal}`"-->
-<!--              frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"-->
-<!--              allowfullscreen-->
-<!--            ></iframe>-->
-          </div>
         </div>
 
       </div>
@@ -212,13 +170,6 @@ export default defineComponent({
     },
     closeNav () {
       document.getElementById('mySidenavVideo').style.width = '0'
-    },
-    async openModal (item) {
-      this.videoModal = await item.snippet.resourceId.videoId
-      console.log(this.videoModal)
-      this.videoModalTitle = await item.snippet.title
-      window.scrollTo({ top: 300, behavior: 'smooth' })
-      // this.showModal = true
     }
   },
   async mounted () {
@@ -234,9 +185,31 @@ export default defineComponent({
   setup () {
     const idList = ref('UUSb71yKJmS0eHyhRRl00ioQ')
     const showModal = ref(false)
-    const videoModal = ref('LnNHe8LepDM')
+    const videoModal = ref('')
     const videoModalTitle = ref('')
     const ListVideoData = computed(() => store.state.ListVideoData)
+
+    const isPrivateVideo = (item: any) => {
+      return (
+        item.snippet.title === 'Private video' ||
+        item.snippet.description.includes('This video is private.')
+      )
+    }
+
+    const filteredVideoList = computed(() => {
+      return ListVideoData.value.filter((item) => !isPrivateVideo(item))
+    })
+
+    const defaultVideoId = '2bfP6fhg5Dw'
+
+    const videoModalComputed = computed(() => {
+      if (videoModal.value) {
+        return videoModal.value
+      }
+      const firstPublicVideo = ListVideoData.value.find((item) => !isPrivateVideo(item))
+      return firstPublicVideo ? firstPublicVideo.snippet.resourceId.videoId : defaultVideoId
+    })
+    console.log('ListVideoData.value>>', ListVideoData.value)
 
     const listVideo = (value: string) => {
       idList.value = value
@@ -249,9 +222,24 @@ export default defineComponent({
         count: 5
       })
       listVideo(idList.value)
+
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth' // Добавление плавного скроллинга
+        })
+      }, 100) // Таймаут, чтобы дать время DOM обновиться
+    }
+
+    const clikItemVideo = async (item: any) => {
+      videoModal.value = item.snippet.resourceId.videoId
+      console.log('>>>', videoModal.value)
+      videoModalTitle.value = item.snippet.title
+      window.scrollTo({ top: 300, behavior: 'smooth' })
     }
 
     const startListVideo = () => {
+      videoModal.value = ''
       store.dispatch('getListVideoData')
     }
     onMounted(startListVideo)
@@ -261,8 +249,11 @@ export default defineComponent({
       listVideo,
       showModal,
       videoModalTitle,
-      videoModal,
-      countVideo
+      videoModal: videoModalComputed,
+      filteredVideoList,
+      isPrivateVideo,
+      countVideo,
+      clikItemVideo
     }
   }
 })
@@ -686,6 +677,14 @@ export default defineComponent({
     flex-wrap: wrap;
     justify-content: space-evenly;
   }
+
+  .youtube-container p {
+    max-width: 300px;
+    color: black;
+    padding: 10px;
+    width: 100%;
+  }
+
   .youtube-list {
     flex-basis: 25%;
     box-shadow: 0 0 8px 0 #e0e0e0;
@@ -694,6 +693,10 @@ export default defineComponent({
     margin-left: 1px;
   }
   .change-youtube {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.2);
     margin-top: 10px;
     margin-bottom: 10px;
@@ -723,6 +726,14 @@ export default defineComponent({
     }
     .btn_mobile {
       display: block
+    }
+
+    .btn_mobile p {
+      display: flex;
+      justify-content: space-around;
+      font-size:24px;
+      cursor:pointer;
+      color: #847e7e;
     }
   }
   /* Media Queries */

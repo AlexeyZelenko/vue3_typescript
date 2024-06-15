@@ -183,6 +183,7 @@ export default createStore({
         `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${value}&key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU&part=snippet&maxResults=${getters.GET_VIDEO_ON_PAGE}`)
       const data = await response.json()
       const ListVideoData = data.items || ''
+      console.log('ListVideoData>>', ListVideoData)
       commit('SET_VIDEO_LIST', ListVideoData)
     },
     setVideoOnPage ({ commit }) {
