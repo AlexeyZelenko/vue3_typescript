@@ -68,13 +68,14 @@ export default {
     ModalImages
   },
   setup (props) {
-    const openModal = (categoryImages) => {
-      showModal.value = true
-    }
     const showModal = ref(false)
     const photo = ref({})
     const el = ref(null)
     const { observe, unobserve, isShown } = useIntersectionObserver()
+
+    const openModal = () => {
+      showModal.value = true
+    }
 
     const categoryImages = computed(() => {
       return props.category.arrayImages[0]
@@ -112,5 +113,3 @@ export default {
   }
 }
 </script>
-
-<style scoped></style>

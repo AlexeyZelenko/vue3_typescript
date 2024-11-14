@@ -169,16 +169,16 @@ export default {
     const alertShow = ref(false)
     const alertText = ref('')
     const alertTitle = ref('')
+    const alertMessageClosed = () => {
+      showModal.value = false
+      alertShow.value = false
+    }
     const alertMessage = (ctx) => {
       showModal.value = true
       alertShow.value = true
       alertText.value = ctx.text
       alertTitle.value = ctx.title
       setTimeout(alertMessageClosed, 10000)
-    }
-    const alertMessageClosed = () => {
-      showModal.value = false
-      alertShow.value = false
     }
 
     const nameFolder = ref('')

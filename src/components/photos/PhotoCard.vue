@@ -45,11 +45,11 @@ export default {
   components: {
     ModalImages
   },
-  setup (props) {
-    const openModal = (photo) => {
+  setup () {
+    const showModal = ref(false)
+    const openModal = () => {
       showModal.value = true
     }
-    const showModal = ref(false)
     const el = ref(null)
     const { observe, unobserve, isShown } = useIntersectionObserver()
 

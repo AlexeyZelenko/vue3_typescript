@@ -1,5 +1,8 @@
 module.exports = {
-  purge: ['./src/**/*.html', './src/**/*.vue', './src/**/*.jsx'],
+  purge: {
+    layers: ['base', 'components', 'utilities'],
+    content: ['./src/**/*.{html,js,ts,vue}'],
+  },
   theme: {
     extend: {
       spacing: {

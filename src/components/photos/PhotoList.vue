@@ -31,7 +31,7 @@ export default {
       type: Object
     }
   },
-  setup (props) {
+  setup () {
     const el = ref(null)
     const { observe, unobserve, isShown } = useIntersectionObserver()
 
