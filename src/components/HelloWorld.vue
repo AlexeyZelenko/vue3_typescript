@@ -1,13 +1,13 @@
 <template>
   <div>
-<!--    Модальное окно-->
+    <!-- Модальное окно -->
     <ModalVideo
       v-if="showModal"
-      @click="showModal = false"
+      @click="closeModal"
     >
       <template v-slot:header>
         <div>
-          <h4 style="display: inline-block;">{{titleVideo}}</h4>
+          <h4 style="display: inline-block;">{{ titleVideo || 'Нет данных' }}</h4>
         </div>
       </template>
 
@@ -15,23 +15,22 @@
         <iframe
           v-if="codVideo"
           :src="`https://www.youtube.com/embed/${codVideo}`"
-          frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
+        <div v-else>Видео не найдено</div>
       </template>
-
-<!--      <template v-slot:footer>-->
-<!--      </template>-->
-
     </ModalVideo>
-    <!--    Модальное окно -  Прямая трансляция-->
+
+    <!-- Модальное окно - Прямая трансляция -->
     <ModalVideo
       v-if="showModalOnline"
-      @click="showModalOnline = false"
+      @click="closeModalOnline"
     >
       <template v-slot:header>
         <div>
-          <h4 style="display: inline-block;">{{liveTitleVideo}}</h4>
+          <h4 style="display: inline-block;">{{ liveTitleVideo || 'Нет данных' }}</h4>
         </div>
       </template>
 
@@ -39,14 +38,12 @@
         <iframe
           v-if="liveCodVideo"
           :src="`https://www.youtube.com/embed/${liveCodVideo}`"
-          frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
+        <div v-else>Прямой эфир не найден</div>
       </template>
-
-      <template v-slot:footer>
-      </template>
-
     </ModalVideo>
 
     <header>
@@ -194,6 +191,7 @@
 import { defineAsyncComponent, defineComponent, computed, onMounted, ref } from 'vue'
 import store from '@/store'
 import useSWRFetch from '@/composables/useSWRFetch'
+
 const Timer = defineAsyncComponent(() => import('@/components/Timer.vue'))
 const ModalVideo = defineAsyncComponent(() => import('@/components/ModalVideo.vue'))
 const Ministries = defineAsyncComponent(() => import('@/components/Ministries.vue'))
@@ -201,32 +199,46 @@ const Ministries = defineAsyncComponent(() => import('@/components/Ministries.vu
 export default defineComponent({
   name: 'HelloWorld',
   components: {
-    ModalVideo, Ministries, Timer
+    ModalVideo,
+    Ministries,
+    Timer
   },
-  data: () => ({
-    TextBible: {}
-  }),
-  setup () {
+  data() {
+    return {
+      TextBible: {}
+    }
+  },
+  setup() {
+    // Использование SWR для получения данных с YouTube
     const { data: VideoDevelopers, error } = useSWRFetch(
-      'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=PLlURDWJlf7fT9p77c-wQOzVIG_GLs32Pq&key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU&part=snippet&&maxResults=1'
+      'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=PLlURDWJlf7fT9p77c-wQOzVIG_GLs32Pq&key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU&part=snippet&maxResults=1'
     )
+
+    // Обработка данных видео
     const LastVideoData = computed(() => {
-      const videoInfo = VideoDevelopers.value
-      return videoInfo.items[0].snippet
+      if (VideoDevelopers.value && VideoDevelopers.value.items && VideoDevelopers.value.items.length > 0) {
+        return VideoDevelopers.value.items[0].snippet
+      }
+      return null
     })
 
-    const titleVideo = computed(() => LastVideoData.value.title)
-    const codVideo = computed(() => LastVideoData.value.resourceId.videoId)
-    const liveTitleVideo = computed(() => LiveVideoData.value.snippet.title)
-    const liveCodVideo = computed(() => LiveVideoData.value.id.videoId)
+    // Получение данных для прямой трансляции из store
     const LiveVideoData = computed(() => store.state.LiveVideoData)
 
+    // Безопасное получение заголовка и кода видео
+    const titleVideo = computed(() => LastVideoData.value ? LastVideoData.value.title : '')
+    const codVideo = computed(() => LastVideoData.value && LastVideoData.value.resourceId ? LastVideoData.value.resourceId.videoId : '')
+    const liveTitleVideo = computed(() => LiveVideoData.value ? LiveVideoData.value.snippet.title : '')
+    const liveCodVideo = computed(() => LiveVideoData.value ? LiveVideoData.value.id.videoId : '')
+
+    // Управление модальными окнами
     const showModal = ref(false)
     const showModalOnline = ref(false)
 
+    // Массив иконок из store
     const icons = computed(() => store.state.icons)
-    // const LastVideoData = computed(() => store.state.LastVideoData)
 
+    // Действия для загрузки видео
     const getCodeVideo = () => {
       store.dispatch('getLastVideoData')
     }
@@ -236,6 +248,15 @@ export default defineComponent({
       store.dispatch('getLiveVideoData')
     }
     onMounted(getLiveVideoData)
+
+    // Методы для закрытия модальных окон
+    const closeModal = () => {
+      showModal.value = false
+    }
+
+    const closeModalOnline = () => {
+      showModalOnline.value = false
+    }
 
     return {
       VideoDevelopers,
@@ -248,21 +269,30 @@ export default defineComponent({
       titleVideo,
       codVideo,
       liveTitleVideo,
-      liveCodVideo
+      liveCodVideo,
+      closeModal,
+      closeModalOnline
     }
   },
-  async mounted () {
-    const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json')
-    const data = await response.json()
-
-    const arrayVerse = Object.keys(data).map(key => {
-      return { ...data[key], id: key }
-    })
-
-    this.TextBible = arrayVerse[Math.floor(Math.random() * arrayVerse.length)]
+  async mounted() {
+    try {
+      const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json')
+      if (!response.ok) {
+        throw new Error('Ошибка загрузки данных Библии')
+      }
+      const data = await response.json()
+      const arrayVerse = Object.keys(data).map(key => ({
+        ...data[key],
+        id: key
+      }))
+      this.TextBible = arrayVerse[Math.floor(Math.random() * arrayVerse.length)]
+    } catch (error) {
+      console.error('Ошибка загрузки данных Библии:', error)
+    }
   }
 })
 </script>
+
 
 <style>
   table {  border-collapse: collapse; }

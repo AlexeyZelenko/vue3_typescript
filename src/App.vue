@@ -128,9 +128,9 @@
           <li class="nav-item">
             <router-link to="/books" class="nav-link">Книги</router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/business" class="nav-link">Бізнес</router-link>
-          </li>
+<!--          <li class="nav-item">-->
+<!--            <router-link to="/business" class="nav-link">Бізнес</router-link>-->
+<!--          </li>-->
           <li class="nav-item">
             <router-link to="/power_kindness" class="nav-link">Волонтерська діяльність церкви</router-link>
           </li>

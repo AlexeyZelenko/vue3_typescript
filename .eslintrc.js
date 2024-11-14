@@ -2,21 +2,30 @@ module.exports = {
   root: true,
 
   env: {
-    node: true
+    node: true,
   },
 
   parserOptions: {
-    parser: '@typescript-eslint/parser'
+    parser: '@typescript-eslint/parser',
   },
 
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+    // Отключаем предупреждения об использовании console и debugger, чтобы они не мешали при разработке
+    'no-console': 'off',
+    'no-debugger': 'off',
+    // Устанавливаем только критичные правила
+    'no-undef': 'error', // Ошибка, если используются неинициализированные переменные
+    'no-unused-vars': 'error', // Ошибка, если есть неиспользуемые переменные (чтобы не засорять код)
+    'no-redeclare': 'error', // Ошибка при повторном объявлении переменной
+    'no-empty': 'error', // Ошибка, если есть пустые блоки кода (чаще всего это ошибка)
+    'no-unreachable': 'error', // Ошибка, если есть недостижимый код
+    'comma-dangle': ['error', 'never'], // Запрещаем висячие запятые (в конце объектов/массивов)
+    'semi': ['error', 'never'], // Запрещаем использование точек с запятой
+    'space-before-function-paren': 'off'
   },
 
   extends: [
-    'plugin:vue/vue3-essential',
-    '@vue/standard',
-    '@vue/typescript'
-  ]
-}
+    'plugin:vue/vue3-essential', // Оставляем только основные правила для Vue
+    '@vue/typescript/recommended', // Ограничиваемся рекомендациями для TypeScript
+  ],
+};

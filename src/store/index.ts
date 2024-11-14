@@ -1,9 +1,10 @@
 import { createStore } from 'vuex'
 import Note from '@/models/NoteModel'
 import Icon from '@/models/IconModel'
-import Video from '@/models/Video'
-import { db } from '@/main.ts'
-import firebase from 'firebase/app'
+
+const REQUEST_LIMIT = 5 // Лимит запросов в минуту
+let requestCount = 0 // Текущее количество запросов
+let isRateLimited = false // Флаг ограничения
 
 export default createStore({
   state: {
@@ -12,7 +13,7 @@ export default createStore({
         fontawesome: 'fab fa-facebook-f fa-2x',
         icon: 'mdi-facebook',
         name: 'facebook',
-        src: 'https://www.facebook.com/%D0%A6%D0%B5%D1%80%D0%BA%D0%BE%D0%B2%D1%8C-%D0%91%D0%BB%D0%B0%D0%B3%D0%B0%D1%8F-%D0%92%D0%B5%D1%81%D1%82%D1%8C-%D0%A7%D0%B5%D1%80%D0%BA%D0%B0%D1%81%D1%81%D1%8B-746415165547326/'
+        src: 'https://www.facebook.com/Церковь-Благая-Весть-Черкассы-746415165547326/'
       },
       {
         fontawesome: 'fab fa-youtube fa-2x',
@@ -34,172 +35,111 @@ export default createStore({
       }
     ] as Note[],
     icon: [] as Icon[],
-    LastVideoData: [] as any,
+    LastVideoData: null as any,
     ListVideoData: [] as any,
-    LiveVideoData: false as any,
+    LiveVideoData: null as any,
     videOnPage: 10,
+    // eslint-disable-next-line @typescript-eslint/camelcase
     User_Entrance: false,
     userEntrance: false,
     adminEntrance: false,
     userId: null
   },
   mutations: {
-    USER_ENTRANCE: (state, userEntrance) => {
+    SET_USER_ENTRANCE(state, userEntrance) {
       state.userEntrance = userEntrance
     },
-    USER_ID_ENTRANCE: (state, userID) => {
+    SET_USER_ID(state, userID) {
       state.userId = userID
     },
-    SET_VIDEO (state, LastVideoData) {
+    SET_VIDEO(state, LastVideoData) {
       state.LastVideoData = LastVideoData
     },
-    SET_ONLINE_VIDEO (state, LiveVideoData) {
+    SET_ONLINE_VIDEO(state, LiveVideoData) {
       state.LiveVideoData = LiveVideoData
     },
-    SET_VIDEO_LIST (state, ListVideoData) {
+    SET_VIDEO_LIST(state, ListVideoData) {
       state.ListVideoData = ListVideoData
     },
-    ADMIN_ENTRANCE: (state, adminEntrance) => {
+    SET_ADMIN_ENTRANCE(state, adminEntrance) {
       state.adminEntrance = adminEntrance
     },
-    AddVideoOnPage: (state, payload) => {
-      state.videOnPage = payload.count + state.videOnPage
+    ADD_VIDEO_ON_PAGE(state, count) {
+      state.videOnPage += count
+    },
+    RESET_REQUEST_COUNT() {
+      requestCount = 0
     }
   },
   actions: {
-    async createFolderGoogleDisc ({ commit }, payload) {
-      const newFolder = payload
-      await db.collection('archive')
-        .add({
-          name: newFolder.name,
-          year: newFolder.year,
-          link: newFolder.link
-        })
-      try {
-        console.log('Категорію успішно створенно!!!')
-      } catch (error) {
-        console.log(error)
+    async rateLimitCheck() {
+      if (isRateLimited) {
+        throw new Error('Превышен лимит запросов. Подождите минуту.')
+      }
+
+      requestCount++
+      if (requestCount >= REQUEST_LIMIT) {
+        isRateLimited = true
+        setTimeout(() => {
+          this.commit('RESET_REQUEST_COUNT')
+          isRateLimited = false
+        }, 60000) // Сброс счетчика запросов через минуту
       }
     },
-    async createTextBible ({ commit }, payload) {
-      const newText = payload
-      const response = await fetch('https://blv-vue3-tp.firebaseio.com/bible.json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newText)
-      })
-      const data = await response.json()
-    },
-    async createTextPoetry ({ commit }, payload) {
-      const newText = payload
-      const response = await fetch('https://blv-vue3-tp.firebaseio.com/poetry.json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newText)
-      })
-      const data = await response.json()
-    },
-    async createNewBook ({ commit }, payload) {
-      const newText = payload
-      const response = await fetch('https://blv-vue3-tp.firebaseio.com/books.json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newText)
-      })
-      const data = await response.json()
-    },
-    async createNewBusiness ({ commit }, payload) {
-      const newText = payload
-      const response = await fetch('https://blv-vue3-tp.firebaseio.com/business.json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newText)
-      })
-      const data = await response.json()
-    },
-    async logout ({ commit }) {
-      await firebase.auth().signOut()
-        .then(() => {
-          const adminEntrance = !!firebase.auth().currentUser
-          commit('ADMIN_ENTRANCE', adminEntrance)
-        })
-    },
-    getUid () {
-      const user = firebase.auth().currentUser
-      return user ? user.uid : null
-    },
-    async signInWithGoogle ({ commit, dispatch }) {
-      const uid = await dispatch('getUid')
+    async fetchVideoData({ commit, dispatch }, { endpoint, mutation }) {
       try {
-        const provider = new firebase.auth.GoogleAuthProvider()
-        await firebase.auth().signInWithPopup(provider)
-        const uid = await dispatch('getUid')
+        await dispatch('rateLimitCheck') // Проверка ограничения запросов
 
-        // Проверка администратора
-        if (['J4IfR9V40cdfNDKumeiyqvzhyzK2', '8KRYS9dR8seAKFjykBx4HP15nPq2', 'C3qVi7rFitWl6Ai3CGZTtOvZt6w2', '0uitDjM9VtSasvL3aURzR7AupgC3']
-          .some(elem => elem === uid)) {
-          console.log('Администратор вошел!')
-          // router.push('/admin')
-        } else {
-          alert('Тільки адміністратори сайту можуть увійти!!!')
-          console.log('Пользователь вошел!')
+        const response = await fetch(endpoint)
+        if (!response.ok) {
+          throw new Error(`Ошибка HTTP: ${response.status}`)
         }
-      } catch (e) {
-        commit('setError', e)
-        throw e
+        const data = await response.json()
+        commit(mutation, data.items[0] || null)
+      } catch (error) {
+        console.error(`Ошибка при выполнении запроса ${endpoint}:`, error)
       }
-
-      const userEntrance = !!firebase.auth().currentUser
-      const USER_ID = await dispatch('getUid')
-      if (userEntrance) {
-        const adminEntrance = await ['J4IfR9V40cdfNDKumeiyqvzhyzK2', '8KRYS9dR8seAKFjykBx4HP15nPq2', 'C3qVi7rFitWl6Ai3CGZTtOvZt6w2', '0uitDjM9VtSasvL3aURzR7AupgC3'].includes(USER_ID)
-        commit('ADMIN_ENTRANCE', adminEntrance)
-      }
-      commit('USER_ENTRANCE', userEntrance)
     },
-    async getLastVideoData ({ commit }) {
-      const response = await fetch('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UCSb71yKJmS0eHyhRRl00ioQ=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU&part=snippet&&maxResults=1')
-      const data = await response.json()
-      const LastVideoData = data.items[0].snippet
-      commit('SET_VIDEO', LastVideoData)
+    async getLastVideoData({ dispatch }) {
+      const endpoint =
+        'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UCSb71yKJmS0eHyhRRl00ioQ&part=snippet&&maxResults=1'
+      await dispatch('fetchVideoData', {
+        endpoint,
+        mutation: 'SET_VIDEO'
+      })
     },
-    async getLiveVideoData ({ commit }) {
-      const response = await fetch('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCSb71yKJmS0eHyhRRl00ioQ&eventType=live&type=video&key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU')
-      const data = await response.json()
-      const LiveVideoData = data.items[0]
-      commit('SET_ONLINE_VIDEO', LiveVideoData)
+    async getLiveVideoData({ dispatch }) {
+      const endpoint =
+        'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCSb71yKJmS0eHyhRRl00ioQ&eventType=live&type=video'
+      await dispatch('fetchVideoData', {
+        endpoint,
+        mutation: 'SET_ONLINE_VIDEO'
+      })
     },
-    async getListVideoData ({ commit, getters }, payload) {
+    async getListVideoData({ commit, getters, dispatch }, payload) {
       const value = payload ? payload.value : 'UUSb71yKJmS0eHyhRRl00ioQ'
-      const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${value}&key=AIzaSyAHq7nCX7e6FxeXJ6JWD_iqWMb7_sHCdoU&part=snippet&maxResults=${getters.GET_VIDEO_ON_PAGE}`)
-      const data = await response.json()
-      const ListVideoData = data.items || ''
-      console.log('ListVideoData>>', ListVideoData)
-      commit('SET_VIDEO_LIST', ListVideoData)
+      const endpoint = `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${value}&part=snippet&maxResults=${getters.GET_VIDEO_ON_PAGE}`
+
+      try {
+        await dispatch('rateLimitCheck') // Проверка ограничения запросов
+
+        const response = await fetch(endpoint)
+        if (!response.ok) {
+          throw new Error(`Ошибка HTTP: ${response.status}`)
+        }
+        const data = await response.json()
+        commit('SET_VIDEO_LIST', data.items || [])
+      } catch (error) {
+        console.error('Ошибка при получении списка видео:', error)
+      }
     },
-    setVideoOnPage ({ commit }) {
-      commit('SET_VIDEO_ON_PAGE')
+    addVideosOnPage({ commit }, count) {
+      commit('ADD_VIDEO_ON_PAGE', count)
     }
   },
   getters: {
-    // GET_textBible: s => (s.textBibleArray[Math.floor(Math.random() * s.textBibleArray.length)]),
-    GET_VIDEO_ON_PAGE: s => s.videOnPage,
-    USER_ID (state) {
-      return state.userId
-    },
-    User_Entrance (state) {
-      return state.userEntrance
-    }
-  },
-  modules: {
+    GET_VIDEO_ON_PAGE: (state) => state.videOnPage,
+    USER_ID: (state) => state.userId,
+    USER_ENTRANCE: (state) => state.userEntrance
   }
 })

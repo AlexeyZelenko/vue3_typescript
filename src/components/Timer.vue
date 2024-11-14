@@ -20,7 +20,7 @@
         <div class="smalltext">Секунди</div>
       </div>
     </div>
-    <div v-if="!currentTime" class="text-center" style="color: #fff">
+    <div v-if="currentTime <= 0" class="text-center" style="color: #fff">
       Час вийшло!
     </div>
   </div>
@@ -30,7 +30,8 @@
 import { computed, ref, onMounted } from 'vue'
 
 export default {
-  setup () {
+  name: 'Timer',
+  setup() {
     const currentTime = ref<number>(0)
     const targetTime = ref<Date>(new Date())
 
@@ -38,6 +39,7 @@ export default {
       const now = new Date()
       const dayOfWeek = now.getDay()
       const daysUntilSunday = (7 - dayOfWeek) % 7
+
       // Создаем дату следующего воскресенья в 10:00 утра
       const nextSunday = new Date(
         now.getFullYear(),
@@ -62,14 +64,24 @@ export default {
       setInterval(updateTime, 1000)
     })
 
-    const days = computed(() => Math.floor(currentTime.value / (1000 * 60 * 60 * 24)))
-    const hours = computed(() => Math.floor((currentTime.value / (1000 * 60 * 60)) % 24))
-    const minutes = computed(() => Math.floor((currentTime.value / (1000 * 60)) % 60))
-    const seconds = computed(() => Math.floor((currentTime.value / 1000) % 60))
+    const days = computed(() =>
+      Math.max(Math.floor(currentTime.value / (1000 * 60 * 60 * 24)), 0)
+    )
+    const hours = computed(() =>
+      Math.max(Math.floor((currentTime.value / (1000 * 60 * 60)) % 24), 0)
+    )
+    const minutes = computed(() =>
+      Math.max(Math.floor((currentTime.value / (1000 * 60)) % 60), 0)
+    )
+    const seconds = computed(() =>
+      Math.max(Math.floor((currentTime.value / 1000) % 60), 0)
+    )
 
-    const formatTime = (value: number) => (value < 10 ? '0' + value : value.toString())
+    const formatTime = (value: number) =>
+      value < 10 ? '0' + value : value.toString()
 
     return {
+      currentTime,
       days,
       hours,
       minutes,

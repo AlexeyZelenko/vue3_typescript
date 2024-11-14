@@ -122,13 +122,13 @@
       >
         Додати книгу
       </router-link>
-      <router-link
-        class="dropdown-item"
-        to="/add_new_business"
-        exact
-      >
-        Додати бізнес
-      </router-link>
+<!--      <router-link-->
+<!--        class="dropdown-item"-->
+<!--        to="/add_new_business"-->
+<!--        exact-->
+<!--      >-->
+<!--        Додати бізнес-->
+<!--      </router-link>-->
       <router-link
         class="dropdown-item"
         to="/add_folder_google_disc"
